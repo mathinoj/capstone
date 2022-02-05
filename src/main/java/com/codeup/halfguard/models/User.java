@@ -2,6 +2,8 @@ package com.codeup.halfguard.models;
 
 import javax.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name="users")
 public class User {
@@ -20,9 +22,29 @@ public class User {
     private String email;
 
     @Column(nullable = false, length = 64)
-//    used 64 as length because encoded password is used in encrypted format
+//    used 64 as length because we will use encoded password in an encrypted format
     private String password;
 
+    public User(User copy){
+        id = copy.id;
+        firstName = copy.firstName;
+        lastName = copy.lastName;
+        email = copy.email;
+        password = copy.password;
+    }
+
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy="user")
+//    private List<Post> posts;
+//
+//    public List<Post> getPosts() {
+//        return posts;
+//    }
+//
+//    public void setPosts(List<Post> userPosts){
+//        this.posts = userposts;
+//    }
+//
+    public User(){}
 
     public long getId(){
         return id;
