@@ -1,11 +1,23 @@
 package com.codeup.halfguard.models;
 
+import com.codeup.halfguard.services.UserDetailsLoader;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 
-public class UserRoles implements UserDetails {
+public class UserRoles extends User implements UserDetails {
+//    public UserRoles(User user) {
+//        super(user);  // Call the copy constructor defined in User
+//    }
+//
+//    @Override
+//    public Collection<? extends GrantedAuthority> getAuthorities() {
+//        String roles = ""; // Since we're not using the authorization part of the component
+//        return AuthorityUtils.commaSeparatedStringToAuthorityList(roles);
+//    }
+//
 
     private User user;
 
@@ -31,6 +43,11 @@ public class UserRoles implements UserDetails {
     @Override
     public String getPassword(){
         return user.getPassword();
+    }
+
+    @Override
+    public String getUsername() {
+        return null;
     }
 
 //    @Override
