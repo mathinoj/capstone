@@ -45,10 +45,10 @@ public class UserRoles extends User implements UserDetails {
         return user.getPassword();
     }
 
-    @Override
-    public String getUsername() {
-        return null;
-    }
+//    @Override
+//    public String getUsername() {
+//        return user.getUsername();
+//    }
 
 //    @Override
 //    public String getEmail(){

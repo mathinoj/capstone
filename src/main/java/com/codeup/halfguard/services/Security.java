@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+
 @Configuration
 @EnableWebSecurity
 public class Security extends WebSecurityConfigurerAdapter {
@@ -46,7 +47,7 @@ public class Security extends WebSecurityConfigurerAdapter {
                 .anyRequest().permitAll()
                 .and()
                 .formLogin()
-                .usernameParameter("email")
+                .usernameParameter("username")
                 .defaultSuccessUrl("/list_users")
                 .permitAll()
                 .and()

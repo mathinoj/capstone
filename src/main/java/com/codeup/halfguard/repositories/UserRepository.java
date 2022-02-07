@@ -8,8 +8,13 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface UserRepository extends JpaRepository <User, Long> {
-    @Query("select u from User u where u.email = ?1")
-    User findByEmail(String email);
+//    @Query("select u from User u where u.email = ?1")
+//    User findByEmail(String email);
+
+        @Query("select u from User u where u.username = ?1")
+//
+    User findByUsername(String username);
+
 
 //    You used 'u' because 'User'
 //    Since email is unique we do NOT need to return a LIST like the ones below

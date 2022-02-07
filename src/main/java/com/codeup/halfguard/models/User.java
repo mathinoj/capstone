@@ -19,7 +19,7 @@ public class User {
 
     @Column(nullable = false, unique = true, length = 50)
 //    UNIQUE is used because no 2 emails are the same
-    private String email;
+    private String username;
 
     @Column(nullable = false, length = 64)
 //    used 64 as length because we will use encoded password in an encrypted format
@@ -70,12 +70,12 @@ public class User {
         this.lastName = lastName;
     }
 
-    public String getEmail(){
-        return email;
+    public String getUsername(){
+        return username;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {

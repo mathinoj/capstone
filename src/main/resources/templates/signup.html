@@ -13,7 +13,7 @@
     </div>
 
 
-    <form th:action="@{/process_register}" method="POST" th:object="${user}">
+    <form th:action="@{/process_registration}" method="POST" th:object="${user}">
 <!--        <div>-->
 <!--            <div class="form-group col-md-6">-->
 <!--                <label for="firstName">First Name</label>-->
@@ -38,8 +38,8 @@
             <label for="lastName">Last Name</label>
             <input id="lastName" th:field="*{lastName}" />
 
-            <label for="email">Email</label>
-            <input id="email" th:field="*{email}" />
+            <label for="username">Email</label>
+            <input id="username" th:field="*{username}" />
 
             <label for="password">Password</label>
             <input id="password" type="password" th:field="*{password}" />

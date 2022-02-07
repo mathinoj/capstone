@@ -22,10 +22,25 @@ public class UserRepositoryTests {
     @Autowired
     private TestEntityManager entityManager;
 
+//    @Test
+//    public void testCreateUser(){
+//        User user = new User();
+//        user.setEmail("a@a.com");
+//        user.setFirstName("add");
+//        user.setLastName("bab");
+//        user.setPassword("password");
+//
+//        User savedUser = repo.save(user);
+//
+//        User existUser = entityManager.find(User.class, savedUser.getId());
+//
+//        assertThat(existUser.getEmail()).isEqualTo(user.getEmail());
+//    }
+
     @Test
     public void testCreateUser(){
         User user = new User();
-        user.setEmail("a@a.com");
+        user.setUsername("a@a.com");
         user.setFirstName("add");
         user.setLastName("bab");
         user.setPassword("password");
@@ -34,6 +49,6 @@ public class UserRepositoryTests {
 
         User existUser = entityManager.find(User.class, savedUser.getId());
 
-        assertThat(existUser.getEmail()).isEqualTo(user.getEmail());
+        assertThat(existUser.getUsername()).isEqualTo(user.getUsername());
     }
 }

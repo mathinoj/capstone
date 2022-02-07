@@ -4,6 +4,7 @@ import com.codeup.halfguard.models.User;
 import com.codeup.halfguard.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,9 +17,12 @@ import java.util.List;
 public class UserController {
 
     private UserRepository userDao;
+    private PasswordEncoder passwordEncoder;
 
-    public UserController(UserRepository userDao){
+
+    public UserController(UserRepository userDao, PasswordEncoder passwordEncoder){
         this.userDao = userDao;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @GetMapping("/")
@@ -35,12 +39,16 @@ public class UserController {
 
     @PostMapping("/process_registration")
     public String processRegistration(@ModelAttribute User user){
-        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        String encodedPassword = encoder.encode(user.getPassword());
-        user.setPassword(encodedPassword);
+//        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+//        String encodedPassword = encoder.encode(user.getPassword());
+//        user.setPassword(encodedPassword);
+
+        String hash = passwordEncoder.encode(user.getPassword());
+        user.setPassword(hash);
         userDao.save(user);
 
-        return "/registration_success";
+
+        return "registration_success";
     }
 
     @GetMapping("/list_users")
