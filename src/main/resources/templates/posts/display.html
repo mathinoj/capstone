@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Single Post</title>
+</head>
+<body>
+
+<h1 th:text="${singlePost.title}"></h1>
+<h1 th:text="${singlePost.body}"></h1>
+<a th:href="@{'/posts/' + ${singlePost.id} + '/edit'}">Edit Post</a>
+<form th:action="@{'/posts/' + ${singlePost.id} + '/delete'}" th:method="post">
+    <button>Delete</button>
+</form>
+
+
+</body>
+</html>
