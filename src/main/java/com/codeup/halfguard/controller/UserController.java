@@ -54,4 +54,18 @@ public class UserController {
 
         return "users";
     }
+
+//    @GetMapping("/posts_index")
+//    public String viewUsersList(@ModelAttribute User users){
+//        users.addAttribute("user", users);
+//
+//        return "posts/index";
+//    }
+
+
+//************************THIS TAKES US TO THE 'index html in "POSTS" folder under TEMPLATES"'***************
+    @GetMapping("/list_users")
+    public String viewPostPage(){
+        return "posts/index";
+    }
 }

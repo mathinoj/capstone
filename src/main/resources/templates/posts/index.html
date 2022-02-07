@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Posts Index</title>
+</head>
+<body>
+<h1>YOU SHOULD SEE THIS AFTER CLICKING LOGIN??</h1>
+</body>
+
+<div sec:authorize="isAuthenticated()">
+
+<nav>
+    <ul>
+        <li>
+            <form th:action="@{/logout}" th:method="POST">
+                <button class="btn-link btn" style="...">Logout</button>
+            </form>
+        </li>
+    </ul>
+</nav>
+</div>
+
+<div th:each="post: ${allPosts}">
+    <span th:text="${post.getTitle()}"></span>
+    <span th:text="${post.getBody()}"></span>
+    <h1>Written By: </h1><span th:text="${post.getUser().getUsername()}"></span>
+
+    <p th:text="${post.getBody()}"></p>
+
+    <form th:action="'/posts/edit/' + ${post.getId()}" method="get">
+        <button>Edit</button>
+    </form>
+
+    <form th:action="'/posts/delete/' + ${post.getId()}" method="post">
+        <button>Delete</button>
+    </form>
+
+    <br>
+</div>
+
+</html>
