@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 
 @Configuration
@@ -22,7 +23,7 @@ public class Security extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    public BCryptPasswordEncoder passwordEncoder(){
+    public PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
     }
 
@@ -40,19 +41,82 @@ public class Security extends WebSecurityConfigurerAdapter {
 //        authentication.authenticationProvider(authenticationProvider());
 //    }
 
+//    @Override
+//    protected void configure(HttpSecurity http) throws Exception{
+//        http
+//                .authorizeRequests()
+//                .antMatchers("/list_users").authenticated()
+//                .anyRequest().permitAll()
+//                .and()
+//                .formLogin()
+//                .usernameParameter("username")
+//                .defaultSuccessUrl("/list_users")
+//                .permitAll()
+//                .and()
+//                .logout().logoutSuccessUrl("/").permitAll();
+//    }
+
+
     @Override
-    protected void configure(HttpSecurity http) throws Exception{
-        http.authorizeRequests()
-                .antMatchers("/list_users").authenticated()
-                .anyRequest().permitAll()
-                .and()
+    protected void configure(HttpSecurity http) throws Exception {
+        http
+                /* Login configuration */
                 .formLogin()
                 .usernameParameter("username")
-                .defaultSuccessUrl("/list_users")
-                .permitAll()
+//                .loginPage("/login")
+                .defaultSuccessUrl("/posts") // user's home page, it can be any URL
+                .permitAll() // Anyone can go to the login page
+                /* Logout configuration */
                 .and()
-                .logout().logoutSuccessUrl("/").permitAll();
+                .logout()
+                .logoutSuccessUrl("/login?logout") // append a query string value
+                /* Pages that can be viewed without having to log in */
+                .and()
+                .authorizeRequests()
+                .antMatchers("/", "/posts") // anyone can see the home and the ads pages
+                .permitAll()
+                /* Pages that require authentication */
+                .and()
+                .authorizeRequests()
+                .antMatchers(
+                        "list_users",
+                        "/posts/create", // only authenticated users can create posts
+                        "/posts/edit/{id}", // only authenticated users can edit posts
+                        "/posts/delete/{id}"
+                )
+                .authenticated()
+                .anyRequest().permitAll()
+
+        ;
     }
+
+//    @Override
+//    protected void configure(HttpSecurity http) throws Exception {
+//        http
+//                /* Login configuration */
+//                .formLogin()
+//                .loginPage("/login")
+//                .defaultSuccessUrl("/posts") // user's home page, it can be any URL
+//                .permitAll() // Anyone can go to the login page
+//                /* Logout configuration */
+//                .and()
+//                .logout()
+//                .logoutSuccessUrl("/login?logout") // append a query string value
+//                /* Pages that can be viewed without having to log in */
+//                .and()
+//                .authorizeRequests()
+//                .antMatchers("/", "/posts") // anyone can see the home and the ads pages
+//                .permitAll()
+//                /* Pages that require authentication */
+//                .and()
+//                .authorizeRequests()
+//                .antMatchers(
+//                        "/posts/create", // only authenticated users can create ads
+//                        "/posts/{id}/edit" // only authenticated users can edit ads
+//                )
+//                .authenticated()
+//        ;
+//    }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {

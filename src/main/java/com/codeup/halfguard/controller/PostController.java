@@ -77,16 +77,21 @@ public class PostController {
 
     @PostMapping("/posts/create")
     public String createPost(@ModelAttribute Post post){
-        User postCreator = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    User postCreator = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-        post.setUser(userDao.getById(2L));
-        post.setUser(postCreator);
+//        post.setUser(userDao.getById(2L));
+//        post.setUser(postCreator);
+//
+//        String emailSubject = post.getUser().getUsername() + ", post has been created!";
+//
+////        String emailBody = "Congrats your latest post is up: " + post.getTitle() + post.getBody();
+//        String emailBody = "Congrats your latest post is up: " + post.getBody();
+//
+////        emailService.prepareAndSend(post, emailSubject, emailBody);
+//        postDao.save(post);
 
-        String emailSubject = post.getUser().getUsername() + ", post has been created!";
-
-        String emailBody = "Congrats your latest post is up: " + post.getTitle() + post.getBody();
-
-        emailService.preparAndSend(post, emailSubject, emailBody);
+        User user = userDao.getById(2L);
+        post.setUser(user);
         postDao.save(post);
 
         return "redirect:/posts";

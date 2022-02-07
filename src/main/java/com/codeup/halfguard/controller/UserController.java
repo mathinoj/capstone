@@ -64,8 +64,8 @@ public class UserController {
 
 
 //************************THIS TAKES US TO THE 'index html in "POSTS" folder under TEMPLATES"'***************
-    @GetMapping("/list_users")
-    public String viewPostPage(){
-        return "posts/index";
-    }
+//    @GetMapping("/list_users")
+//    public String viewPostPage(){
+//        return "posts/index";
+//    }
 }

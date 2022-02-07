@@ -51,7 +51,7 @@ public class Post {
         return body;
     }
 
-    public void setBody(){
+    public void setBody(String body){
         this.body = body;
     }
 }
