@@ -25,13 +25,13 @@ public class User {
 //    used 64 as length because we will use encoded password in an encrypted format
     private String password;
 
-    public User(User copy){
-        id = copy.id;
-        firstName = copy.firstName;
-        lastName = copy.lastName;
-        email = copy.email;
-        password = copy.password;
-    }
+//    public User(User copy){
+//        id = copy.id;
+//        firstName = copy.firstName;
+//        lastName = copy.lastName;
+//        email = copy.email;
+//        password = copy.password;
+//    }
 
 //    @OneToMany(cascade = CascadeType.ALL, mappedBy="user")
 //    private List<Post> posts;
@@ -43,7 +43,7 @@ public class User {
 //    public void setPosts(List<Post> userPosts){
 //        this.posts = userposts;
 //    }
-//
+
     public User(){}
 
     public long getId(){
