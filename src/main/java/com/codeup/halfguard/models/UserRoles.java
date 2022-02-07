@@ -75,5 +75,8 @@ public class UserRoles extends User implements UserDetails {
         return true;
     }
 
+    public String getFullName(){
+        return user.getFirstName() + " " + user.getLastName();
+    }
 
 }
