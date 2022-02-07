@@ -12,19 +12,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class UserController {
 
-//    @Autowired
-//  this means we automatically create a new instance repository and inject that into the existing class
-//    private UserRepository repo;
-
     private UserRepository userDao;
 
     public UserController(UserRepository userDao){
         this.userDao = userDao;
     }
-
-
-//    private UserRepository userDao;
-
 
     @GetMapping("/")
     public String viewHomePage(){
@@ -35,23 +27,14 @@ public class UserController {
     public String signupForm(Model model){
         model.addAttribute("user", new User());
 
-        return "signup_form";
+        return "signup";
     }
 
-    @PostMapping("/process_register")
+    @PostMapping("/process_registration")
     public String processRegistration(@ModelAttribute User user){
-//        repo.save(user);
         userDao.save(user);
 
-
-        return "/register_success";
+        return "/registration_success";
     }
-
-//    @PostMapping("/process_register")
-//    public String saveUser(@ModelAttribute User user) {
-//        userDao.save(user);
-//
-//        return "redirect:/register_success";
-//    }
 
 }
