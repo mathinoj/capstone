@@ -23,9 +23,12 @@
     </nav>
 
     <div th:each="post : ${allPosts}">
-        <a th:text="${post.getTitle}" th:href="@{|/templates/halfGuard/posts/${post.id}|}"></a>
-        <p th:text="${post.getBody}"></p>
+<!--       Title: <p th:text="${post.getTitle}" th:href="@{|/templates/halfGuard/posts/${post.id}|}"></p>-->
+        Title: <p th:text="${post.getTitle}" ></p>
+        Body: <p th:text="${post.getBody}"></p>
     </div>
+
+
     <!--    User ID: <span th:text="${#authentication.principal.id}"/>-->
     <!--    Username: <span th:text="${#authentication.principal.username}"/>-->
     <!--    Email: <span th:text="${#authentication.principal.email}"/>-->

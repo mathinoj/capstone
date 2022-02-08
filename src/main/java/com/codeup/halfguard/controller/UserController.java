@@ -43,6 +43,9 @@ public class UserController {
         user.setPassword(hash);
         userDao.save(user);
 
+//        User userCreate = userDao.getById(1L);
+//        user.setUsername(userCreate.getUsername());
+//        userDao.save(user);
 
         return "registration_success";
     }

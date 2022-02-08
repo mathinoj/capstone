@@ -21,21 +21,21 @@ public class User {
 //    UNIQUE is used because no 2 emails are the same
     private String username;
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    @Column(nullable = false, unique = true, length = 100)
-//    UNIQUE is used because no 2 emails are the same
-    private String email;
+//    @Column(nullable = false, unique = true, length = 100)
+////    UNIQUE is used because no 2 emails are the same
+//    private String email;
 
     @Column(nullable = false, length = 64)
 //    used 64 as length because we will use encoded password in an encrypted format
     private String password;
+
+//    public String getEmail() {
+//        return email;
+//    }
+//
+//    public void setEmail(String email) {
+//        this.email = email;
+//    }
 
     public User(User copy) {
         id = copy.id;
@@ -43,10 +43,19 @@ public class User {
         lastName = copy.lastName;
         username = copy.username;
         password = copy.password;
+//        email = copy.email;
     }
 
     public User() {
     }
+
+//    public User(String username, String email, String firstName, String lastName, String password){
+//        this.username = username;
+//        this.email = email;
+//        this.firstName = firstName;
+//        this.lastName = lastName;
+//        this.password = password;
+//    }
 
 //        @OneToMany(cascade = CascadeType.ALL, mappedBy="user")
     @OneToMany(mappedBy = "user")
