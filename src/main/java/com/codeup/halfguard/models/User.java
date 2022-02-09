@@ -49,17 +49,15 @@ public class User {
     public User() {
     }
 
-//    public User(String username, String email, String firstName, String lastName, String password){
-//        this.username = username;
+    public User(String username, String email, String password, List<Post> posts) {
+        this.username = username;
 //        this.email = email;
-//        this.firstName = firstName;
-//        this.lastName = lastName;
-//        this.password = password;
-//    }
+        this.password = password;
+        this.posts = posts;
+    }
 
-//        @OneToMany(cascade = CascadeType.ALL, mappedBy="user")
-    @OneToMany(mappedBy = "user")
-
+    @OneToMany(cascade = CascadeType.ALL, mappedBy="user")
+//    @OneToMany(mappedBy = "user")
     private List<Post> posts;
 
     public List<Post> getPosts() {

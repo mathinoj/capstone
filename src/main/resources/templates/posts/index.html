@@ -7,25 +7,43 @@
 </head>
 <body>
 <h1>YOU SHOULD SEE THIS AFTER CLICKING LOGIN??</h1>
+<h1>THIS COULD BE THE GENERAL POSTS PAGE SEEN BY ERRONE</h1>
+
 
 <div class="container" sec:authorize="isAuthenticated()">
 
-    <nav>
-        <ul>
-            <li>
-                <form th:action="@{/logout}" th:method="POST">
-                    <!--                    <button class="btn-link btn" style="...">Logout</button>-->
-                    <button type="submit">Logout</button>
+    <div>
+        <form th:action="@{/logout}">
+            <p>Hello <b>[[${#request.userPrincipal.principal.fullName}]]</b></p>
 
-                </form>
-            </li>
-        </ul>
+            <input type="submit" value="Logout" />
+        </form>
+    </div>
+
+    <div>
+        <form th:action="@{/posts/create}">
+            <input type="submit" value="Create" />
+        </form>
+    </div>
+
+    <nav>
+<!--        <ul>-->
+<!--            <li>-->
+<!--                <form th:action="@{/logout}" th:method="POST">-->
+<!--                    &lt;!&ndash;                    <button class="btn-link btn" style="...">Logout</button>&ndash;&gt;-->
+<!--                    <button type="submit">Logout</button>-->
+
+<!--                </form>-->
+<!--            </li>-->
+<!--        </ul>-->
     </nav>
 
     <div th:each="post : ${allPosts}">
 <!--       Title: <p th:text="${post.getTitle}" th:href="@{|/templates/halfGuard/posts/${post.id}|}"></p>-->
         Title: <p th:text="${post.getTitle}" ></p>
         Body: <p th:text="${post.getBody}"></p>
+       Poster: <p th:text="${post.user.firstName}"></p>
+
     </div>
 
 

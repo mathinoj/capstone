@@ -28,6 +28,8 @@ public class Post {
         this.user = user;
     }
 
+//    public User get
+
     public Post(){}
     //////////////////////////
 

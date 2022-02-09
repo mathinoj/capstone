@@ -18,5 +18,15 @@
     <button type="submit">Submit Edit</button>
 </form>
 
+<!--<form th:action="@{|/templates/halfguard/posts/${post.id}/delete|}" th:method="POST">-->
+<!--    <input class="btn btn-danger" type="submit" value="Delete Post" />-->
+<!--</form>-->
+
+<form th:action="${'/posts/delete/{id}'}" method="post">
+    <input name="deleteId" type="hidden" th:value="${id}">
+
+    <button type="submit">Delete</button>
+</form>
+
 </body>
 </html>

@@ -31,12 +31,21 @@ public class PostController {
 
     @GetMapping("/posts/{id}")
     public String singlePost(@PathVariable long id, Model model){
-        Post singlePost = postDao.getById(id);
-        model.addAttribute("singlePost", singlePost);
+        Post soloPost = postDao.getOne(id);
+        model.addAttribute("post", soloPost);
+        model.addAttribute("post", soloPost.getBody());
+        model.addAttribute("body", soloPost.getTitle());
 
         return "posts/display";
     }
 
+    //    show a post by it's ID
+//    @GetMapping("/posts/{id}")
+//    public String show(@PathVariable long id, Model model) {
+//        Post pulledPost = postDao.getOne(id);
+//        model.addAttribute("post", pulledPost);
+//        return "posts/display";
+//    }
 
     @GetMapping("/posts/edit/{id}")
     public String editPost(@PathVariable long id, Model model){
@@ -46,6 +55,7 @@ public class PostController {
 
         return "/posts/edit";
     }
+
 
     @PostMapping("/posts/edit")
     public String saveEdit(@RequestParam(name="postTitle") String postTitle, @RequestParam(name="postBody") String postBody, @RequestParam(name="postId") long id){
@@ -59,11 +69,28 @@ public class PostController {
         return "redirect:/posts";
     }
 
+//    @GetMapping("/posts/delete/{id}")
+//    public String deletePost(@PathVariable long id, Model model) {
+//        Post deletePost = postDao.deleteById(id);
+//
+//        model.addAttribute("postToEdit", deletePost);
+//        return "redirect:/posts";
+//    }
+
+//    @PostMapping("/posts/delete/{id}")
+//    public String deletePost(@PathVariable long id, Model model) {
+//        long deletePost = id;
+//        postDao.deleteById(id);
+//
+//        model.addAttribute("postToEdit", deletePost);
+//        return "redirect:/posts/index";
+//    }
+
 
     @PostMapping("/posts/delete/{id}")
-    public String deletPost(@PathVariable long id){
-        long deletePostId = id;
-        postDao.deleteById(deletePostId);
+    public String deletePost(@PathVariable long id){
+//        long deletePostId = id;
+        postDao.deleteById(id);
 
         return "redirect:/posts";
     }
@@ -76,24 +103,16 @@ public class PostController {
     }
 
     @PostMapping("/posts/create")
+//    public String createPost(@ModelAttribute Post post, @RequestParam(name="title") String title, @RequestParam(name="body") String body){
     public String createPost(@ModelAttribute Post post){
-    User postCreator = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-//        post.setUser(userDao.getById(2L));
-//        post.setUser(postCreator);
-//
-//        String emailSubject = post.getUser().getUsername() + ", post has been created!";
-//
-////        String emailBody = "Congrats your latest post is up: " + post.getTitle() + post.getBody();
-//        String emailBody = "Congrats your latest post is up: " + post.getBody();
-//
-////        emailService.prepareAndSend(post, emailSubject, emailBody);
-//        postDao.save(post);
+        User postCreator = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-        User user = userDao.getById(2L);
+        User user = userDao.getOne(1L);
         post.setUser(user);
         postDao.save(post);
 
         return "redirect:/posts";
+
     }
 }

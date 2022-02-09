@@ -6,12 +6,26 @@
 </head>
 <body>
 
-<h1 th:text="${singlePost.title}"></h1>
-<h1 th:text="${singlePost.body}"></h1>
-<a th:href="@{'/posts/' + ${singlePost.id} + '/edit'}">Edit Post</a>
-<form th:action="@{'/posts/' + ${singlePost.id} + '/delete'}" th:method="post">
+SINGLE POSTS SHOULD GO HERE
+
+<h2 th:text="${post.title}"></h2>
+<p th:text="${post.user.username}"></p>
+<p th:text="${post.body}"></p>
+<!--<a th:href="@{|/templates/halfguard/posts/${post.id}/edit|}">Edit</a>-->
+
+<form th:action="@{'/posts/' + ${post.id} + '/edit'}" th:method="POST">
+    <button>Edit</button>
+</form>
+<form th:action="@{'/posts/' + ${post.id} + '/delete'}" th:method="POST">
     <button>Delete</button>
 </form>
+
+<!--<h1 th:text="${post.title}"></h1>-->
+<!--<h1 th:text="${post.body}"></h1>-->
+<!--<a th:href="@{'/posts/' + ${post.id} + '/edit'}">Edit Post</a>-->
+<!--<form th:action="@{'/posts/' + ${post.id} + '/delete'}" th:method="POST">-->
+<!--    <button>Delete</button>-->
+<!--</form>-->
 
 
 </body>
