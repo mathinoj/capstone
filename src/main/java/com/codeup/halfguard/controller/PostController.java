@@ -57,12 +57,25 @@ public class PostController {
     }
 
 
+//    @PostMapping("/posts/edit")
+//    public String saveEdit(@RequestParam(name="postTitle") String postTitle, @RequestParam(name="postBody") String postBody, @RequestParam(name="postId") long id){
+//        Post postToEdit = postDao.getById(id);
+//
+//        postToEdit.setTitle(postTitle);
+//        postToEdit.setBody(postBody);
+//
+//        postDao.save(postToEdit);
+//
+//        return "redirect:/posts";
+//    }
+
     @PostMapping("/posts/edit")
-    public String saveEdit(@RequestParam(name="postTitle") String postTitle, @RequestParam(name="postBody") String postBody, @RequestParam(name="postId") long id){
+    public String saveEditPost(@RequestParam(name="postTitle") String postTitle, @RequestParam(name="postBody") String postBody, @RequestParam(name="postId") long id){
+
         Post postToEdit = postDao.getById(id);
 
-        postToEdit.setTitle(postTitle);
         postToEdit.setBody(postBody);
+        postToEdit.setTitle(postTitle);
 
         postDao.save(postToEdit);
 
