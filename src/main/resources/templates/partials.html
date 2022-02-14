@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<nav th:fragment="navbar">
+    <a href="#" class="brand-logo center">Welcome to Halfguard</a>
+    <div class="nav-wrapper">
+        <ul>
+            <li><a class="nav-link" th:href="@{/}">Logout</a></li>
+            <li><a class="nav-link" th:href="@{/posts}">Home</a></li>
+            <li><a class="nav-link" th:href="@{/posts}">All Posts</a></li>
+            <li><a class="nav-link" th:href="@{/posts/create}">Create Post</a></li>
+            <li><a class="nav-link" th:href="@{/posts/edit}">Edit Post</a></li>
+            <li><a class="nav-link" th:href="@{/register}">Register</a></li>
+        </ul>
+    </div>
+
+
+</nav>
+</body>
+</html>

@@ -49,7 +49,7 @@ public class User {
     public User() {
     }
 
-    public User(String username, String email, String password, List<Post> posts) {
+    public User(String username, String password, List<Post> posts) {
         this.username = username;
 //        this.email = email;
         this.password = password;
@@ -72,7 +72,7 @@ public class User {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 

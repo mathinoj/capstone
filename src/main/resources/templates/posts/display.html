@@ -1,16 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<div th:insert="partials :: head"></div>
+
 <head>
     <meta charset="UTF-8">
     <title>Single Post</title>
 </head>
 <body>
+<nav th:replace="partials :: navbar"></nav>
 
-SINGLE POSTS SHOULD GO HERE
+<h4>SINGLE POSTS SHOULD GO HERE</h4>
 
-<h2 th:text="${post.title}"></h2>
-<p th:text="${post.user.username}"></p>
-<p th:text="${post.body}"></p>
+Title: <h2 th:text="${post.title}"></h2>
+Body: <p th:text="${post.body}"></p>
+Username:  <p th:text="${post.user.username}"></p>
 <!--<a th:href="@{|/templates/halfguard/posts/${post.id}/edit|}">Edit</a>-->
 
 <form th:action="@{'/posts/' + ${post.id} + '/edit'}" th:method="POST">

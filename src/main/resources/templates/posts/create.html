@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+<div th:insert="partials :: head"></div>
+
 <head>
     <meta charset="UTF-8">
     <title>Create Post</title>
 </head>
 <body>
+<nav th:replace="partials :: navbar"></nav>
 
 <form th:action="@{/posts/create}" th:method="post" th:object="${post}">
     <label name="postTitle">Title of Post:</label>

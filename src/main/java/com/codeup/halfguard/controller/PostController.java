@@ -31,10 +31,10 @@ public class PostController {
 
     @GetMapping("/posts/{id}")
     public String singlePost(@PathVariable long id, Model model){
-        Post soloPost = postDao.getOne(id);
+        Post soloPost = postDao.getById(id);
         model.addAttribute("post", soloPost);
-        model.addAttribute("post", soloPost.getBody());
-        model.addAttribute("body", soloPost.getTitle());
+        model.addAttribute("body", soloPost.getBody());
+        model.addAttribute("title", soloPost.getTitle());
 
         return "posts/display";
     }
@@ -103,16 +103,40 @@ public class PostController {
     }
 
     @PostMapping("/posts/create")
-//    public String createPost(@ModelAttribute Post post, @RequestParam(name="title") String title, @RequestParam(name="body") String body){
-    public String createPost(@ModelAttribute Post post){
+    public String createPost(@ModelAttribute Post post, @RequestParam(name="title") String title, @RequestParam(name="body") String body){
+//    public String createPost(@ModelAttribute Post post){
+
+//        String str1 = Long.toString(Long);
+
 
         User postCreator = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        User specificUser = userDao.findByUsername(postCreator.getLastName());
+        User specificUser = userDao.findByUsername(postCreator.getUsername());
 
-        User user = userDao.getOne(1L);
+//        (postCreator.getId());
+
+//        User user = userDao.getOne(1L);
+//        post.setUser(user);
+
+        User user = specificUser;
         post.setUser(user);
+
+        post.setUser(userDao.findByUsername(postCreator.getUsername()));
+
+
+//        post.setTitle(title);
+//        post.setBody(body);
+//        post.setUser(specificUser);
         postDao.save(post);
 
         return "redirect:/posts";
 
+    }
+
+    @GetMapping("/posts/own_posts")
+    public String ownPosts(Model model){
+        model.addAttribute("allPosts", postDao.findAll());
+
+        return "posts/own_post";
     }
 }
