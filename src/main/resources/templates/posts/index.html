@@ -14,31 +14,6 @@
 <div class="container" sec:authorize="isAuthenticated()">
 
 
-
-<!--    <div>-->
-<!--        <form th:action="@{/posts/create}">-->
-<!--            <input type="submit" value="Create" />-->
-<!--        </form>-->
-<!--    </div>-->
-
-<!--    <div>-->
-<!--        <form th:action="@{/posts/edit}" method="post">-->
-<!--            <input type="submit" value="Edit" />-->
-<!--        </form>-->
-<!--    </div>-->
-
-<!--    <nav>-->
-<!--        <ul>-->
-<!--            <li>-->
-<!--                <form th:action="@{/logout}" th:method="POST">-->
-<!--                    &lt;!&ndash;                    <button class="btn-link btn" style="...">Logout</button>&ndash;&gt;-->
-<!--                    <button type="submit">Logout</button>-->
-
-<!--                </form>-->
-<!--            </li>-->
-<!--        </ul>-->
-<!--    </nav>-->
-
     <div th:each="post : ${allPosts}">
 <!--       Title: <p th:text="${post.getTitle}" th:href="@{|/templates/halfGuard/posts/${post.id}|}"></p>-->
         Title: <p th:text="${post.getTitle}" ></p>
@@ -60,31 +35,6 @@
 
     </div>
 
-
-    <!--    User ID: <span th:text="${#authentication.principal.id}"/>-->
-    <!--    Username: <span th:text="${#authentication.principal.username}"/>-->
-    <!--    Email: <span th:text="${#authentication.principal.email}"/>-->
-
-    <!--</div>-->
-
-<!--    <div th:each="post: ${allPosts}">-->
-<!--        <span th:text="${post.getTitle()}"></span>-->
-<!--        <br>-->
-<!--        &lt;!&ndash;    <span th:text="${post.getBody()}"></span>&ndash;&gt;-->
-<!--        Written By:<span th:text="${post.getUser().getUsername()}"></span>-->
-
-<!--        <p th:text="${post.getBody()}"></p>-->
-
-<!--        <form th:action="'/posts/edit/' + ${post.getId()}" method="get">-->
-<!--            <button>Edit</button>-->
-<!--        </form>-->
-
-<!--        <form th:action="'/posts/delete/' + ${post.getId()}" method="post">-->
-<!--            <button>Delete</button>-->
-<!--        </form>-->
-
-<!--        <br>-->
-<!--    </div>-->
 </div>
 
 </body>
