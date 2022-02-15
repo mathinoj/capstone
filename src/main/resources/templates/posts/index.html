@@ -9,7 +9,7 @@
 <body>
 <nav th:replace="partials :: navbar"></nav>
 
-<!--<H1>Hello <b>[[${#request.userPrincipal.principal.fullName}]]</b></H1>-->
+<H1>Hello <b>[[${#request.userPrincipal.principal.fullName}]]</b></H1>
 
 <div class="container" sec:authorize="isAuthenticated()">
 

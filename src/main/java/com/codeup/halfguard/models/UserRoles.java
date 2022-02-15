@@ -8,9 +8,12 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 
 public class UserRoles extends User implements UserDetails {
-    public UserRoles(User user) {super(user);} {
-       // Call the copy constructor defined in User
+    public UserRoles(User user) {
+        super(user);
     }
+
+       // Call the copy constructor defined in User
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -19,11 +22,11 @@ public class UserRoles extends User implements UserDetails {
     }
 
 
-//    private User user;
-//
-//    public UserRoles(User user){
-//        this.user = user;
-//    }
+    private User user;
+
+    public UserRoles(User user){
+        this.user = user;
+    }
 //
 //    @Override
 //    public Collection<? extends GrantedAuthority> getAuthorities(){
@@ -75,8 +78,8 @@ public class UserRoles extends User implements UserDetails {
         return true;
     }
 
-//    public String getFullName(){
-//        return user.getFirstName() + " " + user.getLastName();
-//    }
+    public String getFullName(){
+        return user.getFirstName() + " " + user.getLastName();
+    }
 
 }
