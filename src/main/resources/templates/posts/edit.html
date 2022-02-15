@@ -3,8 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Edit blah</title>
+<div th:insert="partials :: head"></div>
 </head>
 <body>
+<nav th:replace="partials :: navbar"></nav>
 
 <form th:action="${'/posts/edit'}" method="post">
     <label name="postTitle">Title of Post:</label>
@@ -22,11 +24,11 @@
 <!--    <input class="btn btn-danger" type="submit" value="Delete Post" />-->
 <!--</form>-->
 
-<form th:action="${'/posts/delete/{id}'}" method="post">
-    <input name="deleteId" type="hidden" th:value="${id}">
+<!--<form th:action="${'/posts/delete/{id}'}" method="post">-->
+<!--    <input name="deleteId" type="hidden" th:value="${id}">-->
 
-    <button type="submit">Delete</button>
-</form>
+<!--    <button type="submit">Delete</button>-->
+<!--</form>-->
 
 </body>
 </html>

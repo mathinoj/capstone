@@ -11,13 +11,13 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(nullable = false, length = 100)
+    @Column(length = 100)
     private String firstName;
 
-    @Column(nullable = false, length = 100)
+    @Column(length = 100)
     private String lastName;
 
-    @Column(nullable = false, unique = true, length = 100)
+    @Column(unique = true, length = 100)
 //    UNIQUE is used because no 2 emails are the same
     private String username;
 
@@ -25,7 +25,7 @@ public class User {
 ////    UNIQUE is used because no 2 emails are the same
 //    private String email;
 
-    @Column(nullable = false, length = 64)
+    @Column(length = 64)
 //    used 64 as length because we will use encoded password in an encrypted format
     private String password;
 
@@ -38,7 +38,7 @@ public class User {
 //    }
 
     public User(User copy) {
-        id = copy.id;
+        id = copy.id; // This line is SUPER important! Many things won't work if it's absent
         firstName = copy.firstName;
         lastName = copy.lastName;
         username = copy.username;

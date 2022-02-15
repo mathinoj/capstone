@@ -12,12 +12,16 @@ public interface UserRepository extends JpaRepository <User, Long> {
 //    User findByEmail(String email);
 
 //        @Query("select u from User u where u.username = ?1")
-//
-    User findByUsername(String username);
 
+    <List>User findAllByUsername(User user);
+
+    User findByUsername(String username);
 
 //    User getById(Long id);
 
+//    User findByUsername(String username);
+
+    List <User> findAllByIdNotLike(Long id);
 
 //    You used 'u' because 'User'
 //    Since email is unique we do NOT need to return a LIST like the ones below

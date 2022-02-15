@@ -31,10 +31,10 @@ public class PostController {
 
     @GetMapping("/posts/{id}")
     public String singlePost(@PathVariable long id, Model model){
-        Post soloPost = postDao.getById(id);
+        Post soloPost = postDao.getOne(id);
         model.addAttribute("post", soloPost);
-        model.addAttribute("body", soloPost.getBody());
-        model.addAttribute("title", soloPost.getTitle());
+//        model.addAttribute("body", soloPost.getBody());
+//        model.addAttribute("title", soloPost.getTitle());
 
         return "posts/display";
     }
@@ -115,36 +115,70 @@ public class PostController {
         return "posts/create";
     }
 
+
     @PostMapping("/posts/create")
-    public String createPost(@ModelAttribute Post post, @RequestParam(name="title") String title, @RequestParam(name="body") String body){
-//    public String createPost(@ModelAttribute Post post){
-
-//        String str1 = Long.toString(Long);
-
+    public String createPost(@ModelAttribute Post post){
 
         User postCreator = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//        User specificUser = userDao.findByUsername(postCreator.getLastName());
-        User specificUser = userDao.findByUsername(postCreator.getUsername());
+        User specificUser = userDao.getById(postCreator.getId());
+////        User user = userDao.getOne(1L);
 
-//        (postCreator.getId());
-
-//        User user = userDao.getOne(1L);
-//        post.setUser(user);
-
-        User user = specificUser;
-        post.setUser(user);
-
-        post.setUser(userDao.findByUsername(postCreator.getUsername()));
-
-
-//        post.setTitle(title);
-//        post.setBody(body);
-//        post.setUser(specificUser);
+        post.setUser(specificUser);
         postDao.save(post);
 
         return "redirect:/posts";
-
     }
+
+//    @PostMapping("/items/create")
+//    public String addNewItem(@Valid @ModelAttribute Item item, Errors validation , Model model, @RequestParam("images") MultipartFile multipartFile) throws IOException {
+//        if (validation.hasErrors()) {
+//            model.addAttribute("errors", validation);
+//            model.addAttribute("item", item);
+//            List<Category> categoryList = categoryDao.findAll();
+//            model.addAttribute("categories", categoryList);
+//            return "items/create";
+//        }
+//
+//        @GetMapping("/items/create")
+//        public String viewCreateItemForm(Model model){
+//            model.addAttribute("item", new Item());
+//            List<Category> categoryList = categoryDao.findAll();
+//            model.addAttribute("categories", categoryList);
+//            return "items/create";
+//        }
+
+//    @PostMapping("/posts/create")
+//    public String createPost(@ModelAttribute Post post, @RequestParam(name="title") String title, @RequestParam(name="body") String body){
+////    public String createPost(@ModelAttribute Post post){
+//
+////        String str1 = Long.toString(Long);
+//
+//
+//        User postCreator = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+////        User specificUser = userDao.findByUsername(postCreator.getLastName());
+//        User specificUser = userDao.findByUsername(postCreator.getUsername());
+//
+////        (postCreator.getId());
+//
+////        User user = userDao.getOne(1L);
+////        post.setUser(user);
+//
+//        User user = specificUser;
+//        post.setUser(user);
+//
+//        post.setUser(userDao.findByUsername(postCreator.getUsername()));
+//
+//
+////        post.setTitle(title);
+////        post.setBody(body);
+////        post.setUser(specificUser);
+//        postDao.save(post);
+//
+//        return "redirect:/posts";
+//
+//    }
+
+
 
     @GetMapping("/posts/own_posts")
     public String ownPosts(Model model){

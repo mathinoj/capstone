@@ -9,7 +9,7 @@
 <body>
 <nav th:replace="partials :: navbar"></nav>
 
-<H1>Hello <b>[[${#request.userPrincipal.principal.fullName}]]</b></H1>
+<!--<H1>Hello <b>[[${#request.userPrincipal.principal.fullName}]]</b></H1>-->
 
 <div class="container" sec:authorize="isAuthenticated()">
 
@@ -18,11 +18,10 @@
 <!--       Title: <p th:text="${post.getTitle}" th:href="@{|/templates/halfGuard/posts/${post.id}|}"></p>-->
         Title: <p th:text="${post.getTitle}" ></p>
         Body: <p th:text="${post.getBody}"></p>
-        Poster: <p th:text="${post.getUser()}"></p>
+        Poster: <p th:text="${post.getId()}"></p>
 <!--        POSTER 1000: <span th:text="${#authentication.principal.getFirstName}"/>-->
-        <a th:href="@{|/templates/springblog/posts/${post.id}|}"></a>
+<!--        POSTERFY : <a th:href="@{/posts/${post.id}}"></a>-->
 
-       POSTER 5000 - <span th:href="@{'/posts/' + ${post.getId()}}" />
         <!--        POSTER 1000:<p th:text="${post.getUser().getUsername}"></p>-->
 <!--        POSTER 1000: <p th:text="${post.user.id}"></p>-->
 

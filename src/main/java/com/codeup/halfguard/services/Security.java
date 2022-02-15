@@ -16,7 +16,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableWebSecurity
 public class Security extends WebSecurityConfigurerAdapter {
 
-    private UserDetailsLoader usersLoader;
+    private final UserDetailsLoader usersLoader;
 
     public Security(UserDetailsLoader usersLoader) {
         this.usersLoader = usersLoader;
@@ -27,34 +27,15 @@ public class Security extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
-    @Bean
-    public DaoAuthenticationProvider authenticationProvider(){
-        DaoAuthenticationProvider authorization = new DaoAuthenticationProvider();
-        authorization.setUserDetailsService(userDetailsService());
-        authorization.setPasswordEncoder(passwordEncoder());
-
-        return authorization;
-    }
-
-//    @Override
-//    protected void configure(AuthenticationManagerBuilder authentication) throws Exception{
-//        authentication.authenticationProvider(authenticationProvider());
+//    @Bean
+//    public DaoAuthenticationProvider authenticationProvider(){
+//        DaoAuthenticationProvider authorization = new DaoAuthenticationProvider();
+//        authorization.setUserDetailsService(userDetailsService());
+//        authorization.setPasswordEncoder(passwordEncoder());
+//
+//        return authorization;
 //    }
-
-//    @Override
-//    protected void configure(HttpSecurity http) throws Exception{
-//        http
-//                .authorizeRequests()
-//                .antMatchers("/list_users").authenticated()
-//                .anyRequest().permitAll()
-//                .and()
-//                .formLogin()
-//                .usernameParameter("username")
-//                .defaultSuccessUrl("/list_users")
-//                .permitAll()
-//                .and()
-//                .logout().logoutSuccessUrl("/").permitAll();
-//    }
+//COMMENTED OUT ON FEB 15, @129PM**************
 
 
     @Override
