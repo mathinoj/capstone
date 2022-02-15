@@ -126,7 +126,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableWebSecurity
 public class Security extends WebSecurityConfigurerAdapter {
 
-    private final UserDetailsLoader usersLoader;
+    private UserDetailsLoader usersLoader;
 
     public Security(UserDetailsLoader usersLoader) {
         this.usersLoader = usersLoader;
@@ -137,14 +137,14 @@ public class Security extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
-//    @Bean
-//    public DaoAuthenticationProvider authenticationProvider(){
-//        DaoAuthenticationProvider authorization = new DaoAuthenticationProvider();
-//        authorization.setUserDetailsService(userDetailsService());
-//        authorization.setPasswordEncoder(passwordEncoder());
-//
-//        return authorization;
-//    }
+    @Bean
+    public DaoAuthenticationProvider authenticationProvider(){
+        DaoAuthenticationProvider authorization = new DaoAuthenticationProvider();
+        authorization.setUserDetailsService(userDetailsService());
+        authorization.setPasswordEncoder(passwordEncoder());
+
+        return authorization;
+    }
 //COMMENTED OUT ON FEB 15, @129PM**************
 
 
@@ -153,8 +153,8 @@ public class Security extends WebSecurityConfigurerAdapter {
         http
                 /* Login configuration */
                 .formLogin()
-                .usernameParameter("username")
-//                .loginPage("/login")
+//                .usernameParameter("username")
+                .loginPage("/login")
                 .defaultSuccessUrl("/posts") // user's home page, it can be any URL
                 .permitAll() // Anyone can go to the login page
                 /* Logout configuration */
@@ -176,7 +176,7 @@ public class Security extends WebSecurityConfigurerAdapter {
                         "/posts/delete/{id}"
                 )
                 .authenticated()
-                .anyRequest().permitAll()
+//                .anyRequest().permitAll()
 
         ;
     }

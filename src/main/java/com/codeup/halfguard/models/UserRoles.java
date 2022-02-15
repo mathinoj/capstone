@@ -12,7 +12,8 @@ public class UserRoles extends User implements UserDetails {
         super(user);
     }
 
-       // Call the copy constructor defined in User
+
+    // Call the copy constructor defined in User
 
 
     @Override
@@ -22,11 +23,13 @@ public class UserRoles extends User implements UserDetails {
     }
 
 
-    private User user;
+//    private User user;
 
-    public UserRoles(User user){
-        this.user = user;
-    }
+//    public UserRoles(User user){
+//        this.user = user;
+//    }
+
+
 //
 //    @Override
 //    public Collection<? extends GrantedAuthority> getAuthorities(){
@@ -78,8 +81,8 @@ public class UserRoles extends User implements UserDetails {
         return true;
     }
 
-    public String getFullName(){
-        return user.getFirstName() + " " + user.getLastName();
-    }
+//    public String getFullName(){
+//        return user.getFirstName() + " " + user.getLastName();
+//    }
 
 }
