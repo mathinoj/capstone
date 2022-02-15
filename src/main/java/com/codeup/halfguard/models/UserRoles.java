@@ -23,8 +23,8 @@ public class UserRoles extends User implements UserDetails {
     }
 
 
-//    private User user;
-
+    private User user;
+//
 //    public UserRoles(User user){
 //        this.user = user;
 //    }
@@ -81,8 +81,8 @@ public class UserRoles extends User implements UserDetails {
         return true;
     }
 
-//    public String getFullName(){
-//        return user.getFirstName() + " " + user.getLastName();
-//    }
+    public String getFullName(){
+        return user.getFirstName() + " " + user.getLastName();
+    }
 
 }

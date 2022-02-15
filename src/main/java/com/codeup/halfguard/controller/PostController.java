@@ -4,7 +4,7 @@ import com.codeup.halfguard.models.Post;
 import com.codeup.halfguard.models.User;
 import com.codeup.halfguard.repositories.PostRepository;
 import com.codeup.halfguard.repositories.UserRepository;
-import com.codeup.halfguard.services.EmailService;
+//import com.codeup.halfguard.services.EmailService;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,12 +14,12 @@ import org.springframework.web.bind.annotation.*;
 public class PostController {
     private final PostRepository postDao;
     private final UserRepository userDao;
-    private final EmailService emailService;
+//    private final EmailService emailService;
 
-    public PostController(PostRepository postDao, UserRepository userDao, EmailService emailService){
+    public PostController(PostRepository postDao, UserRepository userDao){
         this.postDao = postDao;
         this.userDao = userDao;
-        this.emailService = emailService;
+//        this.emailService = emailService;
     }
 
     @GetMapping("/posts")
@@ -129,23 +129,6 @@ public class PostController {
         return "redirect:/posts";
     }
 
-//    @PostMapping("/items/create")
-//    public String addNewItem(@Valid @ModelAttribute Item item, Errors validation , Model model, @RequestParam("images") MultipartFile multipartFile) throws IOException {
-//        if (validation.hasErrors()) {
-//            model.addAttribute("errors", validation);
-//            model.addAttribute("item", item);
-//            List<Category> categoryList = categoryDao.findAll();
-//            model.addAttribute("categories", categoryList);
-//            return "items/create";
-//        }
-//
-//        @GetMapping("/items/create")
-//        public String viewCreateItemForm(Model model){
-//            model.addAttribute("item", new Item());
-//            List<Category> categoryList = categoryDao.findAll();
-//            model.addAttribute("categories", categoryList);
-//            return "items/create";
-//        }
 
 //    @PostMapping("/posts/create")
 //    public String createPost(@ModelAttribute Post post, @RequestParam(name="title") String title, @RequestParam(name="body") String body){
