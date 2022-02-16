@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<div th:insert="partials :: head"></div>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<nav th:replace="partials :: navbar"></nav>
+
+<H1>Hello <b>[[${#request.userPrincipal.principal.firstName} + ' ' + ${#request.userPrincipal.principal.lastName}]]</b></H1>
+
+
+<!--<h3>You just created: <span th:text="${postEdit.getTitle()}"></span></h3>-->
+
+<h3>This is your post: <span th:text="${editedPost.getTitle()}"></span></h3>
+
+<h4>What's next?</h4>
+<h6><a th:href="@{'/posts/' + ${editedPost.getId()}}">View the post I just created</a></h6>
+<h6><a th:href="@{'/posts/' + ${editedPost.getId()} + '/edit'}">Edit the post I just created</a></h6>
+<h6><a href="/posts">View all of the other posts</a></h6>
+
+</body>
+</html>

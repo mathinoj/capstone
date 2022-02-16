@@ -31,7 +31,7 @@ public class PostController {
 
     @GetMapping("/posts/{id}")
     public String singlePost(@PathVariable long id, Model model){
-        Post soloPost = postDao.getOne(id);
+        Post soloPost = postDao.getById(id);
         model.addAttribute("post", soloPost);
 //        model.addAttribute("body", soloPost.getBody());
 //        model.addAttribute("title", soloPost.getTitle());
@@ -47,13 +47,62 @@ public class PostController {
 //        return "posts/display";
 //    }
 
+
+
+
+    //EDIT A SINGLE POST ON -- all posts page ****************
+
     @GetMapping("/posts/edit/{id}")
     public String editPost(@PathVariable long id, Model model){
-        Post editPost = postDao.getById(id);
+        Post postEdit = postDao.getById(id);
 
-        model.addAttribute("postToEdit", editPost);
+        model.addAttribute("postEdit", postEdit);
 
         return "/posts/edit";
+    }
+
+    //TRYING TO GET ALL POSTS BY -- ONE USER
+    @GetMapping("/posts/edit/")
+    public String editPostByUser(@PathVariable long id, Model model){
+        Post postingEdit = postDao.getById(id);
+        model.addAttribute("allPostsByUser", postDao.findAll());
+//        model.addAttribute("allUsers", userDao.findAll());
+
+
+//        Post postEdit = postDao.getById(id);
+
+//        model.addAttribute("postEdit", postEdit);
+
+        return "/posts/edited_page";
+//        return "redirect:/posts/edit";
+//        return "posts/edit";
+
+    }
+
+
+
+    @PostMapping("/posts/edit/{id}")
+    public String saveEditedPost(@PathVariable long id, @RequestParam (name="title") String title, @RequestParam (name="body") String body, Model model){
+
+        //Finds post by ID
+//        Post postEdit = postDao.getById(id);
+        Post postEdit = postDao.getOne(id);
+
+
+        //Make changes to post
+        postEdit.setTitle(title);
+        postEdit.setBody(body);
+
+        postDao.save(postEdit);
+
+        //Redirect user to page after edit
+        Post editedPost = postDao.getById(postEdit.getId());
+        model.addAttribute("editedPost", editedPost);
+
+//        return "redirect:/posts/edit";
+//        return "redirect:/posts/edited_page";
+        return "posts/edited_page";
+
     }
 
 

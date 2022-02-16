@@ -10,12 +10,12 @@
 
 <form th:action="${'/posts/edit'}" method="post">
     <label name="postTitle">Title of Post:</label>
-    <input name="postTitle" th:value="${postToEdit.getTitle()}">
+    <input name="postTitle" th:value="${postEdit.getTitle()}">
 
     <label name="postBody">Body of Post:</label>
-    <input name="postBody" th:value="${postToEdit.getBody()}">
+    <input name="postBody" th:value="${postEdit.getBody()}">
 
-    <input name="postId" type="hidden" th:value="${postToEdit.getId()}">
+    <input name="postId" type="hidden" th:value="${postEdit.getId()}">
 
     <button type="submit">Submit Edit</button>
 </form>

@@ -9,10 +9,6 @@
 <body>
 <nav th:replace="partials :: navbar"></nav>
 
-<H1>Hello <b>[[${#request.userPrincipal.principal.firstName}]]</b></H1>
-<!--<h1>Hello, this be <span th:text="${firstName}"> </span> World !</h1>-->
-
-
 <div class="container" sec:authorize="isAuthenticated()">
 
 
@@ -20,12 +16,7 @@
 <!--       Title: <p th:text="${post.getTitle}" th:href="@{|/templates/halfGuard/posts/${post.id}|}"></p>-->
         Title: <p th:text="${post.getTitle}" ></p>
         Body: <p th:text="${post.getBody}"></p>
-        Poster: <p th:text="${post.getId()}"></p>
-<!--        POSTER 1000: <span th:text="${#authentication.principal.getFirstName}"/>-->
-<!--        POSTERFY : <a th:href="@{/posts/${post.id}}"></a>-->
-
-        <!--        POSTER 1000:<p th:text="${post.getUser().getUsername}"></p>-->
-<!--        POSTER 1000: <p th:text="${post.user.id}"></p>-->
+        POSTER 1000:<p th:text="${post.getUser().getFirstName} + ' ' + ${post.getUser().getLastName}"></p>
 
         <form th:action="'/posts/edit/' + ${post.getId()}" method="get">
             <button>Edit</button>

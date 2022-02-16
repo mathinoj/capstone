@@ -13,10 +13,14 @@
         <ul>
             <li><a class="nav-link" th:href="@{/}">Logout</a></li>
             <li><a class="nav-link" th:href="@{/posts/display}">Home</a></li>
+            <li><a class="nav-link" th:href="@{/posts/edited/{id}}">Home DEUCE</a></li>
+            <li><a class="nav-link" th:href="@{/posts/edited_page}">Home DEUCE DEUCE</a></li>
             <li><a class="nav-link" th:href="@{/posts}">All Posts</a></li>
             <li><a class="nav-link" th:href="@{/posts/create}">Create Post</a></li>
             <li><a class="nav-link" th:href="@{/posts/edit}">Edit Post</a></li>
-<!--            <li><a class="nav-link" th:href="@{/posts/display}">Your Post</a></li>-->
+            <li><a class="nav-link" th:href="@{/posts/{id}}">Should Take to Single Post</a></li>
+
+            <!--            <li><a class="nav-link" th:href="@{/posts/display}">Your Post</a></li>-->
             <!--            <li><a class="nav-link" th:href="@{/register}">Register</a></li>-->
         </ul>
     </div>
