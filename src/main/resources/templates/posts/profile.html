@@ -9,27 +9,37 @@
 <nav th:replace="partials :: navbar"></nav>
 
 <h1>THIS WILL BE THE USERS PROFILE WITH THEIR OWN POSTS, not all post</h1>
+<ul>
+    <form th:action="@{/biography}" th:method="post">
+        <button class="btn-link btn">Biography</button>
+    </form>
+</ul>
+<ul>
+    <form th:action="@{/groups}" th:method="post">
+        <button class="btn-link btn">Groups</button>
+    </form>
+</ul>
+<ul>
+    <form th:action="@{/friends}" th:method="post">
+        <button class="btn-link btn">Friends</button>
+    </form>
+</ul>
+<ul>
+    <form th:action="@{/media}" th:method="post">
+        <button class="btn-link btn">Media</button>
+    </form>
+</ul>
 
 
 <div>
     <div sec:authorize="isAuthenticated()">
 <!--        <div th:object="${postOwner}">-->
-            <h5 class="hide">User ID: <span th:text="${#authentication.principal.id}"></span></h5>
+            <h1>User ID: <span th:text="${#authentication.principal.id}"></span></h1>
 <!--            <h5 class="hide">User ID: <span th:text="${#authentication.principal.title}"></span></h5>-->
 <!--            <h5 class="hide">User ID: <span th:text="${#authentication.principal.body}"></span></h5>-->
-
-
-
         </div>
     </div>
 </div>
-
-<!--<div th:each="post : ${postOwner}">-->
-<!--    &lt;!&ndash;       Title: <p th:text="${post.getTitle}" th:href="@{|/templates/halfGuard/posts/${post.id}|}"></p>&ndash;&gt;-->
-<!--    Title: <p th:text="${post.getTitle}" ></p>-->
-<!--    Body: <p th:text="${post.getBody}"></p>-->
-<!--&lt;!&ndash;    POSTER 1000:<p th:text="${post.getUser().getFirstName} + ' ' + ${post.getUser().getLastName}"></p>&ndash;&gt;-->
-<!--</div>-->
 
 
 

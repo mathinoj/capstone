@@ -49,12 +49,6 @@ public class PostController {
         return "posts/profile";
     }
 
-    @PostMapping("posts/profile")
-    public String results(@RequestParam(name = "username") String usernameForPost, Model model) {
-        model.addAttribute("your posts " + usernameForPost + "!");
-
-        return "/posts/profile";
-    }
 
 
     //    show a post by it's ID
