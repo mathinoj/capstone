@@ -32,11 +32,11 @@ public class PostController {
 
     @GetMapping("/posts/userProfile")
     public String profile(Model model) {
-//        User loggedinUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//        User postOwner = userDao.getById(loggedinUser.getId());
+        User specificUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User poster = userDao.getById(specificUser.getId());
 
 
-//        model.addAttribute("allPostsByUser", postDao.findAllBy(username));
+        model.addAttribute("postBySpecificUser", postDao.findPostsByUser(poster));
 //        User allPostings = postDao.findByUsername(username);
 //        model.addAttribute("allPosters", allPostings);
 
@@ -53,9 +53,9 @@ public class PostController {
 
     //    show a post by it's ID
     @GetMapping("/posts/{id}")
-    public String showPost (Model model){
-//        Post post = postDao.getById(id);
-//        model.addAttribute("post", post);
+    public String specificPost(@PathVariable long id, Model model) {
+        Post post = postDao.getById(id);
+        model.addAttribute("post", post);
 
         return "posts/display";
     }

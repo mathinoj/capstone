@@ -15,7 +15,6 @@
 
 
     <div th:each="post : ${allPosts}">
-<!--       Title: <p th:text="${post.getTitle}" th:href="@{|/templates/halfGuard/posts/${post.id}|}"></p>-->
         Title: <p th:text="${post.getTitle}" ></p>
         Body: <p th:text="${post.getBody}"></p>
         POSTER 1000:<p th:text="${post.getUser().getFirstName} + ' ' + ${post.getUser().getLastName}"></p>
@@ -27,6 +26,7 @@
         <form th:action="'/posts/delete/' + ${post.getId()}" method="post">
             <button>Delete</button>
         </form>
+        <a th:href="@{'/posts/' + ${post.getId()}} ">View Single Post</a>
 
         <br>
 

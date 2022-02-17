@@ -10,7 +10,19 @@
 
 <h4>SINGLE POSTS SHOULD GO HERE</h4>
 
+<div>
+    <h1 th:text="${(post.title)}"></h1>
+    <h3><span th:text="${post.body}"></span></h3>
+    <p>Author:  <span th:text="${post.getUser().getUsername()}"></span></p>
 
+
+    <div sec:authorize="isAuthenticated()">
+        <a th:href="@{'/posts/' + ${post.getId()} + '/edit'}">Edit</a>
+
+
+        <a th:href="@{'/posts/' + ${post.getId()} + '/delete-prompt'}">Delete</a>
+    </div>
+</div>
 
 
 
