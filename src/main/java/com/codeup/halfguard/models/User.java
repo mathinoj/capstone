@@ -26,20 +26,17 @@ public class User {
 //    used 64 as length because we will use encoded password in an encrypted format
     private String password;
 
-
-
-
-    @Column(nullable = false, length = 100)
-    private int years;
-
-    @Column(nullable = false, length = 100)
+//    @Column(nullable = false, length = 100)
+//    private int years;
+//
+    @Column()
     private String rank;
-
-    @Column(nullable = false, length = 100)
-    private String location;
-
-    @Column(nullable = false, length = 100)
-    private String gymName;
+//
+//    @Column(nullable = false, length = 100)
+//    private String location;
+//
+//    @Column(nullable = false, length = 100)
+//    private String gymName;
 
 
     public User(User copy) {
@@ -48,21 +45,25 @@ public class User {
         lastName = copy.lastName;
         username = copy.username;
         password = copy.password;
-//        email = copy.email;
+//        years = copy.years;
+        rank = copy.rank;
+//        location = copy.location;
+//        gymName = copy.gymName;
     }
 
-    public User() {
-    }
 
-    public User(String username, String password, List<Post> posts) {
+    public User(String firstName, String lastName, String username, String password, String rank) {
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.username = username;
-//        this.email = email;
         this.password = password;
-        this.posts = posts;
+//        this.years = years;
+        this.rank = rank;
+//        this.location = location;
+//        this.gymName = gymName;
     }
 
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy="user")
 //    @OneToMany(mappedBy = "user")
@@ -77,24 +78,8 @@ public class User {
     }
 
 
-//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
-//    private List<Bio> userBio;
-//
-//    public List<Bio> getUserBio() {
-//        return userBio;
-//    }
-//    public void setUserBio(List<Bio> userBio) {
-//        this.userBio = userBio;
-//    }
-//
-//    @ManyToMany(cascade = CascadeType.ALL)
-//    @JoinTable(
-//            name="bios",
-//            joinColumns = {@JoinColumn(name="user_id")},
-//            inverseJoinColumns = {@JoinColumn(name="bio_id")}
-//    )
-//    private List<Bio> bios;
-    ////////////////////////////////////////////////////////////////////////////////////////////////////
+    public User() {
+    }
 
     public long getId() {
         return id;
@@ -136,14 +121,18 @@ public class User {
         this.password = password;
     }
 
-    public int getYears() {
-        return years;
-    }
 
-    public void setYears(int years) {
-        this.years = years;
-    }
-
+//
+//
+//
+//    public int getYears() {
+//        return years;
+//    }
+//
+//    public void setYears(int years) {
+//        this.years = years;
+//    }
+//
     public String getRank() {
         return rank;
     }
@@ -151,22 +140,22 @@ public class User {
     public void setRank(String rank) {
         this.rank = rank;
     }
-
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
-    }
-
-    public String getGymName() {
-        return gymName;
-    }
-
-    public void setGymName(String gymName) {
-        this.gymName = gymName;
-    }
+//
+//    public String getLocation() {
+//        return location;
+//    }
+//
+//    public void setLocation(String location) {
+//        this.location = location;
+//    }
+//
+//    public String getGymName() {
+//        return gymName;
+//    }
+//
+//    public void setGymName(String gymName) {
+//        this.gymName = gymName;
+//    }
 
 
 }
