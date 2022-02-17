@@ -1,8 +1,7 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<div th:insert="partials :: head"></div>
-
-<head>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:insert="partials :: head">
     <meta charset="UTF-8">
     <title>Single Post</title>
 </head>
@@ -11,24 +10,10 @@
 
 <h4>SINGLE POSTS SHOULD GO HERE</h4>
 
-Title: <h2 th:text="${post.title}"></h2>
-Body: <p th:text="${post.body}"></p>
-Username:  <p th:text="${post.user.username}"></p>
-<!--<a th:href="@{|/templates/halfguard/posts/${post.id}/edit|}">Edit</a>-->
 
-<form th:action="@{'/posts/' + ${post.id} + '/edit'}" th:method="POST">
-    <button>Edit</button>
-</form>
-<form th:action="@{'/posts/' + ${post.id} + '/delete'}" th:method="POST">
-    <button>Delete</button>
-</form>
 
-<!--<h1 th:text="${post.title}"></h1>-->
-<!--<h1 th:text="${post.body}"></h1>-->
-<!--<a th:href="@{'/posts/' + ${post.id} + '/edit'}">Edit Post</a>-->
-<!--<form th:action="@{'/posts/' + ${post.id} + '/delete'}" th:method="POST">-->
-<!--    <button>Delete</button>-->
-<!--</form>-->
+
+
 
 
 </body>

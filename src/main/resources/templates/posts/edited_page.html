@@ -14,12 +14,31 @@
 
 <!--<h3>You just created: <span th:text="${postEdit.getTitle()}"></span></h3>-->
 
-<h3>This is your post: <span th:text="${editedPost.getTitle()}"></span></h3>
+<!--<h3>This is your post: <span th:text="${editedPost.getTitle()}"></span></h3>-->
 
-<h4>What's next?</h4>
-<h6><a th:href="@{'/posts/' + ${editedPost.getId()}}">View the post I just created</a></h6>
-<h6><a th:href="@{'/posts/' + ${editedPost.getId()} + '/edit'}">Edit the post I just created</a></h6>
-<h6><a href="/posts">View all of the other posts</a></h6>
+<!--<h4>What's next?</h4>-->
+<!--<h6><a th:href="@{'/posts/' + ${editedPost.getId()}}">View the post I just created</a></h6>-->
+<!--<h6><a th:href="@{'/posts/' + ${editedPost.getId()} + '/edit'}">Edit the post I just created</a></h6>-->
+<!--<h6><a href="/posts">View all of the other posts</a></h6>-->
+
+
+<h3 th:action="@{/posts/edited_page}" th:method="post" th:object="${editedPost}">
+<!--    Title:-->
+<!--    <h2 type="text" th:field="*{getTitle}" />-->
+<!--    <br />-->
+<!--    Description:-->
+<!--    <h2 type="text" th:field="*{getBody}" />-->
+
+    <h3>You just created: <span th:text="${editedPost.getTitle()}"></span></h3>
+
+    <h3>This is your post: <span th:text="${editedPost.getTitle()}"></span></h3>
+
+    <h6><a th:href="@{'/posts/' + ${editedPost.getId()}}">View the post I just created</a></h6>
+    <h6><a th:href="@{'/posts/' + ${editedPost.getId()} + '/edit'}">Edit the post I just created</a></h6>
+    <br />
+<!--    <input type="submit" />-->
+</h3>
+
 
 </body>
 </html>

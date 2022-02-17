@@ -16,58 +16,80 @@ public class PostController {
     private final UserRepository userDao;
 //    private final EmailService emailService;
 
-    public PostController(PostRepository postDao, UserRepository userDao){
+    public PostController(PostRepository postDao, UserRepository userDao) {
         this.postDao = postDao;
         this.userDao = userDao;
 //        this.emailService = emailService;
     }
 
+
     @GetMapping("/posts")
-    public String indexPosts(Model model){
+    public String indexPosts(Model model) {
         model.addAttribute("allPosts", postDao.findAll());
 
         return "posts/index";
     }
 
+    @GetMapping("/posts/userProfile")
+    public String profile(Model model) {
+//        User loggedinUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        User postOwner = userDao.getById(loggedinUser.getId());
+
+
+//        model.addAttribute("allPostsByUser", postDao.findAllBy(username));
+//        User allPostings = postDao.findByUsername(username);
+//        model.addAttribute("allPosters", allPostings);
+
+//        Post post = postDao.getOne(id);
+//        model.addAttribute("post", post);
+
+//        Post post = postDao.getById(id);
+//        model.addAttribute("post", post);
+
+        return "posts/profile";
+    }
+
+    @PostMapping("posts/profile")
+    public String results(@RequestParam(name = "username") String usernameForPost, Model model) {
+        model.addAttribute("your posts " + usernameForPost + "!");
+
+        return "/posts/profile";
+    }
+
+
+    //    show a post by it's ID
     @GetMapping("/posts/{id}")
-    public String singlePost(@PathVariable long id, Model model){
-        Post soloPost = postDao.getById(id);
-        model.addAttribute("post", soloPost);
-//        model.addAttribute("body", soloPost.getBody());
-//        model.addAttribute("title", soloPost.getTitle());
+    public String showPost (Model model){
+//        Post post = postDao.getById(id);
+//        model.addAttribute("post", post);
 
         return "posts/display";
     }
-
-    //    show a post by it's ID
-//    @GetMapping("/posts/{id}")
-//    public String show(@PathVariable long id, Model model) {
-//        Post pulledPost = postDao.getOne(id);
-//        model.addAttribute("post", pulledPost);
-//        return "posts/display";
-//    }
-
-
 
 
     //EDIT A SINGLE POST ON -- all posts page ****************
 
     @GetMapping("/posts/edit/{id}")
-    public String editPost(@PathVariable long id, Model model){
+    public String editPost(@PathVariable long id, String username, Model model) {
         Post postEdit = postDao.getById(id);
+//        User postEdit = userDao.findByUsername(username);
+
 
         model.addAttribute("postEdit", postEdit);
 
         return "/posts/edit";
     }
+    //EDIT A SINGLE POST ON -- all posts page ****************
+
 
     //TRYING TO GET ALL POSTS BY -- ONE USER
     @GetMapping("/posts/edit/")
-    public String editPostByUser(@PathVariable long id, Model model){
-        Post postingEdit = postDao.getById(id);
-        model.addAttribute("allPostsByUser", postDao.findAll());
+    public String editPostByUser(@PathVariable long id, Model model) {
+        Post getAllPostByUser = postDao.getById(id);
+//        model.addAttribute("allPostsByUser", userDao.findAllById());
 //        model.addAttribute("allUsers", userDao.findAll());
 
+        User userIDFind = userDao.getOne(id);
 
 //        Post postEdit = postDao.getById(id);
 
@@ -80,9 +102,10 @@ public class PostController {
     }
 
 
-
+    // TRY TO EDIT A USERS POSTS
+//    @PostMapping("/posts/edit/{id}")
     @PostMapping("/posts/edit/{id}")
-    public String saveEditedPost(@PathVariable long id, @RequestParam (name="title") String title, @RequestParam (name="body") String body, Model model){
+    public String saveEditedPost(@PathVariable long id, @RequestParam(name = "title") String title, @RequestParam(name = "body") String body, Model model) {
 
         //Finds post by ID
 //        Post postEdit = postDao.getById(id);
@@ -106,20 +129,8 @@ public class PostController {
     }
 
 
-//    @PostMapping("/posts/edit")
-//    public String saveEdit(@RequestParam(name="postTitle") String postTitle, @RequestParam(name="postBody") String postBody, @RequestParam(name="postId") long id){
-//        Post postToEdit = postDao.getById(id);
-//
-//        postToEdit.setTitle(postTitle);
-//        postToEdit.setBody(postBody);
-//
-//        postDao.save(postToEdit);
-//
-//        return "redirect:/posts";
-//    }
-
     @PostMapping("/posts/edit")
-    public String saveEditPost(@RequestParam(name="postTitle") String postTitle, @RequestParam(name="postBody") String postBody, @RequestParam(name="postId") long id){
+    public String saveEditPost(@RequestParam(name = "postTitle") String postTitle, @RequestParam(name = "postBody") String postBody, @RequestParam(name = "postId") long id) {
 
         Post postToEdit = postDao.getById(id);
 
@@ -130,6 +141,7 @@ public class PostController {
 
         return "redirect:/posts";
     }
+
 
 //    @GetMapping("/posts/delete/{id}")
 //    public String deletePost(@PathVariable long id, Model model) {
@@ -150,23 +162,24 @@ public class PostController {
 
 
     @PostMapping("/posts/delete/{id}")
-    public String deletePost(@PathVariable long id){
+    public String deletePost(@PathVariable long id) {
 //        long deletePostId = id;
         postDao.deleteById(id);
 
         return "redirect:/posts";
     }
 
+
+    ///CREATE POSTS ******************
     @GetMapping("/posts/create")
-    public String displayCreatePost(Model model){
+    public String displayCreatePost(Model model) {
         model.addAttribute("post", new Post());
 
         return "posts/create";
     }
 
-
     @PostMapping("/posts/create")
-    public String createPost(@ModelAttribute Post post){
+    public String createPost(@ModelAttribute Post post) {
 
         User postCreator = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User specificUser = userDao.getById(postCreator.getId());
@@ -177,45 +190,27 @@ public class PostController {
 
         return "redirect:/posts";
     }
+    ///CREATE POSTS ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 
-//    @PostMapping("/posts/create")
-//    public String createPost(@ModelAttribute Post post, @RequestParam(name="title") String title, @RequestParam(name="body") String body){
-////    public String createPost(@ModelAttribute Post post){
+//    @GetMapping("/posts/edit")
+//    public String displayPosts(Model model){
 //
-////        String str1 = Long.toString(Long);
+//                model.addAttribute("user", new User());
+//        model.addAttribute("post", new Post());
 //
+//        return "posts/edit";
+//    }
+//    @PostMapping("/posts/edit")
+//    public String editorPost(@ModelAttribute Post post){
+//        User postCreation = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        User userPoster = userDao.getById(postCreation.getId());
 //
-//        User postCreator = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-////        User specificUser = userDao.findByUsername(postCreator.getLastName());
-//        User specificUser = userDao.findByUsername(postCreator.getUsername());
-//
-////        (postCreator.getId());
-//
-////        User user = userDao.getOne(1L);
-////        post.setUser(user);
-//
-//        User user = specificUser;
-//        post.setUser(user);
-//
-//        post.setUser(userDao.findByUsername(postCreator.getUsername()));
-//
-//
-////        post.setTitle(title);
-////        post.setBody(body);
-////        post.setUser(specificUser);
+//        post.setUser(userPoster);
 //        postDao.save(post);
 //
-//        return "redirect:/posts";
-//
+//        return "redirect:post/edited_page";
 //    }
 
 
-
-    @GetMapping("/posts/own_posts")
-    public String ownPosts(Model model){
-        model.addAttribute("allPosts", postDao.findAll());
-
-        return "posts/own_post";
-    }
 }

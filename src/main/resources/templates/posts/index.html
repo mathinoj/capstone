@@ -9,7 +9,9 @@
 <body>
 <nav th:replace="partials :: navbar"></nav>
 
+
 <div class="container" sec:authorize="isAuthenticated()">
+    <h1>Welcome to Half Guard, <span th:text="${#authentication.principal.firstName + ' ' + #authentication.principal.lastName}"></span>!</h1>
 
 
     <div th:each="post : ${allPosts}">

@@ -20,6 +20,24 @@
     <button type="submit">Submit Edit</button>
 </form>
 
+
+////////////////THIS DOES A SINGLE POST BY A SPECIFIC USER, AND IT POSTS TO THE DATABASE, BUT DOESN'T SHOW UP ON ALLPOSTS!!!! THEREFORE THIS MIGHT BE USEFUL FOR SINGLE POSTS ON USERS HOMEPAGE
+<!--<form th:action="@{/posts/edit}" th:method="post" th:object="${post}">-->
+<!--    Title:-->
+<!--    <input type="text" th:field="*{title}" />-->
+<!--    <br />-->
+<!--    Description:-->
+<!--    <input type="text" th:field="*{body}" />-->
+<!--    <br />-->
+<!--    <input type="submit" />-->
+<!--</form>-->
+
+<button type="submit">Submit edit</button>
+
+
+
+
+
 <!--<form th:action="@{|/templates/halfguard/posts/${post.id}/delete|}" th:method="POST">-->
 <!--    <input class="btn btn-danger" type="submit" value="Delete Post" />-->
 <!--</form>-->
