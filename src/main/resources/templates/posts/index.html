@@ -19,14 +19,16 @@
         Body: <p th:text="${post.getBody}"></p>
         POSTER 1000:<p th:text="${post.getUser().getFirstName} + ' ' + ${post.getUser().getLastName}"></p>
 
-        <form th:action="'/posts/edit/' + ${post.getId()}" method="get">
-            <button>Edit</button>
-        </form>
 
-        <form th:action="'/posts/delete/' + ${post.getId()}" method="post">
-            <button>Delete</button>
-        </form>
-        <a th:href="@{'/posts/' + ${post.getId()}} ">View Single Post</a>
+
+<!--        <form th:action="'/posts/edit/' + ${post.getId()}" method="get">-->
+<!--            <button>Edit</button>-->
+<!--        </form>-->
+
+<!--        <form th:action="'/posts/delete/' + ${post.getId()}" method="post">-->
+<!--            <button>Delete</button>-->
+<!--        </form>-->
+<!--        <a th:href="@{'/posts/' + ${post.getId()}} ">View Single Post</a>-->
 
         <br>
 

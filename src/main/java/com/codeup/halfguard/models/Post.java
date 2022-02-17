@@ -15,7 +15,10 @@ public class Post {
     @Column(nullable = false, length = 1000)
     private String body;
 
-    //////////////////////////
+
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
     @ManyToOne
     @JoinColumn(name="user_id")
     private User user;
@@ -28,16 +31,16 @@ public class Post {
         this.user = user;
     }
 
-//    public User get
 
     public Post(){}
-    //////////////////////////
 
     public Post(String title, String body, User user) {
         this.title = title;
         this.body = body;
         this.user = user;
     }
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 
     public long getId(){
         return id;
@@ -62,4 +65,5 @@ public class Post {
     public void setBody(String body){
         this.body = body;
     }
+
 }

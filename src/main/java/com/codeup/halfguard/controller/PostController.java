@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class PostController {
-    private final PostRepository postDao;
-    private final UserRepository userDao;
+    private PostRepository postDao;
+    private UserRepository userDao;
+//    private final PostRepository postDao; 17 & 18 ARE THE OG's
+//    private final UserRepository userDao;
 //    private final EmailService emailService;
 
     public PostController(PostRepository postDao, UserRepository userDao) {
@@ -30,6 +32,9 @@ public class PostController {
         return "posts/index";
     }
 
+
+
+    ///////////THIS TAKES USER TO THEIR PROFILE AND THEIR SPECIFIC POSTS -- profile.html***************
     @GetMapping("/posts/userProfile")
     public String profile(Model model) {
         User specificUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -37,17 +42,11 @@ public class PostController {
 
 
         model.addAttribute("postBySpecificUser", postDao.findPostsByUser(poster));
-//        User allPostings = postDao.findByUsername(username);
-//        model.addAttribute("allPosters", allPostings);
-
-//        Post post = postDao.getOne(id);
-//        model.addAttribute("post", post);
-
-//        Post post = postDao.getById(id);
-//        model.addAttribute("post", post);
 
         return "posts/profile";
     }
+    ///////////THIS TAKES USER TO THEIR PROFILE AND THEIR SPECIFIC POSTS -- profile.html^^^^^^^^^^^^^^^^^^
+
 
 
 
@@ -62,7 +61,6 @@ public class PostController {
 
 
     //EDIT A SINGLE POST ON -- all posts page ****************
-
     @GetMapping("/posts/edit/{id}")
     public String editPost(@PathVariable long id, String username, Model model) {
         Post postEdit = postDao.getById(id);

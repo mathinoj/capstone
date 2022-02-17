@@ -21,21 +21,26 @@ public class User {
 //    UNIQUE is used because no 2 emails are the same
     private String username;
 
-//    @Column(nullable = false, unique = true, length = 100)
-////    UNIQUE is used because no 2 emails are the same
-//    private String email;
 
     @Column(length = 64)
 //    used 64 as length because we will use encoded password in an encrypted format
     private String password;
 
-//    public String getEmail() {
-//        return email;
-//    }
-//
-//    public void setEmail(String email) {
-//        this.email = email;
-//    }
+
+
+
+    @Column(nullable = false, length = 100)
+    private int years;
+
+    @Column(nullable = false, length = 100)
+    private String rank;
+
+    @Column(nullable = false, length = 100)
+    private String location;
+
+    @Column(nullable = false, length = 100)
+    private String gymName;
+
 
     public User(User copy) {
         id = copy.id; // This line is SUPER important! Many things won't work if it's absent
@@ -56,6 +61,9 @@ public class User {
         this.posts = posts;
     }
 
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy="user")
 //    @OneToMany(mappedBy = "user")
     private List<Post> posts;
@@ -67,6 +75,26 @@ public class User {
     public void setPosts(List<Post> posts) {
         this.posts = posts;
     }
+
+
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+//    private List<Bio> userBio;
+//
+//    public List<Bio> getUserBio() {
+//        return userBio;
+//    }
+//    public void setUserBio(List<Bio> userBio) {
+//        this.userBio = userBio;
+//    }
+//
+//    @ManyToMany(cascade = CascadeType.ALL)
+//    @JoinTable(
+//            name="bios",
+//            joinColumns = {@JoinColumn(name="user_id")},
+//            inverseJoinColumns = {@JoinColumn(name="bio_id")}
+//    )
+//    private List<Bio> bios;
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
 
     public long getId() {
         return id;
@@ -107,4 +135,38 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public int getYears() {
+        return years;
+    }
+
+    public void setYears(int years) {
+        this.years = years;
+    }
+
+    public String getRank() {
+        return rank;
+    }
+
+    public void setRank(String rank) {
+        this.rank = rank;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public String getGymName() {
+        return gymName;
+    }
+
+    public void setGymName(String gymName) {
+        this.gymName = gymName;
+    }
+
+
 }
