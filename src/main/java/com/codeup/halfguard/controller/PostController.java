@@ -14,21 +14,21 @@ import org.springframework.web.bind.annotation.*;
 public class PostController {
     private PostRepository postDao;
     private UserRepository userDao;
-//    private final PostRepository postDao; 17 & 18 ARE THE OG's
+//    private final PostRepository postDao;
 //    private final UserRepository userDao;
 //    private final EmailService emailService;
 
     public PostController(PostRepository postDao, UserRepository userDao) {
-        this.postDao = postDao;
         this.userDao = userDao;
+        this.postDao = postDao;
 //        this.emailService = emailService;
     }
 
 
     @GetMapping("/posts")
     public String indexPosts(Model model) {
+//        model.addAttribute("allPosts", postDao.findAll());
         model.addAttribute("allPosts", postDao.findAll());
-
         return "posts/index";
     }
 
