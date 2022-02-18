@@ -158,7 +158,7 @@ public class PostController {
 //        long deletePostId = id;
         postDao.deleteById(id);
 
-        return "redirect:/posts";
+        return "redirect:/posts/profile";
     }
 
 
@@ -179,7 +179,7 @@ public class PostController {
         post.setUser(specificUser);
         postDao.save(post);
 
-        return "redirect:/posts";
+        return "redirect:/posts/userProfile";
     }
     ///CREATE POSTS ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
