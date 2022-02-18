@@ -35,10 +35,17 @@ public class UserController {
         return "signup";
     }
 
+    @GetMapping("/login")
+    public String login(Model model) {
+//        model.addAttribute("user", new User());
+
+        return "users/login";
+    }
+
     @PostMapping("/process_registration")
     public String processRegistration(@ModelAttribute User user){
-        String hash = passwordEncoder.encode(user.getPassword());
-        user.setPassword(hash);
+//        String hash = passwordEncoder.encode(user.getPassword());
+//        user.setPassword(hash);
         userDao.save(user);
 
 //        User userCreate = userDao.getById(1L);
@@ -47,6 +54,23 @@ public class UserController {
 
         return "registration_success";
     }
+
+
+//    @PostMapping("/signup")
+//    public String saveUser(@ModelAttribute User user) {
+////        String hash = passwordEncoder.encode(user.getPassword());
+////        user.setPassword(hash);
+//        userDao.save(user);
+//        return "redirect:/login";
+//    }
+    @PostMapping("/users/login")
+    public String saveUser(@ModelAttribute User user) {
+//        String hash = passwordEncoder.encode(user.getPassword());
+//        user.setPassword(hash);
+        userDao.save(user);
+        return "redirect:/posts/index";
+    }
+
 
     @GetMapping("/list_users")
     public String viewUsersList(Model model){

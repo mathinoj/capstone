@@ -6,9 +6,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 
-public class UserRoles implements UserDetails {
+public class UserRoles extends User implements UserDetails {
     public UserRoles(User user) {
-        super();
+        super(user);
     }
 
 
@@ -19,19 +19,6 @@ public class UserRoles implements UserDetails {
     public Collection<? extends GrantedAuthority> getAuthorities() {
         String roles = ""; // Since we're not using the authorization part of the component
         return AuthorityUtils.commaSeparatedStringToAuthorityList(roles);
-    }
-
-    /////ADDED THIS AFTER REWRITING user.java --> Don't know if it is needed
-    @Override
-    public String getPassword() {
-        return null;
-    }
-
-
-    /////ADDED THIS AFTER REWRITING user.java --> Don't know if it is needed
-    @Override
-    public String getUsername() {
-        return null;
     }
 
 
