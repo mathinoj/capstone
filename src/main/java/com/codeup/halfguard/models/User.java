@@ -1,7 +1,6 @@
 package com.codeup.halfguard.models;
 
 import javax.persistence.*;
-
 import java.util.List;
 
 @Entity
@@ -18,74 +17,47 @@ public class User {
     private String lastName;
 
     @Column(unique = true, length = 100)
-//    UNIQUE is used because no 2 emails are the same
     private String username;
 
-
     @Column(length = 64)
-//    used 64 as length because we will use encoded password in an encrypted format
     private String password;
 
-//    @Column(nullable = false, length = 100)
-//    private int years;
-//
-    @Column()
-    private String rank;
-//
-//    @Column(nullable = false, length = 100)
-//    private String location;
-//
-//    @Column(nullable = false, length = 100)
-//    private String gymName;
+    @Column(length = 100)
+    private long years;
 
+    @Column(length = 20)
+    private String beltRank;
 
-    public User(User copy) {
-        id = copy.id; // This line is SUPER important! Many things won't work if it's absent
+    @Column(length = 100)
+    private String location;
+
+    @Column(length = 100)
+    private String gymName;
+
+    public User(User copy){
+        id = copy.id;
         firstName = copy.firstName;
         lastName = copy.lastName;
         username = copy.username;
         password = copy.password;
-//        years = copy.years;
-        rank = copy.rank;
-//        location = copy.location;
-//        gymName = copy.gymName;
     }
 
-
-    public User(String firstName, String lastName, String username, String password, String rank) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.username = username;
-        this.password = password;
-//        this.years = years;
-        this.rank = rank;
-//        this.location = location;
-//        this.gymName = gymName;
-    }
-
-
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy="user")
-//    @OneToMany(mappedBy = "user")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<Post> posts;
 
     public List<Post> getPosts() {
         return posts;
     }
 
-    public void setPosts(List<Post> posts) {
-        this.posts = posts;
-    }
+    public void setPosts(List<Post> posts) {this.posts = posts; }
 
-
-    public User() {
-    }
+    public User(){}
 
     public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -121,41 +93,35 @@ public class User {
         this.password = password;
     }
 
-
-//
-//
-//
-//    public int getYears() {
-//        return years;
-//    }
-//
-//    public void setYears(int years) {
-//        this.years = years;
-//    }
-//
-    public String getRank() {
-        return rank;
+    public long getYears() {
+        return years;
     }
 
-    public void setRank(String rank) {
-        this.rank = rank;
+    public void setYears(long years) {
+        this.years = years;
     }
-//
-//    public String getLocation() {
-//        return location;
-//    }
-//
-//    public void setLocation(String location) {
-//        this.location = location;
-//    }
-//
-//    public String getGymName() {
-//        return gymName;
-//    }
-//
-//    public void setGymName(String gymName) {
-//        this.gymName = gymName;
-//    }
 
+    public String getBeltRank() {
+        return beltRank;
+    }
 
+    public void setBeltRank(String beltRank) {
+        this.beltRank = beltRank;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public String getGymName() {
+        return gymName;
+    }
+
+    public void setGymName(String gymName) {
+        this.gymName = gymName;
+    }
 }

@@ -2,8 +2,6 @@ package com.codeup.halfguard.controller;
 
 import com.codeup.halfguard.models.User;
 import com.codeup.halfguard.repositories.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

@@ -1,12 +1,10 @@
 package com.codeup.halfguard.controller;
 
 //import com.codeup.halfguard.models.Bio;
-import com.codeup.halfguard.models.Post;
 import com.codeup.halfguard.models.User;
 import com.codeup.halfguard.repositories.BioRepository;
 import com.codeup.halfguard.repositories.PostRepository;
 import com.codeup.halfguard.repositories.UserRepository;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,14 +13,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class ProfileController {
-    private BioRepository bioDao;
-    private PostRepository postDao;
-    private UserRepository userDao;
+//    private BioRepository bioDao;
+//    private PostRepository postDao;
+//    private UserRepository userDao;
 
     public ProfileController(BioRepository bioDao, PostRepository postDao, UserRepository userDao) {
-        this.bioDao = bioDao;
-        this.postDao = postDao;
-        this.userDao = userDao;
+//        this.bioDao = bioDao;
+//        this.postDao = postDao;
+//        this.userDao = userDao;
     }
 
 
