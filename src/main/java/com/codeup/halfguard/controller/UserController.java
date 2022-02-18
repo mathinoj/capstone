@@ -44,8 +44,8 @@ public class UserController {
 
     @PostMapping("/process_registration")
     public String processRegistration(@ModelAttribute User user){
-//        String hash = passwordEncoder.encode(user.getPassword());
-//        user.setPassword(hash);
+        String hash = passwordEncoder.encode(user.getPassword());
+        user.setPassword(hash);
         userDao.save(user);
 
 //        User userCreate = userDao.getById(1L);

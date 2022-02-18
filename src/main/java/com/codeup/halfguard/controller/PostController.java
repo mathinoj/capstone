@@ -175,7 +175,6 @@ public class PostController {
 
         User postCreator = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User specificUser = userDao.getById(postCreator.getId());
-////        User user = userDao.getOne(1L);
 
         post.setUser(specificUser);
         postDao.save(post);
