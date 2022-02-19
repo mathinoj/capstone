@@ -158,7 +158,7 @@ public class PostController {
 //        long deletePostId = id;
         postDao.deleteById(id);
 
-        return "redirect:/posts/profile";
+        return "redirect:/posts/userProfile";
     }
 
 

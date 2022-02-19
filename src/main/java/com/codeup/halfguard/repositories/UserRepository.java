@@ -1,5 +1,6 @@
 package com.codeup.halfguard.repositories;
 
+import com.codeup.halfguard.models.Post;
 import com.codeup.halfguard.models.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -14,6 +15,9 @@ public interface UserRepository extends JpaRepository <User, Long> {
     <List>User findByUsername(User user);
 
     User findByUsername(String username);
+
+//    List<User> findByUserBio(User user);
+//    <List>User findByUserBio(User user);
 
 
 //    User getById(Long id);

@@ -84,4 +84,8 @@ public class UserRoles extends User implements UserDetails {
         return user.getFirstName() + " " + user.getLastName();
     }
 
+    public void setBeltRank(String beltRank){
+        this.user.setBeltRank(beltRank);
+    }
+
 }

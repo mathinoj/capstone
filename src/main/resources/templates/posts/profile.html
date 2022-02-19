@@ -9,9 +9,28 @@
 <nav th:replace="partials :: navbar"></nav>
 
 <h1>THIS WILL BE THE USERS PROFILE WITH THEIR OWN POSTS, not all post</h1>
+<h4> NEED TO HAVE BIO LISTED BELOW</h4>
+
+<!--<div th:each="post : ${userSpecificBio}">-->
+<!--    Years: <p th:text="${post.getYears}" ></p>-->
+<!--    Rank: <p th:text="${post.getBeltRank}"></p>-->
+<!--</div>-->
+
+Years Active:
+<br>
+Belt/Rank:
+<br>
+Location:
+<br>
+Gym Name:
+</div>
+
+<h2><a th:href="@{/editBio}">Edit Biography</a></h2>
+
+
 <ul>
-    <form th:action="@{/biography}" th:method="post">
-        <button class="btn-link btn">Biography</button>
+    <form th:action="@{/profile/biography}">
+        <button class="btn-link btn">Edit Biography</button>
     </form>
 </ul>
 <ul>
@@ -32,14 +51,11 @@
 
 
 <div>
-    <div sec:authorize="isAuthenticated()">
-<!--        <div th:object="${postOwner}">-->
-            <h1>User ID: <span th:text="${#authentication.principal.id}"></span></h1>
-<!--            <h5 class="hide">User ID: <span th:text="${#authentication.principal.title}"></span></h5>-->
-<!--            <h5 class="hide">User ID: <span th:text="${#authentication.principal.body}"></span></h5>-->
-        </div>
-    </div>
-</div>
+<!--    <div sec:authorize="isAuthenticated()">-->
+<!--            <h1>User ID: <span th:text="${#authentication.principal.id}"></span></h1>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
 
 <div th:each="post : ${postBySpecificUser}">
     Title: <p th:text="${post.getTitle}" ></p>
@@ -57,7 +73,7 @@
 
     <br>
 
-
+</div>
 </div>
 
 </body>

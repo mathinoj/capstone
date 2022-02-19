@@ -8,17 +8,34 @@
 <body>
 <nav th:replace="partials :: navbar"></nav>
 
-<H1>SHOULD SEE BIOGRAPHY PAGE</H1>
+<H1>SHOULD SEE BIOGRAPHY EDIT PAGE</H1>
 
-<!--<form th:action="@{/profile/biography}" th:method="post" th:object="${bio}">-->
-<!--    <label name="postYears">Years Active:</label>-->
-<!--    <input type="text" th:field="*{years}" id="postYears">-->
+<!--<p th:text="${userSpecificBio}"></p>-->
 
-<!--    <label name="postRank">Rank:</label>-->
-<!--    <input type="text" th:field="*{rank}" id="postRank">-->
+<!--<form th:action="@{/posts/userProfile}" th:object="${specificUser}" th:method="post">-->
+<form th:action="@{/process_edit}" method="POST" th:object="${userSpecificBio}">
 
-<!--    <button type="submit">Submit Post</button>-->
-<!--</form>-->
+<!--    <form th:action="@{/posts/userProfile}"  th:method="post">-->
+
+    <!--        <label for="years">Years</label>-->
+    <!--        <input id="years"/>-->
+
+    <label for="years">Years: </label>
+    <input id="years" th:field="*{years}"/>
+    <br>
+    <label for="beltRank">Belt: </label>
+    <input id="beltRank" th:field="*{beltRank}"/>
+    <br>
+<!--    <label for="location">Location: </label>-->
+<!--    <input id="location" th:field="*{location}"/>-->
+<!--    <br>-->
+<!--    <label for="gymName">Gym Name: </label>-->
+<!--    <input id="gymName" th:field="*{gymName}"/>-->
+<!--    <br>-->
+
+    <input value="Edit Bio!" type="submit"/>
+
+</form>
 
 </body>
 </html>

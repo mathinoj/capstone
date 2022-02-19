@@ -39,6 +39,12 @@ public class Post {
         this.body = body;
         this.user = user;
     }
+
+//    public Bio(){}
+//
+//    public Bio(long years, String rank, String location, String gymName, User, user){
+//        this.years = years;
+//    }
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 

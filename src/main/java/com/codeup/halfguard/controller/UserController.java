@@ -2,6 +2,7 @@ package com.codeup.halfguard.controller;
 
 import com.codeup.halfguard.models.User;
 import com.codeup.halfguard.repositories.UserRepository;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,18 +29,13 @@ public class UserController {
         return "index";
     }
 
+
+    /////////////////////////////////TAKES TO REG PAGE TO "SIGNUP", THEN AFTER IT CONFIRMS REG SUCCESS
     @GetMapping("/register")
     public String signupForm(Model model){
         model.addAttribute("user", new User());
 
         return "signup";
-    }
-
-    @GetMapping("/login")
-    public String login(Model model) {
-//        model.addAttribute("user", new User());
-
-        return "users/login";
     }
 
     @PostMapping("/process_registration")
@@ -54,6 +50,19 @@ public class UserController {
 
         return "registration_success";
     }
+    /////////////////////////////////TAKES TO REG PAGE TO "SIGNUP", THEN AFTER IT CONFIRMS REG SUCCESS ^^^^^^^^^^^
+
+
+
+    /////////////////////////AFTER REG SUCCESS THIS TAKES THEM TO LOGIN
+
+    @GetMapping("/login")
+    public String login(Model model) {
+//        model.addAttribute("user", new User());
+
+        return "users/login";
+    }
+    /////////////////////////AFTER REG SUCCESS THIS TAKES THEM TO LOGIN ^^^^^^^^^^^^^^^^^^^^^
 
 
 //    @PostMapping("/signup")

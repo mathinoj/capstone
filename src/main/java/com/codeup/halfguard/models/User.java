@@ -40,6 +40,10 @@ public class User {
         lastName = copy.lastName;
         username = copy.username;
         password = copy.password;
+        years = copy.years;
+        beltRank = copy.beltRank;
+        location = copy.location;
+        gymName = copy.gymName;
     }
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
@@ -52,6 +56,20 @@ public class User {
     public void setPosts(List<Post> posts) {this.posts = posts; }
 
     public User(){}
+
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    public User(long years, String beltRank, String location, String gymName){
+//        List<Post> posts
+        this.years = years;
+        this.beltRank = beltRank;
+        this.location = location;
+        this.gymName = gymName;
+//        this.posts = posts;
+    }
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 
     public long getId() {
         return id;
