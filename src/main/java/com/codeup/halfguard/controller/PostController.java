@@ -60,7 +60,7 @@ public class PostController {
     }
 
 
-    //EDIT A SINGLE POST ON -- all posts page ****************
+    //EDIT A SINGLE POST ON -- all posts page **************** **************** **************** ****************
     @GetMapping("/posts/edit/{id}")
     public String editPost(@PathVariable long id, String username, Model model) {
         Post postEdit = postDao.getById(id);
@@ -70,54 +70,6 @@ public class PostController {
         model.addAttribute("postEdit", postEdit);
 
         return "/posts/edit";
-    }
-    //EDIT A SINGLE POST ON -- all posts page ****************
-
-
-    //TRYING TO GET ALL POSTS BY -- ONE USER
-    @GetMapping("/posts/edit/")
-    public String editPostByUser(@PathVariable long id, Model model) {
-        Post getAllPostByUser = postDao.getById(id);
-//        model.addAttribute("allPostsByUser", userDao.findAllById());
-//        model.addAttribute("allUsers", userDao.findAll());
-
-        User userIDFind = userDao.getOne(id);
-
-//        Post postEdit = postDao.getById(id);
-
-//        model.addAttribute("postEdit", postEdit);
-
-        return "/posts/edited_page";
-//        return "redirect:/posts/edit";
-//        return "posts/edit";
-
-    }
-
-
-    // TRY TO EDIT A USERS POSTS
-//    @PostMapping("/posts/edit/{id}")
-    @PostMapping("/posts/edit/{id}")
-    public String saveEditedPost(@PathVariable long id, @RequestParam(name = "title") String title, @RequestParam(name = "body") String body, Model model) {
-
-        //Finds post by ID
-//        Post postEdit = postDao.getById(id);
-        Post postEdit = postDao.getOne(id);
-
-
-        //Make changes to post
-        postEdit.setTitle(title);
-        postEdit.setBody(body);
-
-        postDao.save(postEdit);
-
-        //Redirect user to page after edit
-        Post editedPost = postDao.getById(postEdit.getId());
-        model.addAttribute("editedPost", editedPost);
-
-//        return "redirect:/posts/edit";
-//        return "redirect:/posts/edited_page";
-        return "posts/edited_page";
-
     }
 
 
@@ -131,8 +83,15 @@ public class PostController {
 
         postDao.save(postToEdit);
 
-        return "redirect:/posts";
+//        return "/posts/profile"; THIS MAKES CHANGES BUT DOESNT TAKE USER TO SEE CHANGES, INSTEAD ONLY SEE BUTTONS
+        return "redirect:/posts/userProfile"; //THIS ALLOWS USER TO SEE CHANGES
+
     }
+
+    //EDIT A SINGLE POST ON -- all posts page ***************^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+
 
 
 //    @GetMapping("/posts/delete/{id}")
@@ -152,17 +111,23 @@ public class PostController {
 //        return "redirect:/posts/index";
 //    }
 
-
+/////////////////////THIS DELETES A SINGLE POST FROM THE USER PROFILE PAGE, TAKE THIS OUT AND DELETE WONT WORK  ****************
     @PostMapping("/posts/delete/{id}")
     public String deletePost(@PathVariable long id) {
 //        long deletePostId = id;
         postDao.deleteById(id);
 
+//        return "/profile/userProfileEdited";
         return "redirect:/posts/userProfile";
+//        return "/posts/profile"; //THIS MAKES CHANGES BUT DOESNT TAKE USER TO SEE CHANGES, INSTEAD ONLY SEE BUTTONS
     }
+/////////////////////THIS DELETES A SINGLE POST FROM THE USER PROFILE PAGE, TAKE THIS OUT AND DELETE WONT WORK ^^^^^^^^^^^^^^^^^
 
 
-    ///CREATE POSTS ******************
+
+
+
+    ///CREATE POSTS ******************************************************************************************
     @GetMapping("/posts/create")
     public String displayCreatePost(Model model) {
         model.addAttribute("post", new Post());
@@ -179,9 +144,12 @@ public class PostController {
         post.setUser(specificUser);
         postDao.save(post);
 
-        return "redirect:/posts/userProfile";
+//        return "/posts/profile"; THIS POSTS ONTO TABLE BUT BRINGS USER TO POSTS/CREATE AND DOESN'T LIST CREATED POST
+//        return "/posts/index"; // THIS CREATES POST BUT TAKES BACK TO INDEX PAGE AND DOES NOT SHOW ANY POSTS UNTIL YOU CLICK A LINK
+//        return "redirect: /posts/profile"; THIS GIVES A WHITELABEL ERROR PAGE - BUT IT DOES STILL POST ONTO POST TABLE
+        return "redirect:/posts/userProfile"; //THIS TAKES BACK TO PROFILE PAGE WITH ALL NEW UPDATES
     }
-    ///CREATE POSTS ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ///CREATE POSTS ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 
 //    @GetMapping("/posts/edit")

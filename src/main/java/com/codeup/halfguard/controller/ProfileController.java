@@ -1,13 +1,10 @@
 package com.codeup.halfguard.controller;
 
 //import com.codeup.halfguard.models.Bio;
-import com.codeup.halfguard.models.Post;
 import com.codeup.halfguard.models.User;
 import com.codeup.halfguard.repositories.BioRepository;
 import com.codeup.halfguard.repositories.PostRepository;
 import com.codeup.halfguard.repositories.UserRepository;
-import org.springframework.security.authentication.AnonymousAuthenticationToken;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -36,7 +33,7 @@ public class ProfileController {
         User poster = userDao.getById(specificUser.getId());
 
 
-        return "profile/biography";
+        return "edit_biography";
     }
 
 
@@ -113,19 +110,26 @@ public class ProfileController {
 
 
     @GetMapping("/editBio")
-    public String signupForm(@ModelAttribute User user, Model model){
+    public String editBioForm(@ModelAttribute User user, Model model){
         User specificUserBioEdit = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User userEditBio = userDao.getById(specificUserBioEdit.getId()); //ADDED THIS
 
         model.addAttribute("userSpecificBio", userEditBio);
+//        model.addAttribute("addOnProfile", userDao.findByUsername(userEditBio));
 
-        return "profile/biography";
+
+        return "profile/edit_biography";
     }
 
-    @PostMapping("/process_edit")
-    public String processRegistration(User user){
+//    @PostMapping("/process_edit")
+    @PostMapping("/posts/userProfile")
+//    @PostMapping("profile/edit_biography")
+    public String processBioEdit(User user, Model model){
         User specificUserBioEdit = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User userEditBio = userDao.getById(specificUserBioEdit.getId());
+
+        model.addAttribute("userSpecificBio", userEditBio);
+
 
         userEditBio.setBeltRank(user.getBeltRank());
         userEditBio.setYears(user.getYears());
@@ -135,7 +139,10 @@ public class ProfileController {
         userDao.save(user);
 
 
-        return "redirect:/profile";
+//        return "/profile/userProfileEdited";
+//        return "/posts/profile"; //THIS WILL SHOW THE UPDATED YEARS BUT DOES NOT SHOW USER POSTS
+//        return "redirect:/posts/userProfile"; //THIS MAKES CHANGES TO YEARS BUT DOES NOT DISPLAY, INSTEAD TAKES TO VIEW OF USER POSTS
+        return "/posts/userProfile"; //MAKES CHANGES IN TABLE, BUT GIVES WHITELABEL ERROR
     }
 
 
