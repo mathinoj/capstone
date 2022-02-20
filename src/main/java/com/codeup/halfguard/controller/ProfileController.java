@@ -6,6 +6,8 @@ import com.codeup.halfguard.models.User;
 import com.codeup.halfguard.repositories.BioRepository;
 import com.codeup.halfguard.repositories.PostRepository;
 import com.codeup.halfguard.repositories.UserRepository;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -105,29 +107,33 @@ public class ProfileController {
 
 
 
+
+
+
+
+
     @GetMapping("/editBio")
     public String signupForm(@ModelAttribute User user, Model model){
-        User specificUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        model.addAttribute("userSpecificBio", specificUser);
+        User specificUserBioEdit = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User userEditBio = userDao.getById(specificUserBioEdit.getId()); //ADDED THIS
 
-        userDao.save(user);
-
+        model.addAttribute("userSpecificBio", userEditBio);
 
         return "profile/biography";
     }
 
     @PostMapping("/process_edit")
-    public String processRegistration(@ModelAttribute User user){
-//        String hash = passwordEncoder.encode(user.getPassword());
-//        user.setPassword(hash);
+    public String processRegistration(User user){
+        User specificUserBioEdit = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User userEditBio = userDao.getById(specificUserBioEdit.getId());
 
-
+        userEditBio.setBeltRank(user.getBeltRank());
+        userEditBio.setYears(user.getYears());
+        userEditBio.setGymName(user.getGymName());
+        userEditBio.setLocation(user.getLocation());
 
         userDao.save(user);
 
-//        User userCreate = userDao.getById(1L);
-//        user.setUsername(userCreate.getUsername());
-//        userDao.save(user);
 
         return "redirect:/profile";
     }
