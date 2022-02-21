@@ -33,7 +33,6 @@ public class PostController {
     }
 
 
-
     ///////////THIS TAKES USER TO THEIR PROFILE AND THEIR SPECIFIC POSTS -- profile.html***************
     @GetMapping("/posts/userProfile")
     public String profile(Model model) {
@@ -43,11 +42,17 @@ public class PostController {
 
         model.addAttribute("postBySpecificUser", postDao.findPostsByUser(poster));
 
+
+        //THIS PART SHOWS THE USERS CURRENT BIO
+        User specificUserBio = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User bioShouldBeHere = userDao.getById(specificUserBio.getId());
+
+
+        model.addAttribute("bioShouldBeHere", userDao.findById(bioShouldBeHere.getId()));
+
         return "posts/profile";
     }
     ///////////THIS TAKES USER TO THEIR PROFILE AND THEIR SPECIFIC POSTS -- profile.html^^^^^^^^^^^^^^^^^^
-
-
 
 
     //    show a post by it's ID
@@ -91,27 +96,7 @@ public class PostController {
     //EDIT A SINGLE POST ON -- all posts page ***************^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 
-
-
-
-//    @GetMapping("/posts/delete/{id}")
-//    public String deletePost(@PathVariable long id, Model model) {
-//        Post deletePost = postDao.deleteById(id);
-//
-//        model.addAttribute("postToEdit", deletePost);
-//        return "redirect:/posts";
-//    }
-
-//    @PostMapping("/posts/delete/{id}")
-//    public String deletePost(@PathVariable long id, Model model) {
-//        long deletePost = id;
-//        postDao.deleteById(id);
-//
-//        model.addAttribute("postToEdit", deletePost);
-//        return "redirect:/posts/index";
-//    }
-
-/////////////////////THIS DELETES A SINGLE POST FROM THE USER PROFILE PAGE, TAKE THIS OUT AND DELETE WONT WORK  ****************
+    /////////////////////THIS DELETES A SINGLE POST FROM THE USER PROFILE PAGE, TAKE THIS OUT AND DELETE WONT WORK  ****************
     @PostMapping("/posts/delete/{id}")
     public String deletePost(@PathVariable long id) {
 //        long deletePostId = id;
@@ -122,9 +107,6 @@ public class PostController {
 //        return "/posts/profile"; //THIS MAKES CHANGES BUT DOESNT TAKE USER TO SEE CHANGES, INSTEAD ONLY SEE BUTTONS
     }
 /////////////////////THIS DELETES A SINGLE POST FROM THE USER PROFILE PAGE, TAKE THIS OUT AND DELETE WONT WORK ^^^^^^^^^^^^^^^^^
-
-
-
 
 
     ///CREATE POSTS ******************************************************************************************
@@ -152,6 +134,26 @@ public class PostController {
     ///CREATE POSTS ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 
+}
+
+
+//    @GetMapping("/posts/delete/{id}")
+//    public String deletePost(@PathVariable long id, Model model) {
+//        Post deletePost = postDao.deleteById(id);
+//
+//        model.addAttribute("postToEdit", deletePost);
+//        return "redirect:/posts";
+//    }
+
+//    @PostMapping("/posts/delete/{id}")
+//    public String deletePost(@PathVariable long id, Model model) {
+//        long deletePost = id;
+//        postDao.deleteById(id);
+//
+//        model.addAttribute("postToEdit", deletePost);
+//        return "redirect:/posts/index";
+//    }
+
 //    @GetMapping("/posts/edit")
 //    public String displayPosts(Model model){
 //
@@ -170,6 +172,3 @@ public class PostController {
 //
 //        return "redirect:post/edited_page";
 //    }
-
-
-}

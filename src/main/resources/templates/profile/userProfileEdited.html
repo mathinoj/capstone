@@ -12,100 +12,61 @@
 <h4> NEED TO HAVE BIO LISTED BELOW</h4>
 
 
-
-<!--<div>-->
-<!--<div>-->
-<tr th:each="post : ${postSpecificUser}">
-    Years Active: <p th:text="${post.getYears}" ></p>
-    Belt Rank: <p th:text="${post.getBeltRank}" ></p>
-    Location: <p th:text="${post.getLocation}" ></p>
-    Gym Name: <p th:text="${post.gymName}" ></p>
-</tr>
-
-<!--    Body: <p th:text="${post.getBeltRank}"></p>-->
-<!--</div>-->
-
-<!--&lt;!&ndash;    <tr th:method="get" th:each="team : ${userSpecificBio}">&ndash;&gt;-->
-<!--&lt;!&ndash;        <td th:text="${team.years}"></td>&ndash;&gt;-->
-<!--&lt;!&ndash;    <td th:text="${team.getYears}"></td>&ndash;&gt;-->
-<!--&lt;!&ndash;    <td th:text="${team.setYears}"></td>&ndash;&gt;-->
-<!--&lt;!&ndash;    <td th:text="${years}"></td>&ndash;&gt;-->
-<!--&lt;!&ndash;        <td th:text="${userSpecificBio.years}"></td>&ndash;&gt;-->
-<!--&lt;!&ndash;        <td th:text="${ userEditBio.setYears(team.getYears())}"></td>&ndash;&gt;-->
-<!--&lt;!&ndash;        <td th:text="${ userSpecificBio.setYears(team.getYears())}"></td>&ndash;&gt;-->
-
-
 <br>
+<tr th:each="post : ${postSpecificUser}">
+    Years Active: <p th:text="${post.getYears}"></p>
+    Belt Rank: <p th:text="${post.getBeltRank}"></p>
+    Location: <p th:text="${post.getLocation}"></p>
+    Gym Name: <p th:text="${post.gymName}"></p>
+</tr>
+<br>
+
+<h2><a th:href="@{/editBio}">Edit Biography</a></h2>
+
+
+<ul>
+    <form th:action="@{/editBio}">
+        <button class="btn-link btn">Edit Biography</button>
+    </form>
+</ul>
+<ul>
+    <form th:action="@{/groups}" th:method="post">
+        <button class="btn-link btn">Groups</button>
+    </form>
+</ul>
+<ul>
+    <form th:action="@{/friends}" th:method="post">
+        <button class="btn-link btn">Friends</button>
+    </form>
+</ul>
+<ul>
+    <form th:action="@{/media}" th:method="post">
+        <button class="btn-link btn">Media</button>
+    </form>
+</ul>
+
 <br>
 <h3> POSTS WILL BE LISTED HERE </h3>
 <br>
-<br>
 
 <tr th:each="post : ${postBySpecificUserProfileEdited}">
-    Title: <p th:text="${post.getTitle}" ></p>
+    Title: <p th:text="${post.getTitle}"></p>
     Body: <p th:text="${post.getBody}"></p>
-    POSTER 1000:<p th:text="${post.getUser().getFirstName} + ' ' + ${post.getUser().getLastName}"></p>
+    Person Posting:<p th:text="${post.getUser().getFirstName} + ' ' + ${post.getUser().getLastName}"></p>
+
+    <form th:action="'/posts/edit/' + ${post.getId()}" method="get">
+        <button>Edit</button>
+    </form>
+
+    <form th:action="'/posts/delete/' + ${post.getId()}" method="post">
+        <button>Delete</button>
+    </form>
+    <a th:href="@{'/posts/' + ${post.getId()}} ">View Single Post</a>
+
+    <br>
+
 </tr>
 
-
-<!--Years Active:-->
-<!--<br>-->
-<!--Belt/Rank:-->
-<!--<br>-->
-<!--Location:-->
-<!--<br>-->
-<!--Gym Name:-->
-
-
-<!--<h2><a th:href="@{/editBio}">Edit Biography</a></h2>-->
-
-
-<!--<ul>-->
-<!--    <form th:action="@{/profile/biography}">-->
-<!--        <button class="btn-link btn">Edit Biography</button>-->
-<!--    </form>-->
-<!--</ul>-->
-<!--<ul>-->
-<!--    <form th:action="@{/groups}" th:method="post">-->
-<!--        <button class="btn-link btn">Groups</button>-->
-<!--    </form>-->
-<!--</ul>-->
-<!--<ul>-->
-<!--    <form th:action="@{/friends}" th:method="post">-->
-<!--        <button class="btn-link btn">Friends</button>-->
-<!--    </form>-->
-<!--</ul>-->
-<!--<ul>-->
-<!--    <form th:action="@{/media}" th:method="post">-->
-<!--        <button class="btn-link btn">Media</button>-->
-<!--    </form>-->
-<!--</ul>-->
-
-
-<!--&lt;!&ndash;    <div sec:authorize="isAuthenticated()">&ndash;&gt;-->
-<!--&lt;!&ndash;            <h1>User ID: <span th:text="${#authentication.principal.id}"></span></h1>&ndash;&gt;-->
-<!--&lt;!&ndash;        </div>&ndash;&gt;-->
-<!--&lt;!&ndash;    </div>&ndash;&gt;-->
-<!--&lt;!&ndash;</div>&ndash;&gt;-->
-
-<!--<tr th:each="post : ${postBySpecificUser}">-->
-<!--    Title: <p th:text="${post.getTitle}" ></p>-->
-<!--    Body: <p th:text="${post.getBody}"></p>-->
-<!--    POSTER 1000:<p th:text="${post.getUser().getFirstName} + ' ' + ${post.getUser().getLastName}"></p>-->
-
-<!--    <form th:action="'/posts/edit/' + ${post.getId()}" method="get">-->
-<!--        <button>Edit</button>-->
-<!--    </form>-->
-
-<!--    <form th:action="'/posts/delete/' + ${post.getId()}" method="post">-->
-<!--        <button>Delete</button>-->
-<!--    </form>-->
-<!--    <a th:href="@{'/posts/' + ${post.getId()}} ">View Single Post</a>-->
-
-<!--    <br>-->
-
-<!--</tr>-->
-<!--</div>-->
 
 </body>
 </html>

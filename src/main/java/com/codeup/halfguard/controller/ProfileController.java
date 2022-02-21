@@ -148,12 +148,13 @@ public class ProfileController {
         return "redirect:/posts_afterEdits";
     }
 
-
+////////////////////////////////////////THIS CONTROLLER SHOWS NEW EDITED BIO, AND SAME POSTS----------------------------
     @GetMapping("/posts_afterEdits")
     public String profile(Model model) {
+
+        //THIS PART SHOWS THE USERS NEWLY EDITED BIO
         User specificUserBio = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User editor = userDao.getById(specificUserBio.getId());
-
 
         model.addAttribute("postSpecificUser", userDao.findById(editor.getId()));
 
@@ -163,14 +164,13 @@ public class ProfileController {
         User specificUserPosts = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User posterToNew = userDao.getById(specificUserPosts.getId());
 
-
         model.addAttribute("postBySpecificUserProfileEdited", postDao.findPostsByUser(posterToNew));
 
 
         return "/profile/userProfileEdited";
 //                return "/posts/profile";
     }
-
+////////////////////////////////////////THIS CONTROLLER SHOWS NEW EDITED BIO, AND SAME POSTS^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 
 }
