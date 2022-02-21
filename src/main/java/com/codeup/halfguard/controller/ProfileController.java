@@ -2,7 +2,7 @@ package com.codeup.halfguard.controller;
 
 //import com.codeup.halfguard.models.Bio;
 import com.codeup.halfguard.models.User;
-import com.codeup.halfguard.repositories.BioRepository;
+import com.codeup.halfguard.repositories.ProfileRepository;
 import com.codeup.halfguard.repositories.PostRepository;
 import com.codeup.halfguard.repositories.UserRepository;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -14,11 +14,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class ProfileController {
-    private BioRepository bioDao;
+    private ProfileRepository bioDao;
     private PostRepository postDao;
     private UserRepository userDao;
 
-    public ProfileController(BioRepository bioDao, PostRepository postDao, UserRepository userDao) {
+    public ProfileController(ProfileRepository bioDao, PostRepository postDao, UserRepository userDao) {
         this.bioDao = bioDao;
         this.postDao = postDao;
         this.userDao = userDao;
@@ -33,7 +33,8 @@ public class ProfileController {
         User poster = userDao.getById(specificUser.getId());
 
 
-        return "edit_biography";
+        return "/edit_biography";
+//        return "/profile/edit_biography";
     }
 
 
@@ -142,10 +143,33 @@ public class ProfileController {
 //        return "/profile/userProfileEdited";
 //        return "/posts/profile"; //THIS WILL SHOW THE UPDATED YEARS BUT DOES NOT SHOW USER POSTS
 //        return "redirect:/posts/userProfile"; //THIS MAKES CHANGES TO YEARS BUT DOES NOT DISPLAY, INSTEAD TAKES TO VIEW OF USER POSTS
-        return "/posts/userProfile"; //MAKES CHANGES IN TABLE, BUT GIVES WHITELABEL ERROR
+//        return "/posts/userProfile"; //MAKES CHANGES IN TABLE, BUT GIVES WHITELABEL ERROR
+//        return "/profile/userProfileEdited";
+        return "redirect:/posts_afterEdits";
     }
 
 
+    @GetMapping("/posts_afterEdits")
+    public String profile(Model model) {
+        User specificUserBio = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User editor = userDao.getById(specificUserBio.getId());
+
+
+        model.addAttribute("postSpecificUser", userDao.findById(editor.getId()));
+
+
+
+        ////THIS PART ADDS THE SPECIFIC USER POSTS TO THE PAGE
+        User specificUserPosts = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User posterToNew = userDao.getById(specificUserPosts.getId());
+
+
+        model.addAttribute("postBySpecificUserProfileEdited", postDao.findPostsByUser(posterToNew));
+
+
+        return "/profile/userProfileEdited";
+//                return "/posts/profile";
+    }
 
 
 

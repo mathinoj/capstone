@@ -11,19 +11,19 @@
 <H1>SHOULD SEE BIOGRAPHY EDIT PAGE</H1>
 
 <form th:action="@{/posts/userProfile}" method="POST" th:object="${userSpecificBio}">
-
+<!--<form th:action="@{/posts_afterEdits}" method="POST" th:object="${userSpecificBio}">-->
     <label for="years">Years: </label>
     <input id="years" th:field="*{years}"/>
     <br>
-<!--    <label for="beltRank">Belt: </label>-->
-<!--    <input id="beltRank" th:field="*{beltRank}"/>-->
-<!--    <br>-->
-<!--    <label for="location">Location: </label>-->
-<!--    <input id="location" th:field="*{location}"/>-->
-<!--    <br>-->
-<!--    <label for="gymName">Gym Name: </label>-->
-<!--    <input id="gymName" th:field="*{gymName}"/>-->
-<!--    <br>-->
+    <label for="beltRank">Belt: </label>
+    <input id="beltRank" th:field="*{beltRank}"/>
+    <br>
+    <label for="location">Location: </label>
+    <input id="location" th:field="*{location}"/>
+    <br>
+    <label for="gymName">Gym Name: </label>
+    <input id="gymName" th:field="*{gymName}"/>
+    <br>
 
     <input value="Edit Bio!" type="submit"/>
 
