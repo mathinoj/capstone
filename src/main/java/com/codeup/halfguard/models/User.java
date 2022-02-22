@@ -55,6 +55,25 @@ public class User {
 
     public void setPosts(List<Post> posts) {this.posts = posts; }
 
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "group")
+//    private List<Group> groups;
+//
+//    public List<Group> getGroups(){ return groups; }
+//
+//    public void setGroups(List<Group> groups) {this.groups = groups; }
+
+//    @ManyToOne
+//    @JoinColumn(name = "group_id")
+//    private Group group;
+//
+//    public Group getGroup() {
+//        return group;
+//    }
+//
+//    public void setGroup(Group group) {
+//        this.group = group;
+//    }
+
     public User(){}
 
 

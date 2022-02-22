@@ -10,10 +10,10 @@
 
 <form th:action="${'/posts/edit'}" method="post">
     <label name="postTitle">Title of Post:</label>
-    <input name="postTitle" th:value="${postEdit.getTitle()}">
+    <input name="postTitle" th:value="${postEdit.getTitle()}" required>
 
     <label name="postBody">Body of Post:</label>
-    <input name="postBody" th:value="${postEdit.getBody()}">
+    <input name="postBody" th:value="${postEdit.getBody()}" required>
 
     <input name="postId" type="hidden" th:value="${postEdit.getId()}">
 
@@ -21,7 +21,7 @@
 </form>
 
 
-////////////////THIS DOES A SINGLE POST BY A SPECIFIC USER, AND IT POSTS TO THE DATABASE, BUT DOESN'T SHOW UP ON ALLPOSTS!!!! THEREFORE THIS MIGHT BE USEFUL FOR SINGLE POSTS ON USERS HOMEPAGE
+<!--////////////////THIS DOES A SINGLE POST BY A SPECIFIC USER, AND IT POSTS TO THE DATABASE, BUT DOESN'T SHOW UP ON ALLPOSTS!!!! THEREFORE THIS MIGHT BE USEFUL FOR SINGLE POSTS ON USERS HOMEPAGE-->
 <!--<form th:action="@{/posts/edit}" th:method="post" th:object="${post}">-->
 <!--    Title:-->
 <!--    <input type="text" th:field="*{title}" />-->
@@ -34,19 +34,6 @@
 
 <button type="submit">Submit edit</button>
 
-
-
-
-
-<!--<form th:action="@{|/templates/halfguard/posts/${post.id}/delete|}" th:method="POST">-->
-<!--    <input class="btn btn-danger" type="submit" value="Delete Post" />-->
-<!--</form>-->
-
-<!--<form th:action="${'/posts/delete/{id}'}" method="post">-->
-<!--    <input name="deleteId" type="hidden" th:value="${id}">-->
-
-<!--    <button type="submit">Delete</button>-->
-<!--</form>-->
 
 </body>
 </html>

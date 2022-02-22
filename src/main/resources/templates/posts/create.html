@@ -11,10 +11,10 @@
 
 <form th:action="@{/posts/create}" th:method="post" th:object="${post}">
     <label name="postTitle">Title of Post:</label>
-    <input type="text" th:field="*{title}" id="postTitle">
+    <input type="text" th:field="*{title}" id="postTitle" required>
 
     <label name="postBody">Body of Post:</label>
-    <input type="text" th:field="*{body}" id="postBody">
+    <input type="text" th:field="*{body}" id="postBody" required>
 
     <button type="submit">Submit Post</button>
 </form>

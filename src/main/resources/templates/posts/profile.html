@@ -2,6 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <div th:insert="partials :: head"></div>
+<head>
 <meta charset="UTF-8">
 <title>Profile</title>
 </head>
@@ -9,9 +10,24 @@
 <nav th:replace="partials :: navbar"></nav>
 
 <h1>THIS WILL BE THE USERS PROFILE WITH THEIR OWN POSTS, not all post</h1>
+
+
+PIC WILL GO BELOW HERE
+<br>
+<form action="/fileupload" method="POST" enctype="multipart/form-data">
+    <label for="file">Upload a file!</label>
+    <input id="file" name="filePicYou" type="file" />
+    <br />
+    <input type="submit" value="upload" />
+</form>
+<br>
+PIC WILL GO ABOVE HERE
+
+
+<br>
+<h2><span th:text="${#authentication.principal.firstName + ' ' + #authentication.principal.lastName}"></span>, profile</h2>
+<br>
 <h4> NEED TO HAVE BIO LISTED BELOW</h4>
-
-
 <br>
 <tr th:each="post : ${bioShouldBeHere}">
     Years Active: <p th:text="${post.getYears}"></p>
@@ -21,7 +37,7 @@
 </tr>
 <br>
 
-<h2><a th:href="@{/editBio}">Edit Biography</a></h2>
+<!--<h2><a th:href="@{/editBio}">Edit Biography</a></h2>-->
 
 
 <ul>
@@ -30,7 +46,8 @@
     </form>
 </ul>
 <ul>
-    <form th:action="@{/groups}" th:method="post">
+<!--    <form th:action="@{/groups}" th:method="post">-->
+    <form th:action="@{/groups_start}">
         <button class="btn-link btn">Groups</button>
     </form>
 </ul>
@@ -40,8 +57,9 @@
     </form>
 </ul>
 <ul>
-    <form th:action="@{/media}" th:method="post">
-        <button class="btn-link btn">Media</button>
+<!--    <form th:action="@{/fileupload}" th:method="post">-->
+    <form th:action="@{/fileupload}">
+    <button class="btn-link btn">Media</button>
     </form>
 </ul>
 

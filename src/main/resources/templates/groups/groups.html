@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<div th:insert="partials :: head"></div>
+<head>
+    <meta charset="UTF-8">
+    <title>Groups</title>
+</head>
+<body>
+<nav th:replace="partials :: navbar"></nav>
+
+THIS WILL BE THE GROUPS PAGE WHERE ALL GROUPS CREATED BY USER ARE LISTED
+</body>
+</html>
+
+<!--<ul>-->
+<!--    <form th:action="@{/editBio}">-->
+<!--        <button class="btn-link btn">Create Group</button>-->
+<!--    </form>-->
+<!--</ul>-->
+<ul>
+    <!--    <form th:action="@{/groups}" th:method="post">-->
+    <form th:action="@{/groups_create}">
+        <button class="btn-link btn">Create Group</button>
+    </form>
+</ul>
+<!--<ul>-->
+<!--    <form th:action="@{/friends}" th:method="post">-->
+<!--        <button class="btn-link btn">Friends</button>-->
+<!--    </form>-->
+<!--</ul>-->

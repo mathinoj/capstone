@@ -38,40 +38,9 @@ public class ProfileController {
     }
 
 
-    ////////////CREATE BIOGRAPHY ************************************************************************
-//    @GetMapping("/profile/biography")
-//    public String displayUserBio(Model model) {
-//        model.addAttribute("newBio", new User());
-//
-//        return "profile/biography";
-//    }
-//
-//
-//
-//    @PostMapping("/profile/biography")
-//    public String createBio(@ModelAttribute User user) {
-//
-//        User bioCreator = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//        User specificUserBio = userDao.getById(bioCreator.getId());
-//
-//        user.setUser(specificUserBio);
-////        user.setPosts(postDao.findPostsByUser(specificUserBio));
-//        bioDao.save(user);
-//
-//        return "redirect:/biography";
-//    }
-    ////////////////////////////////////////////////////////////////////////////^^^^^^^^^^^^^^^^^^^
 
 
 
-    ////////////////////////////////////////////////////////////////////////////
-//TOOK THIS OUT TO START THE ONE ON LINE 108
-//    @GetMapping("/profile/biography")
-//    public String showUserBio(Model model){
-//        model.addAttribute("newUserBio", new User());
-//
-//        return "profile/biography";
-//    }
 
     @PostMapping("/profile/biography")
     public String createBioNow(@ModelAttribute User user){
@@ -137,7 +106,7 @@ public class ProfileController {
         userEditBio.setGymName(user.getGymName());
         userEditBio.setLocation(user.getLocation());
 
-        userDao.save(user);
+        userDao.save(userEditBio);
 
 
 //        return "/profile/userProfileEdited";
@@ -171,6 +140,12 @@ public class ProfileController {
 //                return "/posts/profile";
     }
 ////////////////////////////////////////THIS CONTROLLER SHOWS NEW EDITED BIO, AND SAME POSTS^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+
+
+
+
 
 
 }

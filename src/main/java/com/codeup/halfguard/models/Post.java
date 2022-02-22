@@ -9,6 +9,7 @@ public class Post {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+
     @Column(nullable = false, length = 100)
     private String title;
 
