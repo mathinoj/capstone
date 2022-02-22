@@ -3,13 +3,14 @@ package com.codeup.halfguard.models;
 
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "groups")
 public class Group {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    private Long id;
+    private long id;
 
     @Column(nullable = false, length = 100)
     private String location;
@@ -21,17 +22,11 @@ public class Group {
     private String description;
 
 
-//    @ManyToOne
-//    @JoinColumn(name="group_id")
-//    private Group group;
-//
-//    public Group getGroup(){
-//        return group;
-//    }
-//
-//    public void setGroup(Group group) {
-//        this.group = group;
-//    }
+    @ManyToOne
+    @JoinColumn(name="group_id")
+    private User user;
+
+
 
     public Group(){}
 
@@ -43,13 +38,13 @@ public class Group {
 
 
 
-//    public Long getId() {
-//        return id;
-//    }
-//
-//    public void setId(Long id) {
-//        this.id = id;
-//    }
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public String getLocation() {
         return location;

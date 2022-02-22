@@ -1,6 +1,7 @@
 package com.codeup.halfguard.models;
 
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.List;
 
 @Entity
@@ -55,24 +56,13 @@ public class User {
 
     public void setPosts(List<Post> posts) {this.posts = posts; }
 
-//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "group")
-//    private List<Group> groups;
-//
-//    public List<Group> getGroups(){ return groups; }
-//
-//    public void setGroups(List<Group> groups) {this.groups = groups; }
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private List<Group> groups;
 
-//    @ManyToOne
-//    @JoinColumn(name = "group_id")
-//    private Group group;
-//
-//    public Group getGroup() {
-//        return group;
-//    }
-//
-//    public void setGroup(Group group) {
-//        this.group = group;
-//    }
+
+
+
+
 
     public User(){}
 
