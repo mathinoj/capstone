@@ -77,8 +77,7 @@ public class ProfileController {
 
 
 
-
-
+    ///////////////////////////////This takes user to edit biography page
     @GetMapping("/editBio")
     public String editBioForm(@ModelAttribute User user, Model model){
         User specificUserBioEdit = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -91,7 +90,8 @@ public class ProfileController {
         return "profile/edit_biography";
     }
 
-//    @PostMapping("/process_edit")
+
+    ///////////////////////////////This takes user edits and posts them to the database
     @PostMapping("/posts/userProfile")
 //    @PostMapping("profile/edit_biography")
     public String processBioEdit(User user, Model model){
@@ -117,7 +117,7 @@ public class ProfileController {
         return "redirect:/posts_afterEdits";
     }
 
-////////////////////////////////////////THIS CONTROLLER SHOWS NEW EDITED BIO, AND SAME POSTS----------------------------
+////////////////////////////////////////THIS CONTROLLER SHOWS gets NEW EDITED BIO, AND SAME POSTS and displays-----------------
     @GetMapping("/posts_afterEdits")
     public String profile(Model model) {
 

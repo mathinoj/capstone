@@ -102,4 +102,6 @@ public class UserController {
 //    public String viewPostPage(){
 //        return "posts/index";
 //    }
+
+
 }

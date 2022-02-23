@@ -35,7 +35,7 @@ public class User {
     @Column(length = 100)
     private String gymName;
 
-    public User(User copy){
+    public User(User copy) {
         id = copy.id;
         firstName = copy.firstName;
         lastName = copy.lastName;
@@ -50,26 +50,27 @@ public class User {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<Post> posts;
 
-    public List<Post> getPosts() {
-        return posts;
-    }
 
-    public void setPosts(List<Post> posts) {this.posts = posts; }
+
+
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
-    private List<Group> groups;
+    private List<Image> images;
 
 
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private List<Club> clubs;
 
 
 
-    public User(){}
+    public User() {
+    }
 
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public User(long years, String beltRank, String location, String gymName){
+    public User(long years, String beltRank, String location, String gymName) {
 //        List<Post> posts
         this.years = years;
         this.beltRank = beltRank;
@@ -150,5 +151,29 @@ public class User {
 
     public void setGymName(String gymName) {
         this.gymName = gymName;
+    }
+
+    public List<Post> getPosts() {
+        return posts;
+    }
+
+    public void setPosts(List<Post> posts) {
+        this.posts = posts;
+    }
+
+    public List<Image> getImages() {
+        return images;
+    }
+
+    public void setImages(List<Image> images) {
+        this.images = images;
+    }
+
+    public List<Club> getClubs() {
+        return clubs;
+    }
+
+    public void setClubs(List<Club> clubs) {
+        this.clubs = clubs;
     }
 }

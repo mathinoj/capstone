@@ -9,5 +9,17 @@
 <body>
 <nav th:replace="partials :: navbar"></nav>
 THIS WILL BE FORM WHERE USERS CREATE GROUP
+
+<form th:action="@{/create_group_info}" th:method="post" th:object="${club}">
+    <label name="groupName">Group Name:</label>
+    <input type="text" th:field="*{clubName}" id="groupName" required>
+
+    <label name="groupLocation">Location:</label>
+    <input type="text" th:field="*{clubLocation}" id="groupLocation" required>
+
+    <button type="submit">Submit Post</button>
+</form>
+
+
 </body>
 </html>

@@ -9,7 +9,6 @@
 <div class="container text-center">
     <div>
         <form th:action="@{/logout}" method="POST">
-            <p>Hello <b>[[${#request.userPrincipal.principal.fullName}]]</b></p>
 
             <input type="submit" value="Logout" />
         </form>
