@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
@@ -37,9 +38,9 @@ public class GroupsController {
 
         User clubCreated = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User clubGod = userDao.getById(clubCreated.getId());
-        Club blahDoh = clubDao.getById(clubCreated.getId());
+//        Club blahDoh = clubDao.getById(clubCreated.getId());
 
-
+        System.out.println(clubDao.findClubsByUser(clubGod));
         model.addAttribute("displaySpecificClub", clubDao.findClubsByUser(clubGod));
 
 
@@ -59,16 +60,11 @@ public class GroupsController {
     }
 
 //    ///CREATE POSTS ******************************************************************************************
-//    @GetMapping("/posts/create")
-//    public String displayCreatePost(Model model) {
-//        model.addAttribute("post", new Post());
-//
-//        return "posts/create";
-//    }
 
-//    @PostMapping("/groups/create_groups")
+
+    //    @PostMapping("/groups/create_groups")
     @PostMapping("/create_group_info")
-public String clubCreated(@ModelAttribute Club club){
+    public String clubCreated(@ModelAttribute Club club) {
         User clubCreator = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User specificClubCreator = userDao.getById(clubCreator.getId());
 //        Club blah = clubDao.getById(clubCreator.getId());
@@ -92,23 +88,30 @@ public String clubCreated(@ModelAttribute Club club){
     }
 
 
-//    @GetMapping("/group_should_display")
-@GetMapping("/group/groups")
+    //    @GetMapping("/group_should_display")
+    @GetMapping("/group/groups")
 
-    public String showingAllGroups(Model model){
+    public String showingAllGroups(Model model) {
         User clubCreatedRader = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User clubGodRick = userDao.getById(clubCreatedRader.getId());
-                Club blahDoh = clubDao.getById(clubCreatedRader.getId());
+//                Club blahDoh = clubDao.getById(clubCreatedRader.getId());
 
 
         model.addAttribute("displaySpecificClubMaybe", clubDao.findClubsByUser(clubGodRick));
 
 
-
-
 //        return "/groups/groups";
-    return "redirect:/groups_start";
+        return "redirect:/groups_start";
 
+    }
+
+
+///////////////////DELETE A GROUP
+    @PostMapping("/club/delete/{id}")
+    public String deleteClub(@PathVariable long id){
+        clubDao.deleteById(id);
+
+        return "redirect:/groups_start";
     }
 
 

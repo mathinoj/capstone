@@ -35,8 +35,11 @@ public class User {
     @Column(length = 100)
     private String gymName;
 
+    @Column(length = 100)
+    private String profileImage;
+
     public User(User copy) {
-        id = copy.id;
+        id = copy.id; // This line is SUPER important! Many things won't work if it's absent
         firstName = copy.firstName;
         lastName = copy.lastName;
         username = copy.username;
@@ -45,17 +48,11 @@ public class User {
         beltRank = copy.beltRank;
         location = copy.location;
         gymName = copy.gymName;
+        profileImage = copy.profileImage;
     }
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<Post> posts;
-
-
-
-
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
-    private List<Image> images;
 
 
 
@@ -161,19 +158,19 @@ public class User {
         this.posts = posts;
     }
 
-    public List<Image> getImages() {
-        return images;
-    }
-
-    public void setImages(List<Image> images) {
-        this.images = images;
-    }
-
     public List<Club> getClubs() {
         return clubs;
     }
 
     public void setClubs(List<Club> clubs) {
         this.clubs = clubs;
+    }
+
+    public String getProfileImage() {
+        return profileImage;
+    }
+
+    public void setProfileImage(String profileImage) {
+        this.profileImage = profileImage;
     }
 }

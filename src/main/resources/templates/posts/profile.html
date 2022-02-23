@@ -14,13 +14,6 @@
 
 PIC WILL GO BELOW HERE
 <br>
-<form action="/fileupload" method="POST" enctype="multipart/form-data">
-    <label for="file">Upload a file!</label>
-    <input id="file" name="filePicYou" type="file" />
-    <br />
-    <input type="submit" value="upload" />
-</form>
-<br>
 PIC WILL GO ABOVE HERE
 
 
@@ -58,7 +51,7 @@ PIC WILL GO ABOVE HERE
 </ul>
 <ul>
 <!--    <form th:action="@{/fileupload}" th:method="post">-->
-    <form th:action="@{/fileupload}">
+    <form th:action="@{/start_process_to_add_pic}">
     <button class="btn-link btn">Picture Upload</button>
     </form>
 </ul>
@@ -79,7 +72,7 @@ PIC WILL GO ABOVE HERE
     <form th:action="'/posts/delete/' + ${post.getId()}" method="post">
         <button>Delete</button>
     </form>
-    <a th:href="@{'/posts/' + ${post.getId()}} ">View Single Post</a>
+<!--    <a th:href="@{'/posts/' + ${post.getId()}} ">View Single Post</a>-->
 
     <br>
 
