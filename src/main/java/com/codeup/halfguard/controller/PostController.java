@@ -117,6 +117,8 @@ public class PostController {
         return "posts/create";
     }
 
+
+    //THIS ALLOWS FOR MULTIPLE POSTS BY ONE USER AND THE TABLE TO IDENTIFY THE USER ID ASSOCIATED WITH THE POST
     @PostMapping("/posts/create")
     public String createPost(@ModelAttribute Post post) {
 

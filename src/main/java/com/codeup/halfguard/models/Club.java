@@ -19,6 +19,7 @@ public class Club {
     private String clubDescription;
 
     @ManyToOne
+    @JoinColumn(name="user_id")
     private User user;
 
     public Club (){}
@@ -60,5 +61,13 @@ public class Club {
 
     public void setClubDescription(String clubDescription) {
         this.clubDescription = clubDescription;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

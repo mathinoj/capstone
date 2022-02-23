@@ -63,20 +63,24 @@ public class GroupsController {
     public String clubCreated(@ModelAttribute Club club){
         User clubCreator = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User specificClubCreator = userDao.getById(clubCreator.getId());
-
-//        club.setClubName(club.getClubName());
-//        specificClubCreator.setClubs();
-//        club.setClubLocation(club.getClubLocation());
-//        club.setClubDescription(club.getClubDescription());
+//        Club blah = clubDao.getById(clubCreator.getId());
 
 
-        specificClubCreator.setClubs(specificClubCreator.getClubs());
+        club.setUser(specificClubCreator);
+
+        //YOU CAN ALSO FALL BACK TO THESE 3 - these update the same line of the club, but does not add a new club
+//        club.setId(blah.getId()); <---DIDNT NEED THIS
+//        blah.setClubName(blah.getClubName());
+//        blah.setClubLocation(blah.getClubLocation());
+
+//        club.setId(specificClubCreator.getId()); FALL BACK TO THESE TWO
+//        specificClubCreator.setClubs(specificClubCreator.getClubs());
 
 
         clubDao.save(club);
 
-        return "redirect:/groups_start";
-//        return "/groups/groups";
+//        return "redirect:/groups_start";
+        return "/groups/groups";
     }
 
 
@@ -85,7 +89,7 @@ public class GroupsController {
         User clubCreated = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User clubGod = userDao.getById(clubCreated.getId());
 
-        model.addAttribute("displaySpecificClub", userDao.findById(clubGod.getId()));
+        model.addAttribute("displaySpecificClub", clubDao.findClubsByUser(clubGod));
 
         return "/groups/groups";
 
