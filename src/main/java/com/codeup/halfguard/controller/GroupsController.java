@@ -35,6 +35,14 @@ public class GroupsController {
 //        model.addAttribute("allPosts", postDao.findAll());
 //        model.addAttribute("allPosts", postDao.findAll());
 
+        User clubCreated = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User clubGod = userDao.getById(clubCreated.getId());
+        Club blahDoh = clubDao.getById(clubCreated.getId());
+
+
+        model.addAttribute("displaySpecificClub", clubDao.findClubsByUser(clubGod));
+
+
         //THIS WILL BE WHERE YOU PUT THE METHOD THAT BRINGS UP ALL THE GROUPS CREATED BY THE USER
 
         return "groups/groups";
@@ -60,7 +68,7 @@ public class GroupsController {
 
 //    @PostMapping("/groups/create_groups")
     @PostMapping("/create_group_info")
-    public String clubCreated(@ModelAttribute Club club){
+public String clubCreated(@ModelAttribute Club club){
         User clubCreator = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User specificClubCreator = userDao.getById(clubCreator.getId());
 //        Club blah = clubDao.getById(clubCreator.getId());
@@ -79,19 +87,27 @@ public class GroupsController {
 
         clubDao.save(club);
 
-//        return "redirect:/groups_start";
-        return "/groups/groups";
+        return "redirect:/groups_start";
+//        return "/groups/groups";
     }
 
 
-    @GetMapping("/group_should_display")
+//    @GetMapping("/group_should_display")
+@GetMapping("/group/groups")
+
     public String showingAllGroups(Model model){
-        User clubCreated = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        User clubGod = userDao.getById(clubCreated.getId());
+        User clubCreatedRader = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User clubGodRick = userDao.getById(clubCreatedRader.getId());
+                Club blahDoh = clubDao.getById(clubCreatedRader.getId());
 
-        model.addAttribute("displaySpecificClub", clubDao.findClubsByUser(clubGod));
 
-        return "/groups/groups";
+        model.addAttribute("displaySpecificClubMaybe", clubDao.findClubsByUser(clubGodRick));
+
+
+
+
+//        return "/groups/groups";
+    return "redirect:/groups_start";
 
     }
 

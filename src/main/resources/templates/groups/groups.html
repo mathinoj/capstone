@@ -19,9 +19,10 @@ THIS WILL BE THE GROUPS PAGE WHERE ALL GROUPS CREATED BY USER ARE LISTED
 </ul>
 
 <tr th:each="club : ${displaySpecificClub}"></tr>
-Group Name: <p th:text="${displaySpecificClub.getClubName}"></p>
-Group Location: <p th:text="${displaySpecificClub.getClubLocation}"></p>
-Group Description: <p th:text="${displaySpecificClub.getClubDescription}"></p>
+Group Name: <p th:text="${clubName}"></p>
+Group Location: <p th:text="${clubLocation}"></p>
+Group Description: <p th:text="${clubDescription}"></p>
+
 
 
 </body>
