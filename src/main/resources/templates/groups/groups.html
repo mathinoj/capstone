@@ -23,6 +23,7 @@ THIS WILL BE THE GROUPS PAGE WHERE ALL GROUPS CREATED BY USER ARE LISTED
     </form>
 </ul>
 
+<h3>Your Groups</h3>
 
 <div th:each="club : ${displaySpecificClub}">
 Group Name: <p th:text="${club.getClubName()}"></p>

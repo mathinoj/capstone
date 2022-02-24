@@ -160,7 +160,7 @@ public class GroupsController {
     }
 
 
-    ///////////////////////////////////TAKES USER TO ALL CLUBS THAT ARE IN DATABASE
+/////////////////////////////////////////////////TAKES USER TO ALL CLUBS THAT ARE IN DATABASE
     @GetMapping("/view_all_clubs")
     public String allClubs(Model model){
         List<Club> listClubbies = clubDao.findAll();
@@ -170,7 +170,7 @@ public class GroupsController {
     }
 
 
-
+///////////////////////////////////Searches ALL clubs in datatbase and finds club according to user search
     @GetMapping("/search_clubs")
     public String searchClubs(Model model, @Param("keyword") String keyword){
         List<Club> listClubs = clubDao.findAll(keyword);

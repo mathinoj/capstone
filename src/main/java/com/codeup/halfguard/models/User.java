@@ -56,9 +56,24 @@ public class User {
 
 
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+//    private List<Club> clubs;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name="users_clubs",
+            joinColumns = {@JoinColumn(name = "user_id")},
+            inverseJoinColumns = {@JoinColumn(name = "club_id")}
+    )
     private List<Club> clubs;
 
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name="users_friends",
+            joinColumns = {@JoinColumn(name = "user_id")},
+            inverseJoinColumns = {@JoinColumn(name = "friend_id")}
+    )
+    private List<Friend> friends;
 
 
     public User() {

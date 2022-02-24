@@ -1,6 +1,7 @@
 package com.codeup.halfguard.models;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "clubs")
@@ -21,6 +22,9 @@ public class Club {
     @ManyToOne
     @JoinColumn(name="user_id")
     private User user;
+
+    @ManyToMany(mappedBy = "clubs")
+    private List<User> users;
 
     public Club (){}
 
@@ -69,6 +73,14 @@ public class Club {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public List<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<User> users) {
+        this.users = users;
     }
 
 }
