@@ -1,16 +1,20 @@
 package com.codeup.halfguard.repositories;
 
+import com.codeup.halfguard.models.Club;
 import com.codeup.halfguard.models.Post;
 import com.codeup.halfguard.models.User;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
 public interface UserRepository extends JpaRepository <User, Long> {
-//    @Query("select u from User u where u.email = ?1")
-//    User findByEmail(String email);
+    @Query("SELECT u FROM User u WHERE u.firstName LIKE %?1%"
+            + " OR u.lastName LIKE %?1%"
+            + " OR u.username Like %?1%")
+        //WHERE " + "CONCAT (u.firstName, u.lastName, u.username)" + " LIKE %?1%") <--THIS IS THE FASTER WRITTEN
+    public List<User> findAll(String keywordUser);
 
-//        @Query("select u from User u where u.username = ?1")
 
     <List>User findByUsername(User user);
 

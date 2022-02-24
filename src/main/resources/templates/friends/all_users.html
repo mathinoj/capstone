@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<div th:insert="partials :: head"></div>
+<head>
+    <meta charset="UTF-8">
+    <title>All Friends</title>
+</head>
+<body>
+<nav th:replace="partials :: navbar"></nav>
+
+<div>
+    <h1>List of All Users</h1>
+</div>
+
+
+<!--<h1>Search Clubs</h1>-->
+
+
+<form th:action="@{/search_users}">
+    Filter:
+    <input type="text" name="keywordUser" th:value="${keywordUser}" required/>
+    <br>
+    <input type="submit" value="Search"/>
+    <br>
+    <input type="button" value="Clear" onclick="clearFilter()"/>
+</form>
+
+<!--        <tbody>-->
+<div th:each="user: ${showEveryoneFromSite}">
+    <!--            <p th:text="${user.id}">User ID</p>-->
+    First Name: <p th:text="${user.firstName}"></p>
+    Last Name: <p th:text="${user.lastName}"></p>
+    Email: <p th:text="${user.username}"></p>
+    <ul>
+        <form th:action="@{/add_friend}" th:method="post">
+            <button class="btn-link btn">Add Friend</button>
+        </form>
+    </ul>
+    <br>
+</div>
+
+<div th:each="user: ${listAllUsersToThePage}">
+    <!--            <p th:text="${user.id}">User ID</p>-->
+    First Name: <p th:text="${user.firstName}"></p>
+    Last Name: <p th:text="${user.lastName}"></p>
+    Email: <p th:text="${user.username}"></p>
+    <ul>
+        <form th:action="@{/add_friend}" th:method="post">
+            <button class="btn-link btn">Add Friend</button>
+        </form>
+    </ul>
+    <br>
+</div>
+<!--        </tbody>-->
+
+<script type="text/javascript">
+    function clearFilter(){
+        window.location = '/view_all_users'
+    }
+</script>
+
+</body>
+</html>

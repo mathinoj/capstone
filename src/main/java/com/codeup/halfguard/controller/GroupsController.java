@@ -4,6 +4,7 @@ import com.codeup.halfguard.models.Club;
 import com.codeup.halfguard.models.Post;
 import com.codeup.halfguard.models.User;
 import com.codeup.halfguard.repositories.ClubRepository;
+import com.codeup.halfguard.repositories.FriendRepository;
 import com.codeup.halfguard.repositories.PostRepository;
 import com.codeup.halfguard.repositories.UserRepository;
 import org.springframework.data.repository.query.Param;
@@ -20,14 +21,16 @@ public class GroupsController {
     private PostRepository postDao;
     private UserRepository userDao;
     private ClubRepository clubDao;
+    private FriendRepository friendDao;
 //    private final PostRepository postDao;
 //    private final UserRepository userDao;
 //    private final EmailService emailService;
 
-    public GroupsController(PostRepository postDao, UserRepository userDao, ClubRepository clubDao) {
+    public GroupsController(PostRepository postDao, UserRepository userDao, ClubRepository clubDao, FriendRepository friendDao) {
         this.userDao = userDao;
         this.postDao = postDao;
         this.clubDao = clubDao;
+        this.friendDao = friendDao;
 //        this.emailService = emailService;
     }
 
