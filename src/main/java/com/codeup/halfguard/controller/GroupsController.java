@@ -107,9 +107,9 @@ public class GroupsController {
     }
 
 
-///////////////////DELETE A GROUP------------------------------------------------------------------------------
+    ///////////////////DELETE A GROUP------------------------------------------------------------------------------
     @PostMapping("/club/delete/{id}")
-    public String deleteClub(@PathVariable long id){
+    public String deleteClub(@PathVariable long id) {
         clubDao.deleteById(id);
 
         return "redirect:/groups_start";
@@ -127,42 +127,52 @@ public class GroupsController {
 //        return "groups/groups";
 //    }
 
-  ////////////////////////////////////THIS TAKES TO THE GROUP EDITOR PAGE
+    ////////////////////////////////////THIS TAKES TO THE GROUP EDITOR PAGE
 //    @GetMapping("/club/edit/{id}")
     @GetMapping("/club/edit/{id}")
-    public String editClub(@PathVariable long id, String username, Model model) {
+    public String editClub(@PathVariable long id, Model model) {
         Club clubEdit = clubDao.getById(id);
 
         model.addAttribute("clubEdit", clubEdit);
+//        model.addAttribute("id", clubEdit.getId());
         System.out.println(clubEdit);
         return "/groups/edit";
     }
 
 
-
-    @PostMapping("/club/edit/now/{id}")
+    //    @PostMapping("/club/edit/now/{id}") GO TO group.html to find
+    @PostMapping("/please_work")
     //, @PathVariable(name = "id") long id
-//    public String saveEditClub(User user, Club club, @RequestParam(name = "clubName") String clubName, @RequestParam(name = "clubLocation") String clubLocation, @RequestParam(name="clubDescription") String clubDescription, @RequestParam(name = "id") long id){
-    public String saveEditClub(User user, Club club, @PathVariable long id){
-        Club clubToEdit = clubDao.getById(id);
+    //@RequestParam(name = "id") long id)
+    public String saveEditClub(@RequestParam(name = "clubName") String clubName, @RequestParam(name = "clubLocation") String clubLocation, @RequestParam(name="clubDescription") String clubDescription, @RequestParam(name = "id") long id){
+//    public String saveEditClub(User user, Club club, @PathVariable long id) {
+//        Club clubToEdit = clubDao.getById(id); FEB 24 1120
 //        User clubEditPlease = userDao.getById(id);
 
 
+//        clubToEdit.setClubName(clubToEdit.getClubName());FEB 24 1120
+//        clubToEdit.setClubLocation(clubToEdit.getClubLocation());FEB 24 1120
+//        clubToEdit.setClubDescription(clubToEdit.getClubDescription());FEB 24 1120
 
-        clubToEdit.setClubName(clubToEdit.getClubName());
-        clubToEdit.setClubLocation(clubToEdit.getClubLocation());
-        clubToEdit.setClubDescription(clubToEdit.getClubDescription());
+//        clubDao.save(clubToEdit);FEB 24 1120
 
-        clubDao.save(clubToEdit);
+        Club clubFebTwentyFour = clubDao.getById(id);
+        clubFebTwentyFour.setClubName(clubName);
+        clubFebTwentyFour.setClubLocation(clubLocation);
+        clubFebTwentyFour.setClubDescription(clubDescription);
+        clubFebTwentyFour.setId(id);
+//        clubFebTwentyFour.setId(clubFebTwentyFour.getId());
+
+        clubDao.save(clubFebTwentyFour);
 
         return "groups/edit_success";
 
     }
 
 
-/////////////////////////////////////////////////TAKES USER TO ALL CLUBS THAT ARE IN DATABASE
+    /////////////////////////////////////////////////TAKES USER TO ALL CLUBS THAT ARE IN DATABASE
     @GetMapping("/view_all_clubs")
-    public String allClubs(Model model){
+    public String allClubs(Model model) {
         List<Club> listClubbies = clubDao.findAll();
         model.addAttribute("listEveryClub", listClubbies);
 
@@ -170,9 +180,9 @@ public class GroupsController {
     }
 
 
-///////////////////////////////////Searches ALL clubs in datatbase and finds club according to user search
+    ///////////////////////////////////Searches ALL clubs in datatbase and finds club according to user search
     @GetMapping("/search_clubs")
-    public String searchClubs(Model model, @Param("keyword") String keyword){
+    public String searchClubs(Model model, @Param("keyword") String keyword) {
         List<Club> listClubs = clubDao.findAll(keyword);
         model.addAttribute("listAllClubs", listClubs);
         model.addAttribute("keyword", keyword);

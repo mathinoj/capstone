@@ -8,7 +8,7 @@
 <body>
 <nav th:replace="partials :: navbar"></nav>
 
-<form th:action="${'/posts/edit'}" method="post">
+<form th:action="${'/will_this_work'}" method="post">
     <label name="postTitle">Title of Post:</label>
     <input name="postTitle" th:value="${postEdit.getTitle()}" required>
 
@@ -32,7 +32,7 @@
 <!--    <input type="submit" />-->
 <!--</form>-->
 
-<button type="submit">Submit edit</button>
+<!--<button type="submit">Submit edit</button>-->
 
 
 </body>

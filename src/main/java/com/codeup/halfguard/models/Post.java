@@ -24,13 +24,7 @@ public class Post {
     @JoinColumn(name="user_id")
     private User user;
 
-    public User getUser(){
-        return user;
-    }
 
-    public void setUser(User user){
-        this.user = user;
-    }
 
 
     public Post(){}
@@ -69,4 +63,12 @@ public class Post {
         this.body = body;
     }
 
+
+    public User getUser(){
+        return user;
+    }
+
+    public void setUser(User user){
+        this.user = user;
+    }
 }

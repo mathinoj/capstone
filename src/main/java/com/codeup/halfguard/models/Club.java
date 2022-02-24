@@ -28,12 +28,12 @@ public class Club {
 
     public Club (){}
 
-//    public Club (long id, String clubName, String clubLocation, String clubDescription, User user){
-//        this.id = id;
-//        this.clubName = clubName;
-//        this.clubLocation = clubLocation;
-//        this.clubDescription = clubDescription;
-//    }
+    public Club (long id, String clubName, String clubLocation, String clubDescription, User user){
+        this.id = id;
+        this.clubName = clubName;
+        this.clubLocation = clubLocation;
+        this.clubDescription = clubDescription;
+    }
 
     public long getId() {
         return id;

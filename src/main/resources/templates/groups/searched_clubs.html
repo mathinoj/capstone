@@ -33,7 +33,11 @@
     Group Name: <p th:text="${user.clubName}"></p>
     Location: <p th:text="${user.clubLocation}"></p>
     Description: <p th:text="${user.clubDescription}"></p>
-    <br>
+    <ul>
+        <form th:action="@{/join_group}" th:method="post">
+            <button class="btn-link btn">Join Group</button>
+        </form>
+    </ul>
     <br>
 </div>
 
@@ -42,7 +46,11 @@
     Group Name: <p th:text="${user.clubName}"></p>
     Location: <p th:text="${user.clubLocation}"></p>
     Description: <p th:text="${user.clubDescription}"></p>
-    <br>
+    <ul>
+        <form th:action="@{/join_group}" th:method="post">
+            <button class="btn-link btn">Join Group</button>
+        </form>
+    </ul>
     <br>
 </div>
 <!--        </tbody>-->

@@ -77,10 +77,8 @@ public class PostController {
         return "/posts/edit";
     }
 
-
-    @PostMapping("/posts/edit/{id}")
-    public String saveEditPost(@RequestParam(name = "postTitle") String postTitle, @RequestParam(name = "postBody") String postBody, @RequestParam(name = "postId") long id) {
-
+@PostMapping("/will_this_work")
+public String editPostGoesHere(@RequestParam(name = "postTitle") String postTitle, @RequestParam(name = "postBody") String postBody, @RequestParam(name = "postId") long id){
         Post postToEdit = postDao.getById(id);
 
         postToEdit.setBody(postBody);
@@ -88,11 +86,8 @@ public class PostController {
 
         postDao.save(postToEdit);
 
-//        return "/posts/profile"; THIS MAKES CHANGES BUT DOESNT TAKE USER TO SEE CHANGES, INSTEAD ONLY SEE BUTTONS
-        return "redirect:/posts/userProfile"; //THIS ALLOWS USER TO SEE CHANGES
-
-    }
-
+    return "redirect:/posts/userProfile";
+}
     //EDIT A SINGLE POST ON -- all posts page ***************^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 

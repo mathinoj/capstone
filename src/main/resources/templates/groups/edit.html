@@ -10,8 +10,8 @@
 
 CAN YOU SEE THIS EDIT GROUP Page?
 
-<!--<form th:action="${'/club/edit/now/{id}'}" method="post">-->
-<form th:action="${'/club/edit/now'}" method="post">
+<!--<form th:action="${'/club/edit/now'}" method="post">--> //maybe need to add th object="${id}" or club
+<form th:action="${'/please_work'}" method="post">
     <label name="clubName">Group Name:</label>
     <input name="clubName" th:value="${clubEdit.getClubName()}" required>
 
@@ -25,6 +25,22 @@ CAN YOU SEE THIS EDIT GROUP Page?
 
     <button type="submit">Submit Edit</button>
 </form>
+
+<!--<form th:action="@{/please_work}" th:method="post" th:object="${clubEdit}">-->
+<!--    Group Name:-->
+<!--    <input type="text" th:field="*{clubName}" />-->
+<!--    <br />-->
+<!--    Location:-->
+<!--    <input type="text" th:field="*{clubLocation}" />-->
+<!--    <br />-->
+<!--    Location:-->
+<!--    <input type="text" th:field="*{clubDescription}" />-->
+<!--    <br />-->
+<!--    <input name="postId" type="hidden" th:value="${clubEdit.getId()}">&ndash;&gt;-->
+
+<!--    <input type="submit" />-->
+<!--</form>-->
+
 
 </body>
 </html>
