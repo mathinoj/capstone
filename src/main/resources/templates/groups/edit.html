@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Group</title>
+    <div th:insert="partials :: head"></div>
+</head>
+<body>
+<nav th:replace="partials :: navbar"></nav>
+
+CAN YOU SEE THIS EDIT GROUP Page?
+
+<!--<form th:action="${'/club/edit/now/{id}'}" method="post">-->
+<form th:action="${'/club/edit/now'}" method="post">
+    <label name="clubName">Group Name:</label>
+    <input name="clubName" th:value="${clubEdit.getClubName()}" required>
+
+    <label name="clubLocation">Location:</label>
+    <input name="clubLocation" th:value="${clubEdit.getClubLocation()}" required>
+
+    <label th:name="clubDescription">Description:</label>
+    <input name="clubDescription" th:value="${clubEdit.getClubDescription()}" required>
+
+    <input name="postId" type="hidden" th:value="${clubEdit.getId()}">
+
+    <button type="submit">Submit Edit</button>
+</form>
+
+</body>
+</html>

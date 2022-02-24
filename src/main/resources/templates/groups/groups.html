@@ -17,6 +17,12 @@ THIS WILL BE THE GROUPS PAGE WHERE ALL GROUPS CREATED BY USER ARE LISTED
         <button class="btn-link btn">Create Group</button>
     </form>
 </ul>
+<ul>
+    <form th:action="@{/view_all_clubs}">
+        <button class="btn-link btn">Search Groups</button>
+    </form>
+</ul>
+
 
 <div th:each="club : ${displaySpecificClub}">
 Group Name: <p th:text="${club.getClubName()}"></p>
@@ -24,7 +30,7 @@ Group Location: <p th:text="${club.getClubLocation()}"></p>
 Group Description: <p th:text="${club.getClubDescription()}"></p>
 Group Creator:<p th:text="${club.getUser().getFirstName} + ' ' + ${club.getUser().getLastName}"></p>
 
-    <form th:action="'/posts/edit/' + ${club.getId()}" method="get">
+    <form th:action="'/club/edit/' + ${club.getId()}" method="get">
         <button>Edit</button>
     </form>
 

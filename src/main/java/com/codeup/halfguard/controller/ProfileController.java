@@ -66,8 +66,8 @@ public class ProfileController {
     @PostMapping("/posts/userProfile")
 //    @PostMapping("profile/edit_biography")
     public String processBioEdit(User user, Model model) {
-        User specificUserBioEdit = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        User userEditBio = userDao.getById(specificUserBioEdit.getId());
+        User specificUserBioEditing = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User userEditBio = userDao.getById(specificUserBioEditing.getId());
 
         userEditBio.setBeltRank(user.getBeltRank());
         userEditBio.setYears(user.getYears());

@@ -78,7 +78,7 @@ public class PostController {
     }
 
 
-    @PostMapping("/posts/edit")
+    @PostMapping("/posts/edit/{id}")
     public String saveEditPost(@RequestParam(name = "postTitle") String postTitle, @RequestParam(name = "postBody") String postBody, @RequestParam(name = "postId") long id) {
 
         Post postToEdit = postDao.getById(id);
@@ -94,6 +94,8 @@ public class PostController {
     }
 
     //EDIT A SINGLE POST ON -- all posts page ***************^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
 
 
     /////////////////////THIS DELETES A SINGLE POST FROM THE USER PROFILE PAGE, TAKE THIS OUT AND DELETE WONT WORK  ****************

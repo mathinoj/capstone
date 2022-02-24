@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<div th:insert="partials :: head"></div>
+<head>
+    <meta charset="UTF-8">
+    <title>Searched Groups</title>
+</head>
+<body>
+<nav th:replace="partials :: navbar"></nav>
+
+
+<!--    <div>-->
+<!--        <form th:action="@{/logout}" method="POST">-->
+
+<!--            <input type="submit" value="Logout" />-->
+<!--        </form>-->
+<!--    </div>-->
+<div>
+    <h1>List of All Groups</h1>
+</div>
+<!--        <h2><a th:href="@{/register}">Register Here</a></h2>-->
+<!--        <h2><a th:href="@{/list_users}">List All Users</a></h2>-->
+<!--        <h2><a th:href="@{/login}">Login</a></h2>-->
+
+<!--        <table>-->
+<!--            <tr>-->
+<!--                <th>User ID</th>-->
+<!--                <th>Group Name</th>-->
+<!--                <th>Location</th>-->
+<!--                <th>Description</th>-->
+<!--            </tr>-->
+<!--        </table>-->
+
+<h1>Search Manager</h1>
+
+
+    <form th:action="@{/search_clubs}">
+        Filter:
+        <input type="text" name="keyword" th:value="${keyword}" required/>
+        <br>
+        <input type="submit" value="Search"/>
+        <br>
+        <input type="button" value="Clear" onclick="clearFilter()"/>
+    </form>
+
+<!--        <tbody>-->
+<div th:each="user: ${listEveryClub}">
+    <!--            <p th:text="${user.id}">User ID</p>-->
+    Group Name: <p th:text="${user.clubName}"></p>
+    Location: <p th:text="${user.clubLocation}"></p>
+    Description: <p th:text="${user.clubDescription}"></p>
+    <br>
+    <br>
+</div>
+
+<div th:each="user: ${listAllClubs}">
+    <!--            <p th:text="${user.id}">User ID</p>-->
+    Group Name: <p th:text="${user.clubName}"></p>
+    Location: <p th:text="${user.clubLocation}"></p>
+    Description: <p th:text="${user.clubDescription}"></p>
+    <br>
+    <br>
+</div>
+<!--        </tbody>-->
+
+<script type="text/javascript">
+    function clearFilter(){
+        window.location = '/view_all_clubs'
+    }
+</script>
+</body>
+</html>

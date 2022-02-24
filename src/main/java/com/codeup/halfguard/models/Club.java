@@ -70,4 +70,5 @@ public class Club {
     public void setUser(User user) {
         this.user = user;
     }
+
 }
