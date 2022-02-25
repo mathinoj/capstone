@@ -10,14 +10,14 @@ public class Friend {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column
-    private String friendFirstName;
-
-    @Column
-    private String friendLastName;
-
-    @Column
-    private String friendUsername;
+//    @Column
+//    private String friendFirstName;
+//
+//    @Column
+//    private String friendLastName;
+//
+//    @Column
+//    private String friendUsername;
 
     @ManyToMany(mappedBy = "friends")
     private List<User> users;
@@ -32,27 +32,35 @@ public class Friend {
         this.id = id;
     }
 
-    public String getFriendFirstName() {
-        return friendFirstName;
+    public List<User> getUsers() {
+        return users;
     }
 
-    public void setFriendFirstName(String friendFirstName) {
-        this.friendFirstName = friendFirstName;
+    public void setUsers(List<User> users) {
+        this.users = users;
     }
 
-    public String getFriendLastName() {
-        return friendLastName;
-    }
-
-    public void setFriendLastName(String friendLastName) {
-        this.friendLastName = friendLastName;
-    }
-
-    public String getFriendUsername() {
-        return friendUsername;
-    }
-
-    public void setFriendUsername(String friendUsername) {
-        this.friendUsername = friendUsername;
-    }
+    //    public String getFriendFirstName() {
+//        return friendFirstName;
+//    }
+//
+//    public void setFriendFirstName(String friendFirstName) {
+//        this.friendFirstName = friendFirstName;
+//    }
+//
+//    public String getFriendLastName() {
+//        return friendLastName;
+//    }
+//
+//    public void setFriendLastName(String friendLastName) {
+//        this.friendLastName = friendLastName;
+//    }
+//
+//    public String getFriendUsername() {
+//        return friendUsername;
+//    }
+//
+//    public void setFriendUsername(String friendUsername) {
+//        this.friendUsername = friendUsername;
+//    }
 }

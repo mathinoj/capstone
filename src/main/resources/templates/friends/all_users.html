@@ -27,32 +27,52 @@
 </form>
 
 <!--        <tbody>-->
-<div th:each="user: ${showEveryoneFromSite}">
-    <!--            <p th:text="${user.id}">User ID</p>-->
-    First Name: <p th:text="${user.firstName}"></p>
-    Last Name: <p th:text="${user.lastName}"></p>
-    Email: <p th:text="${user.username}"></p>
-    <ul>
-        <form th:action="@{/add_friend}" th:method="post">
-            <button class="btn-link btn">Add Friend</button>
-        </form>
-    </ul>
+<!--<div th:each="user: ${showEveryoneFromSite}">-->
+<!--    &lt;!&ndash;            <p th:text="${user.id}">User ID</p>&ndash;&gt;-->
+<!--    First Name: <p th:text="${user.firstName}"></p>-->
+<!--    Last Name: <p th:text="${user.lastName}"></p>-->
+<!--    Email: <p th:text="${user.username}"></p>-->
+<!--&lt;!&ndash;    Id: <a th:text="${user.id}" ></a> &ndash;&gt;-->
+<!--&lt;!&ndash;    adding 'hidden' after '.id}"' hides the id&ndash;&gt;-->
+
+<!--     <a th:text="${user.id}" th:href="@{/selected_friend_by_id_from_user}" >Add Friend</a>-->
+
+<!--    <ul>-->
+<!--&lt;!&ndash;        <form th:action="@{/add_friend}" th:method="post">&ndash;&gt;-->
+<!--        <form th:action="@{/add_friend}" >-->
+<!--        <button class="btn-link btn">Add Friend</button>-->
+<!--        </form>-->
+<!--    </ul>-->
     <br>
 </div>
 
-<div th:each="user: ${listAllUsersToThePage}">
-    <!--            <p th:text="${user.id}">User ID</p>-->
+<!--<div th:each="user: ${listAllUsersToThePage}">-->
+<!--    &lt;!&ndash;            <p th:text="${user.id}">User ID</p>&ndash;&gt;-->
+<!--    First Name: <p th:text="${user.firstName}"></p>-->
+<!--    Last Name: <p th:text="${user.lastName}"></p>-->
+<!--    Email: <p th:text="${user.username}"></p>-->
+<!--    Id: <p th:text="${user.id}"></p>-->
+<!--&lt;!&ndash;    <a th:text="${user.id}" th:href="@{/selected_friend_by_id_from_user}" >Add Friend</a>&ndash;&gt;-->
+
+<!--    <ul>-->
+<!--&lt;!&ndash;        <form th:action="@{/add_friend}" th:method="post">&ndash;&gt;-->
+<!--        <form th:action="@{/selected_friend_by_id_from_user}">-->
+<!--            <button class="btn-link btn">Add Friend</button>-->
+<!--        </form>-->
+<!--    </ul>-->
+<!--    <br>-->
+<!--</div>-->
+
+<form  th:each="user: ${listAllUsersToThePage}" method="post" th:action="@{/selected_friend_by_id_from_user}">
     First Name: <p th:text="${user.firstName}"></p>
     Last Name: <p th:text="${user.lastName}"></p>
     Email: <p th:text="${user.username}"></p>
-    <ul>
-        <form th:action="@{/add_friend}" th:method="post">
-            <button class="btn-link btn">Add Friend</button>
-        </form>
-    </ul>
-    <br>
-</div>
-<!--        </tbody>-->
+    Id: <p th:text="${user.id}"></p>
+
+    <button  type="submit">Add Friend</button>
+</form>
+
+
 
 <script type="text/javascript">
     function clearFilter(){

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<div th:insert="partials :: head"></div>
+<head>
+    <meta charset="UTF-8">
+    <title>Chosen Friend</title>
+</head>
+<body>
+<nav th:replace="partials :: navbar"></nav>
+
+    <h1>You Chose:</h1>
+
+<form  th:each="user: ${tryingThisOneOut}"  th:action="@{/selected_friend_by_id_from_user}">
+    First Name: <p th:text="${user.firstName}"></p>
+    Last Name: <p th:text="${user.lastName}"></p>
+    Email: <p th:text="${user.username}"></p>
+    Id: <p th:text="${user.id}"></p>
+
+    <button  type="submit">Add Friend</button>
+</form>
+
+
+<ul>
+    <!--    <form th:action="@{/view_all_users}" >-->
+    <form th:action="@{/add_friend}" >
+        <button class="btn-link btn">Add Friend</button>
+    </form>
+</ul>
+
+<ul>
+    <!--    <form th:action="@{/view_all_users}" >-->
+    <form th:action="@{/friends_homepage}" >
+        <button class="btn-link btn">Go Back</button>
+    </form>
+</ul>
+
+</body>
+</html>

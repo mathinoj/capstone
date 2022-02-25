@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<div th:insert="partials :: head"></div>
+<head>
+    <meta charset="UTF-8">
+    <title>Friends Home</title>
+</head>
+<body>
+<nav th:replace="partials :: navbar"></nav>
+
+<h1>This will be where all users friends are!</h1>
+
+<ul>
+        <form th:action="@{/view_all_users}" >
+<!--    <form th:action="@{/friends_homepage}" >-->
+        <button class="btn-link btn">Search Friends</button>
+    </form>
+</ul>
+
+</body>
+</html>
