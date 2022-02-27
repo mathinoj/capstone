@@ -63,14 +63,39 @@
 <!--    <br>-->
 <!--</div>-->
 
-<form  th:each="user: ${listAllUsersToThePage}" method="post" th:action="@{/selected_friend_by_id_from_user}">
-    First Name: <p th:text="${user.firstName}"></p>
-    Last Name: <p th:text="${user.lastName}"></p>
-    Email: <p th:text="${user.username}"></p>
-    Id: <p th:text="${user.id}"></p>
+<!--<form  action="#" th:each="user: ${listAllUsersToThePage}" th:action="@{/selected_friend_by_id_from_user}" th:object="${listAllUsersToThePage}" method="post">-->
+<!--    First Name: <p th:text="${user.firstName}"></p>-->
+<!--    Last Name: <p th:text="${user.lastName}"></p>-->
+<!--    Email: <p th:text="${user.username}"></p>-->
+<!--    Id: <p th:text="${user.id}"></p>-->
 
-    <button  type="submit">Add Friend</button>
-</form>
+<!--&lt;!&ndash;    <button  type="submit">Add Friend</button>&ndash;&gt;-->
+<!--</form>-->
+
+<!--<tr  th:each="user: ${listAllUsersToThePage}" th:object="${listAllUsersToThePage}" >-->
+<!--    First Name: <p th:text="${user.firstName}"></p>-->
+<!--    Last Name: <p th:text="${user.lastName}"></p>-->
+<!--    Email: <p th:text="${user.username}"></p>-->
+<!--    Id: <p th:text="${user.id}"></p>-->
+
+<!--    &lt;!&ndash;    <button  type="submit">Add Friend</button>&ndash;&gt;-->
+<!--    <form th:action="'selected_friend_by_id_from_user' + ${user.id()}" method="post">-->
+<!--        <button>Add Friend</button>-->
+<!--    </form>-->
+<!--</tr>-->
+
+
+<tr  th:each="user: ${listAllUsersToThePage}" th:object="${listAllUsersToThePage}" th:name="addedUser" >
+    First Name: <td th:text="${user.firstName}"></td>
+    Last Name: <td th:text="${user.lastName}"></td>
+    Email: <td th:text="${user.username}"></td>
+    Id: <td th:text="${user.id}"></td>
+        <td>
+    <!--    <button  type="submit">Add Friend</button>-->
+    <a th:name="addedUser" th:action="@{selected_friend_by_id_from_user}" th:href="@{'selected_friend_by_id_from_user/' + ${user.getId}}" th:method="post">Add Friend</a>
+        </td>
+</tr>
+
 
 
 

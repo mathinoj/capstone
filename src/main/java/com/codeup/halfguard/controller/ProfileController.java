@@ -117,11 +117,24 @@ public class ProfileController {
 /////////////////////ON FILESTACK WEBSITE IT SHOWS YOU HAVE 15 UPLOADS
 
 
+
+
+    @GetMapping("/imageToGetMapping")
+    public String profilePicSee(Model model) {
+        User loginUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User userUploads = userDao.findById(loginUser.getId());
+        model.addAttribute("user", userUploads);
+        return "/profile/profilePicSee";
+    }
+
+
+
+
+
     @GetMapping("/start_process_to_add_pic")
     public String takeToAddPicView(Model model) {
         User userPicUploadStart = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User userPicUploading = userDao.getById(userPicUploadStart.getId());
-//        model.addAttribute("fsKey", fileStackAPIkey);
         model.addAttribute("userProfileUploadButton", userPicUploading);
 
 

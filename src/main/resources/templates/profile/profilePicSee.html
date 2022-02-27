@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<div th:insert="partials :: head"></div>
+<head>
+    <meta charset="UTF-8">
+    <title>PicSee</title>
+</head>
+<body>
+<nav th:replace="partials :: navbar"></nav>
+
+<img alt="Profile picture"
+     class="profile-pic"
+     th:src="${user.getProfileImage()}">
+
+
+</body>
+</html>

@@ -19,8 +19,12 @@ public class Friend {
 //    @Column
 //    private String friendUsername;
 
-    @ManyToMany(mappedBy = "friends")
-    private List<User> users;
+//    @ManyToMany(mappedBy = "friends")
+//    private List<User> users;
+
+    @ManyToOne
+    @JoinColumn(name = "friend_id")
+    private User friendAdded;
 
     public Friend (){}
 
@@ -32,13 +36,28 @@ public class Friend {
         this.id = id;
     }
 
-    public List<User> getUsers() {
-        return users;
+    //MIGHT NEED TO ADD DIS
+//    public Friend(long id, User user) {
+//        this.id = id;
+//        this.user = user;
+//    }
+
+    public User getFriendAdded() {
+        return friendAdded;
     }
 
-    public void setUsers(List<User> users) {
-        this.users = users;
+    public void setFriendAdded(User friendAdded) {
+        this.friendAdded = friendAdded;
     }
+
+
+    //    public List<User> getUsers() {
+//        return users;
+//    }
+//
+//    public void setUsers(List<User> users) {
+//        this.users = users;
+//    }
 
     //    public String getFriendFirstName() {
 //        return friendFirstName;

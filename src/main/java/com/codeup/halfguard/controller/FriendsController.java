@@ -13,6 +13,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
@@ -36,13 +37,13 @@ public class FriendsController {
 
 
     @GetMapping("friends_homepage")
-    public String friendsHomepage (Model model){
+    public String friendsHomepage(Model model) {
 
         return "/friends/homepage";
     }
 
     @GetMapping("view_all_users")
-    public String allUsers(Model model){
+    public String allUsers(Model model) {
         List<User> showEveryoneThatUses = userDao.findAll();
         //The line below shows all users
         model.addAttribute("showEveryoneFromSite", showEveryoneThatUses);
@@ -59,46 +60,49 @@ public class FriendsController {
         return "friends/all_users";
     }
 
-//    @GetMapping("/selected_friend_by_id_from_user")
-////    public String addFriend(@PathVariable(name = "id") long id, @ModelAttribute User user, Model model){
-//    public String addFriend(Model model){
-//
-////User clubCreated = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-////        User clubGod = userDao.getById(clubCreated.getId());
-//
-//
-//        User searchFiend = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//        User blahBlah = userDao.getById(searchFiend.getId());
-//
-//
-//        model.addAttribute("newAddedFriend", new Friend());
-//        model.addAttribute("letsSee", userDao.findByUsername(blahBlah));
-//
-////model.addAttribute("displaySpecificClub", clubDao.findClubsByUser(clubGod));
-//        return "/friends/chosen_friend";
-//    }
 
 
+    @GetMapping("/selected_friend_by_id_from_user/{id}")
+    public String viewFriend(Model model) {
+        User loggedInnUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = userDao.findById(loggedInnUser.getId());
 
-//    @PostMapping("add_friend")
-    @PostMapping("/selected_friend_by_id_from_user")
-    //, @RequestParam(name = "id") long id
-    public String addFriendToDatabase(Model model){
-        User foundFriend = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        User selectFriend = userDao.getById(foundFriend.getId());
-
-//        model.addAttribute("postSpecificUser", userDao.findById(editor.getId()));
+//        User postEditFriendId = userDao.getById(id);
 
 
-        model.addAttribute("tryingThisOneOut", selectFriend);
+        model.addAttribute("friends", new Friend());
+        model.addAttribute("friendOfFriends", user.getFriends());
+//        model.addAttribute("friendOfFriends", postEditFriendId);
 
-        selectFriend.setId(selectFriend.getId());
-
-        userDao.save(selectFriend);
-
-
-//        return "redirect:friends_homepage";
         return "/friends/chosen_friend";
 
     }
+
+
+    @PostMapping("/selected_friend_by_id_from_user/{id}")
+    public String saveFriends(@ModelAttribute Friend friend, @RequestParam(name = "friendAdded") long id) {
+        User loggedInnUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = userDao.findById(loggedInnUser.getId());
+
+        List<Friend> friends = user.getFriends();
+
+//        Friend newFriend = new Friend();
+//
+//        newFriend.setFriendAdded(user);
+
+        friends.add(friend);
+
+//        friendDao.save(newFriend);
+
+
+        user.setFriends(friends);
+        userDao.save(user);
+
+        System.out.println("friends ============================ " + friends);
+
+        return "/friends/homepage";
+
+    }
+
+
 }
