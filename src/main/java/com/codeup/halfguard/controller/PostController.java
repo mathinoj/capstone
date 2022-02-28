@@ -114,6 +114,13 @@ public String editPostGoesHere(@RequestParam(name = "postTitle") String postTitl
         return "posts/create";
     }
 
+//    @GetMapping("/posts")
+//    public String indexPosts(Model model) {
+////        model.addAttribute("allPosts", postDao.findAll());
+//        model.addAttribute("allPosts", postDao.findAll());
+//        return "posts/index";
+//    }
+
 
     //THIS ALLOWS FOR MULTIPLE POSTS BY ONE USER AND THE TABLE TO IDENTIFY THE USER ID ASSOCIATED WITH THE POST
     @PostMapping("/posts/create")

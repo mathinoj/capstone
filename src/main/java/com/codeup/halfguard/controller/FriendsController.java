@@ -51,6 +51,7 @@ public class FriendsController {
         return "friends/all_users";
     }
 
+
     @GetMapping("/search_users")
     public String searchUsers(Model model, @Param("keyword") String keywordUser) {
         List<User> listAllUsers = userDao.findAll(keywordUser);
@@ -61,13 +62,13 @@ public class FriendsController {
     }
 
 
-
+    ///////////////USE THIS ONE OKAY///////////////USE THIS ONE OKAY///////////////USE THIS ONE OKAY
     @GetMapping("/selected_friend_by_id_from_user/{id}")
-    public String viewFriend(Model model) {
+    public String viewFriend(Model model,@PathVariable long id) {
         User loggedInnUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        User user = userDao.findById(loggedInnUser.getId());
+//        User user = userDao.findById(loggedInnUser.getId());
 
-//        User postEditFriendId = userDao.getById(id);
+        User user = userDao.getById(id);
 
 
         model.addAttribute("friends", new Friend());
@@ -75,34 +76,88 @@ public class FriendsController {
 //        model.addAttribute("friendOfFriends", postEditFriendId);
 
         return "/friends/chosen_friend";
-
+//        return "redirect:/tryThisOne";
     }
 
-
-    @PostMapping("/selected_friend_by_id_from_user/{id}")
-    public String saveFriends(@ModelAttribute Friend friend, @RequestParam(name = "friendAdded") long id) {
-        User loggedInnUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        User user = userDao.findById(loggedInnUser.getId());
-
-        List<Friend> friends = user.getFriends();
-
-//        Friend newFriend = new Friend();
+//    @GetMapping("/selected_friend_by_id_from_user/{id}")
+//    public String editPost(@PathVariable long id, String username, Model model) {
+//        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        User friendSelect = userDao.findById(id);
+////        User friendSelect = userDao.findById(loggedInUser.getId());
+////        User postEdit = userDao.findByUsername(username);
 //
-//        newFriend.setFriendAdded(user);
+//
+////        model.addAttribute("friendOfFriends", loggedInUser.getFriends());
+////        model.addAttribute("friend", friendSelect.getFriends());
+////        model.addAttribute("friend", loggedInUser.getFriends());
+//
+////        model.addAttribute("postEdit", friendSelect);
+//
+////        User userToEdit = userDao.getById(id);
+////        User postEdit = userDao.findByUsername(username);
+//
+//
+//        model.addAttribute("friendOfFriends", friendSelect);
+//
+//        return "/friends/chosen_friend";
+//    }
 
-        friends.add(friend);
+        @PostMapping("tryThisOne/")
+       public String processFriend(User user, @ModelAttribute Friend friend, @RequestParam(name = "addedFriend") long id) {
+        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            User userAdditFriend = userDao.getById(loggedInUser.getId());
+//        User userAdditFriend = userDao.getById(userId);
 
-//        friendDao.save(newFriend);
+        Friend newFriend = new Friend();
+        newFriend.setId(userAdditFriend.getId());
+        friendDao.save(newFriend);
 
 
-        user.setFriends(friends);
-        userDao.save(user);
+            List<Friend> friends = userAdditFriend.getFriends();
+            friends.add(friend);
+            userAdditFriend.setFriends(friends);
+            userDao.save(userAdditFriend);
 
-        System.out.println("friends ============================ " + friends);
+            User friendToEdit = userDao.getById(id);
+            friendToEdit.setId(friendToEdit.getId());
+            userDao.save(friendToEdit);
 
-        return "/friends/homepage";
+//            userAdditFriend.setAddingFriend(user.getAddingFriend());
+//            userAdditFriend.setFriends(user.getFriends());
+//            userAdditFriend.setId(user.getId());
 
-    }
+//
+//            userDao.save(userAdditFriend);
+//            friendDao.save(userAdditFriend);
+
+           return "/friends/homepage";
+
+        }
+
+//    @PostMapping("/selected_friend_by_id_from_user/{id}")
+//    public String saveFriends(@ModelAttribute Friend friend, @RequestParam(name = "friendAdded") long id) {
+//        User loggedInnUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        User user = userDao.findById(loggedInnUser.getId());
+//
+//        List<Friend> friends = user.getFriends();
+//
+////        Friend newFriend = new Friend();
+////
+////        newFriend.setFriendAdded(user);
+//
+//        friends.add(friend);
+//
+////        friendDao.save(newFriend);
+//
+//
+//        user.setFriends(friends);
+//        userDao.save(user);
+//
+//        System.out.println("friends ============================ " + friends);
+//
+//        return "/friends/homepage";
+//
+//    }
 
 
 }

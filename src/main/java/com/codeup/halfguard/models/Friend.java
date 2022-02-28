@@ -19,14 +19,24 @@ public class Friend {
 //    @Column
 //    private String friendUsername;
 
-//    @ManyToMany(mappedBy = "friends")
-//    private List<User> users;
+    @ManyToMany(mappedBy = "friends")
+    private List<User> users;
 
-    @ManyToOne
-    @JoinColumn(name = "friend_id")
-    private User friendAdded;
+//    @ManyToOne
+//    @JoinColumn(name = "friend_id")
+//    private User friendAdded;
+//
+//    @ManyToOne
+//    @JoinColumn(name = "logged_In_id")
+//    private User userAdding;
 
     public Friend (){}
+
+//    public Friend(long id, User friendAdded, User userAdding) {
+//        this.id = id;
+//        this.friendAdded = friendAdded;
+//        this.userAdding = userAdding;
+//    }
 
     public long getId() {
         return id;
@@ -42,22 +52,29 @@ public class Friend {
 //        this.user = user;
 //    }
 
-    public User getFriendAdded() {
-        return friendAdded;
-    }
-
-    public void setFriendAdded(User friendAdded) {
-        this.friendAdded = friendAdded;
-    }
-
-
-    //    public List<User> getUsers() {
-//        return users;
+//    public User getFriendAdded() {
+//        return friendAdded;
 //    }
 //
-//    public void setUsers(List<User> users) {
-//        this.users = users;
+//    public void setFriendAdded(User friendAdded) {
+//        this.friendAdded = friendAdded;
 //    }
+//
+//    public User getUserAdding() {
+//        return userAdding;
+//    }
+//
+//    public void setUserAdding(User userAdding) {
+//        this.userAdding = userAdding;
+//    }
+
+    public List<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<User> users) {
+        this.users = users;
+    }
 
     //    public String getFriendFirstName() {
 //        return friendFirstName;
@@ -82,4 +99,5 @@ public class Friend {
 //    public void setFriendUsername(String friendUsername) {
 //        this.friendUsername = friendUsername;
 //    }
+
 }

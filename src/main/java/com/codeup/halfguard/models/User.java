@@ -67,17 +67,19 @@ public class User {
     )
     private List<Club> clubs;
 
-//    @ManyToMany(cascade = CascadeType.ALL)
-//    @JoinTable(
-//            name="users_friends",
-//            joinColumns = {@JoinColumn(name = "user_id")},
-//            inverseJoinColumns = {@JoinColumn(name = "friend_id")}
-//    )
-//    private List<Friend> friends;
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "friendAdded")
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name="users_friends",
+            joinColumns = {@JoinColumn(name = "user_id")},
+            inverseJoinColumns = {@JoinColumn(name = "friend_id")}
+    )
     private List<Friend> friends;
 
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "friendAdded")
+//    private List<Friend> friends;
+//
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userAdding")
+//    private List<Friend> addingFriend;
 
     public User() {
     }
@@ -199,4 +201,14 @@ public class User {
     public void setFriends(List<Friend> friends) {
         this.friends = friends;
     }
+
+
+
+//    public List<Friend> getAddingFriend() {
+//        return addingFriend;
+//    }
+//
+//    public void setAddingFriend(List<Friend> addingFriend) {
+//        this.addingFriend = addingFriend;
+//    }
 }
