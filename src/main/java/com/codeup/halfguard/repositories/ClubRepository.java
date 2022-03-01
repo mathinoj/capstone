@@ -17,7 +17,7 @@ public interface ClubRepository extends JpaRepository <Club, Long> {
 //use the % for containing the search
 //1 is the first parameter in the method String keyword
 
-    List<Club> findClubsByUser(User user);
+    List<Club> findClubsByUserJoining(User userJoining);
 
     Club findByClubName(String clubName);
 

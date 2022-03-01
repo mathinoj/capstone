@@ -44,8 +44,8 @@ public class GroupsController {
         User clubGod = userDao.getById(clubCreated.getId());
 //        Club blahDoh = clubDao.getById(clubCreated.getId());
 
-        System.out.println(clubDao.findClubsByUser(clubGod));
-        model.addAttribute("displaySpecificClub", clubDao.findClubsByUser(clubGod));
+        System.out.println(clubDao.findClubsByUserJoining(clubGod));
+        model.addAttribute("displaySpecificClub", clubDao.findClubsByUserJoining(clubGod));
 
 
         //THIS WILL BE WHERE YOU PUT THE METHOD THAT BRINGS UP ALL THE GROUPS CREATED BY THE USER
@@ -74,7 +74,7 @@ public class GroupsController {
 //        Club blah = clubDao.getById(clubCreator.getId());
 
 
-        club.setUser(specificClubCreator);
+//        club.setUser(specificClubCreator);
 
         //YOU CAN ALSO FALL BACK TO THESE 3 - these update the same line of the club, but does not add a new club
 //        club.setId(blah.getId()); <---DIDNT NEED THIS
@@ -101,7 +101,7 @@ public class GroupsController {
 //                Club blahDoh = clubDao.getById(clubCreatedRader.getId());
 
 
-        model.addAttribute("displaySpecificClubMaybe", clubDao.findClubsByUser(clubGodRick));
+        model.addAttribute("displaySpecificClubMaybe", clubDao.findClubsByUserJoining(clubGodRick));
 
 
 //        return "/groups/groups";
@@ -144,7 +144,7 @@ public class GroupsController {
 
 
     //    @PostMapping("/club/edit/now/{id}") GO TO group.html to find
-    @PostMapping("/please_work")
+    @PostMapping("/join_group/{id}")
     //, @PathVariable(name = "id") long id
     //@RequestParam(name = "id") long id)
     public String saveEditClub(@RequestParam(name = "clubName") String clubName, @RequestParam(name = "clubLocation") String clubLocation, @RequestParam(name="clubDescription") String clubDescription, @RequestParam(name = "id") long id){

@@ -19,14 +19,20 @@
 </ul>
 
 
-<!--<form  th:each="user: ${friendSearchers}">-->
-<!--    First Name: <p th:text="${user.firstName}"></p>-->
-<!--    Last Name: <p th:text="${user.lastName}"></p>-->
-<!--    Email: <p th:text="${user.username}"></p>-->
-<!--    Id: <p th:text="${user.id}"></p>-->
+<tr th:each="friend : ${showEveryUserFriend}">
+    <p th:text="${friend.getFriendAdded().getFirstName()}"></p>
+    <p th:text="${friend.getFriendAdded().getLastName()}"></p>
+<!--    Body: <p th:text="${friend.get}"></p>-->
+<!--    Person Posting:<p th:text="${post.getUser().getFirstName} + ' ' + ${post.getUser().getLastName}"></p>-->
+</tr>
 
-<!--    <button  type="submit">Add Friend</button>-->
-<!--</form>-->
+
+<!--<div  th:each="user : ${allUsers}" >-->
+<!--    <form style="padding: 10px" th:action="@{/tryThisOne}" th:method="post" >-->
+<!--        <input type="hidden" th:name="addedUser" th:value="${user.getId()}" />-->
+<!--        <button  type="submit"  class="btn btn-info"  th:text="${user.getUsername()}"></button>-->
+<!--    </form>-->
+<!--</div>-->
 
 <!--MY FRIEND??-->
 <!--Friend: <p th:text="${friendDao.getId()}"></p>-->

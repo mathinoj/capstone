@@ -65,13 +65,11 @@ public class FriendsController {
     ///////////////USE THIS ONE OKAY///////////////USE THIS ONE OKAY///////////////USE THIS ONE OKAY
     @GetMapping("/selected_friend_by_id_from_user/{id}")
     public String viewFriend(Model model,@PathVariable long id) {
-        User loggedInnUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//        User user = userDao.findById(loggedInnUser.getId());
+        User userLoggedIn = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        User user = userDao.findById(userLoggedIn.getId());
+
 
         User user = userDao.getById(id);
-
-
-//        model.addAttribute("friends", new Friend());
         model.addAttribute("friendOfFriends", user.getProcessOfAddingFriend());
         model.addAttribute("friendOfFriends", user.getFriendAdded());
 
@@ -109,24 +107,36 @@ public class FriendsController {
         friendDao.save(newFriendZone);
 
 
-           return "/friends/homepage";
-//           return "redirect:/showFriendOnHomepage";
+//           return "/friends/homepage";
+           return "redirect:/showFriendOnHomepage";
 
         }
 
 
 
     @GetMapping("/showFriendOnHomepage")
-    public String editPost(@PathVariable long id, String username, Model model) {
-        Friend shouldSeeFriend = friendDao.getById(id);
-//        User postEdit = userDao.findByUsername(username);
+    public String editPost( String username, Model model) {
+        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User userLookingForFriend = userDao.getById(loggedInUser.getId());
+
+//        model.addAttribute("showEveryUserFriend", friendDao.findFriendsById(userLookingForFriend.getId()));
+        model.addAttribute("showEveryUserFriend", friendDao.findFriendByIdNotLike(userLookingForFriend.getId()));
+
+//        model.addAttribute("showEveryUserFriend", friendDao.findAllById(userLookingForFriend.getId()));
+
+//        model.addAttribute("showEveryUserFriend", friendDao.findById(userLookingForFriend.getId()));
 
 
-        model.addAttribute("seeMyFriend", shouldSeeFriend);
+//        List<Friend> friendlyList = friendDao.findAllByUserAdding(loggedInUser);
+//        model.addAttribute("friend", friendlyList);
+//        model.addAttribute("allUsers", userDao.findAllByIdNotLike(loggedInUser.getId()));
+//        model.addAttribute("userLoggedIn", loggedInUser);
+//        model.addAttribute("friends", new Friend());
 
 //        return "/posts/edit";
         return "/friends/homepage";
 
     }
+
 
 }

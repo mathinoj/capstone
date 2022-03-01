@@ -59,13 +59,11 @@ public class User {
 //    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
 //    private List<Club> clubs;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(
-            name="users_clubs",
-            joinColumns = {@JoinColumn(name = "user_id")},
-            inverseJoinColumns = {@JoinColumn(name = "club_id")}
-    )
-    private List<Club> clubs;
+@OneToMany(cascade = CascadeType.ALL, mappedBy = "userJoining")
+private List<Club> userJoiningClub;
+
+@OneToMany(cascade = CascadeType.ALL, mappedBy = "clubJoined")
+private List<Club> clubBeingJoined;
 
 
 
@@ -75,6 +73,8 @@ public class User {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "friendAdded")
     private List<Friend> friendAdded;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "uploadingImage")
+    private List<Image> uploadImage;
 
     public User() {
     }
@@ -91,7 +91,9 @@ public class User {
 //        this.posts = posts;
     }
 
-    public User(long id, String firstName, String lastName, String username, String password, long years, String beltRank, String location, String gymName, String profileImage, List<Post> posts, List<Club> clubs, List<Friend> friends) {
+
+
+    public User(long id, String firstName, String lastName, String username, String password, long years, String beltRank, String location, String gymName, String profileImage, List<Post> posts, List<Club> userJoiningClub, List<Club> clubBeingJoined, List<Friend> processOfAddingFriend, List<Friend> friendAdded, List<Image> uploadImage) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -103,8 +105,11 @@ public class User {
         this.gymName = gymName;
         this.profileImage = profileImage;
         this.posts = posts;
-        this.clubs = clubs;
-//        this.friends = friends;
+        this.userJoiningClub = userJoiningClub;
+        this.clubBeingJoined = clubBeingJoined;
+        this.processOfAddingFriend = processOfAddingFriend;
+        this.friendAdded = friendAdded;
+        this.uploadImage = uploadImage;
     }
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -189,14 +194,6 @@ public class User {
         this.posts = posts;
     }
 
-    public List<Club> getClubs() {
-        return clubs;
-    }
-
-    public void setClubs(List<Club> clubs) {
-        this.clubs = clubs;
-    }
-
     public String getProfileImage() {
         return profileImage;
     }
@@ -228,6 +225,28 @@ public class User {
     }
 
 
+    public List<Image> getUploadImage() {
+        return uploadImage;
+    }
+
+    public void setUploadImage(List<Image> uploadImage) {
+        this.uploadImage = uploadImage;
+    }
 
 
+    public List<Club> getUserJoiningClub() {
+        return userJoiningClub;
+    }
+
+    public void setUserJoiningClub(List<Club> userJoiningClub) {
+        this.userJoiningClub = userJoiningClub;
+    }
+
+    public List<Club> getClubBeingJoined() {
+        return clubBeingJoined;
+    }
+
+    public void setClubBeingJoined(List<Club> clubBeingJoined) {
+        this.clubBeingJoined = clubBeingJoined;
+    }
 }

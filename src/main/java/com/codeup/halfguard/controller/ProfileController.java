@@ -2,7 +2,10 @@ package com.codeup.halfguard.controller;
 
 //import com.codeup.halfguard.models.Bio;
 
+import com.codeup.halfguard.models.Friend;
+import com.codeup.halfguard.models.Image;
 import com.codeup.halfguard.models.User;
+import com.codeup.halfguard.repositories.MediaRepository;
 import com.codeup.halfguard.repositories.ProfileRepository;
 import com.codeup.halfguard.repositories.PostRepository;
 import com.codeup.halfguard.repositories.UserRepository;
@@ -29,14 +32,16 @@ public class ProfileController {
     private ProfileRepository bioDao;
     private PostRepository postDao;
     private UserRepository userDao;
+    private MediaRepository imageDao;
 
-    @Value("${file-upload-path}")
-    private String uploadPath;
+//    @Value("${file-upload-path}")
+//    private String uploadPath;
 
-    public ProfileController(ProfileRepository bioDao, PostRepository postDao, UserRepository userDao) {
+    public ProfileController(ProfileRepository bioDao, PostRepository postDao, UserRepository userDao, MediaRepository imageDao) {
         this.bioDao = bioDao;
         this.postDao = postDao;
         this.userDao = userDao;
+        this.imageDao = imageDao;
     }
 
 
@@ -153,9 +158,9 @@ public class ProfileController {
 
     @PostMapping("/fileupload")
     public String postPicToTable(@RequestParam(name = "file") MultipartFile file, @ModelAttribute User user) {
-        String filename = file.getOriginalFilename();
-        String filepath = Paths.get(uploadPath, filename).toString();
-        File destinationFile = new File(filepath);
+//        String filename = file.getOriginalFilename();
+//        String filepath = Paths.get(uploadPath, filename).toString();
+//        File destinationFile = new File(filepath);
 
         User userPicUploadStart = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User userPicUploading = userDao.getById(userPicUploadStart.getId());
@@ -165,7 +170,7 @@ public class ProfileController {
 //        userPicUploading.setImages(userPicUploading.getImages());
 //        userPicUploading.setProfileImage(profileImage); THIS ONE WORKS
 
-//        userPicUploading.setProfileImage(user.getProfileImage()); THIS WORKS
+//        userPicUploading.setProfileImage(user.getProfileImage());
 
 
 //        WORKED ON THIS YESTERDAY WITH JORDY, WAS LAST THING THAT NEEDS TO BE FIXED
@@ -174,7 +179,13 @@ public class ProfileController {
 //        user.setProfileImage(userPicUploading.getProfileImage());
 
 
-        userDao.save(userPicUploading);
+//        userDao.save(userPicUploading);
+
+
+
+        Image newImage = new Image();
+        newImage.setUploadingImage(userPicUploadStart);
+        imageDao.save(newImage);
 
 //        return "posts/profile";
 //        return "redirect:/posts/userProfile";

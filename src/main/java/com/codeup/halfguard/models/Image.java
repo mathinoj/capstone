@@ -18,17 +18,23 @@ public class Image {
     @Value("${file-upload-path}")
     private String uploadPath;
 
-    @ManyToOne
-    private User user;
+//    @ManyToOne
+//    private User user;
 
+
+    @ManyToOne
+    @JoinColumn(name="user_id")
+    private User uploadingImage;
 
     public Image() {
     }
 
-    public Image(Long id, String uploadPath) {
+    public Image(Long id, String uploadPath, User uploadingImage) {
         this.id = id;
         this.uploadPath = uploadPath;
+        this.uploadingImage = uploadingImage;
     }
+
 
     public Long getId() {
         return id;
@@ -46,4 +52,11 @@ public class Image {
         this.uploadPath = uploadPath;
     }
 
+    public User getUploadingImage() {
+        return uploadingImage;
+    }
+
+    public void setUploadingImage(User uploadingImage) {
+        this.uploadingImage = uploadingImage;
+    }
 }

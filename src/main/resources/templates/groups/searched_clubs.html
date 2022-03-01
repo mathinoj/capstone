@@ -47,9 +47,10 @@
     Location: <p th:text="${user.clubLocation}"></p>
     Description: <p th:text="${user.clubDescription}"></p>
     <ul>
-        <form th:action="@{/join_group}" th:method="post">
+        <form th:href="@{'/join_group/' + ${user.id}}" th:method="post">
             <button class="btn-link btn">Join Group</button>
         </form>
+<!--        th:href="@{'selected_friend_by_id_from_user/' + ${user.getId}}"-->
     </ul>
     <br>
 </div>

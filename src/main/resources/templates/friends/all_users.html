@@ -91,7 +91,7 @@
     Email: <span th:text="${user.username}"></span>
     Id: <span th:text="${user.id}"></span>
         <span>
-    <!--    <button  type="submit">Add Friend</button>-->
+<!--        <button  th:action="@{tryThisOne/}"  type="submit">Add Friend</button>-->
     <a th:name="addedUser"  th:href="@{'selected_friend_by_id_from_user/' + ${user.getId}}" th:method="post">Add Friend</a>
         </span>
 </form>
