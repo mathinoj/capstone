@@ -6,6 +6,7 @@ import com.codeup.halfguard.models.User;
 import com.codeup.halfguard.repositories.ProfileRepository;
 import com.codeup.halfguard.repositories.PostRepository;
 import com.codeup.halfguard.repositories.UserRepository;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,12 +14,24 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.support.StringMultipartFileEditor;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
+import java.nio.file.Paths;
 
 @Controller
 public class ProfileController {
     private ProfileRepository bioDao;
     private PostRepository postDao;
     private UserRepository userDao;
+
+    @Value("${file-upload-path}")
+    private String uploadPath;
 
     public ProfileController(ProfileRepository bioDao, PostRepository postDao, UserRepository userDao) {
         this.bioDao = bioDao;
@@ -119,13 +132,6 @@ public class ProfileController {
 
 
 
-    @GetMapping("/imageToGetMapping")
-    public String profilePicSee(Model model) {
-        User loginUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        User userUploads = userDao.findById(loginUser.getId());
-        model.addAttribute("user", userUploads);
-        return "/profile/profilePicSee";
-    }
 
 
 
@@ -143,8 +149,14 @@ public class ProfileController {
 
 
 
-    @PostMapping("/imageToPostToTable")
-    public String postPicToTable(@RequestParam(name = "profileImage") String profileImage, @ModelAttribute User user) {
+
+
+    @PostMapping("/fileupload")
+    public String postPicToTable(@RequestParam(name = "file") MultipartFile file, @ModelAttribute User user) {
+        String filename = file.getOriginalFilename();
+        String filepath = Paths.get(uploadPath, filename).toString();
+        File destinationFile = new File(filepath);
+
         User userPicUploadStart = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User userPicUploading = userDao.getById(userPicUploadStart.getId());
 
@@ -154,7 +166,10 @@ public class ProfileController {
 //        userPicUploading.setProfileImage(profileImage); THIS ONE WORKS
 
 //        userPicUploading.setProfileImage(user.getProfileImage()); THIS WORKS
-        userPicUploading.setProfileImage(profileImage);
+
+
+//        WORKED ON THIS YESTERDAY WITH JORDY, WAS LAST THING THAT NEEDS TO BE FIXED
+//        userPicUploading.setProfileImage(file);
 
 //        user.setProfileImage(userPicUploading.getProfileImage());
 
@@ -162,6 +177,16 @@ public class ProfileController {
         userDao.save(userPicUploading);
 
 //        return "posts/profile";
-        return "redirect:/posts/userProfile";
+//        return "redirect:/posts/userProfile";
+        return "redirect:/imageToGetMapping";
+    }
+
+
+    @GetMapping("/imageToGetMapping")
+    public String profilePicSee(Model model) {
+        User loginUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User userUploads = userDao.findById(loginUser.getId());
+        model.addAttribute("user", userUploads);
+        return "/profile/profilePicSee";
     }
 }

@@ -10,25 +10,15 @@ public class Friend {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-//    @Column
-//    private String friendFirstName;
-//
-//    @Column
-//    private String friendLastName;
-//
-//    @Column
-//    private String friendUsername;
 
-    @ManyToMany(mappedBy = "friends")
-    private List<User> users;
+    @ManyToOne
+    @JoinColumn(name = "logged_In_user_id")
+    private User userAdding;
 
-//    @ManyToOne
-//    @JoinColumn(name = "friend_id")
-//    private User friendAdded;
-//
-//    @ManyToOne
-//    @JoinColumn(name = "logged_In_id")
-//    private User userAdding;
+    @ManyToOne
+    @JoinColumn(name = "friend_id")
+    private User friendAdded;
+
 
     public Friend (){}
 
@@ -52,52 +42,30 @@ public class Friend {
 //        this.user = user;
 //    }
 
-//    public User getFriendAdded() {
-//        return friendAdded;
-//    }
-//
-//    public void setFriendAdded(User friendAdded) {
-//        this.friendAdded = friendAdded;
-//    }
-//
-//    public User getUserAdding() {
-//        return userAdding;
-//    }
-//
-//    public void setUserAdding(User userAdding) {
-//        this.userAdding = userAdding;
-//    }
 
-    public List<User> getUsers() {
-        return users;
+    public Friend(long id, User friendAdded, User userAdding) {
+        this.id = id;
+        this.friendAdded = friendAdded;
+        this.userAdding = userAdding;
     }
 
-    public void setUsers(List<User> users) {
-        this.users = users;
+    public User getFriendAdded() {
+        return friendAdded;
     }
 
-    //    public String getFriendFirstName() {
-//        return friendFirstName;
-//    }
-//
-//    public void setFriendFirstName(String friendFirstName) {
-//        this.friendFirstName = friendFirstName;
-//    }
-//
-//    public String getFriendLastName() {
-//        return friendLastName;
-//    }
-//
-//    public void setFriendLastName(String friendLastName) {
-//        this.friendLastName = friendLastName;
-//    }
-//
-//    public String getFriendUsername() {
-//        return friendUsername;
-//    }
-//
-//    public void setFriendUsername(String friendUsername) {
-//        this.friendUsername = friendUsername;
-//    }
+    public void setFriendAdded(User friendAdded) {
+        this.friendAdded = friendAdded;
+    }
+
+    public User getUserAdding() {
+        return userAdding;
+    }
+
+    public void setUserAdding(User userAdding) {
+        this.userAdding = userAdding;
+    }
+
+
+
 
 }

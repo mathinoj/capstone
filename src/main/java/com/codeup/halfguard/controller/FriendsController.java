@@ -71,93 +71,62 @@ public class FriendsController {
         User user = userDao.getById(id);
 
 
-        model.addAttribute("friends", new Friend());
-        model.addAttribute("friendOfFriends", user.getFriends());
-//        model.addAttribute("friendOfFriends", postEditFriendId);
+//        model.addAttribute("friends", new Friend());
+        model.addAttribute("friendOfFriends", user.getProcessOfAddingFriend());
+        model.addAttribute("friendOfFriends", user.getFriendAdded());
 
         return "/friends/chosen_friend";
 //        return "redirect:/tryThisOne";
     }
 
-//    @GetMapping("/selected_friend_by_id_from_user/{id}")
-//    public String editPost(@PathVariable long id, String username, Model model) {
-//        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//        User friendSelect = userDao.findById(id);
-////        User friendSelect = userDao.findById(loggedInUser.getId());
-////        User postEdit = userDao.findByUsername(username);
-//
-//
-////        model.addAttribute("friendOfFriends", loggedInUser.getFriends());
-////        model.addAttribute("friend", friendSelect.getFriends());
-////        model.addAttribute("friend", loggedInUser.getFriends());
-//
-////        model.addAttribute("postEdit", friendSelect);
-//
-////        User userToEdit = userDao.getById(id);
-////        User postEdit = userDao.findByUsername(username);
-//
-//
-//        model.addAttribute("friendOfFriends", friendSelect);
-//
-//        return "/friends/chosen_friend";
-//    }
 
         @PostMapping("tryThisOne/")
        public String processFriend(User user, @ModelAttribute Friend friend, @RequestParam(name = "addedFriend") long id) {
         User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-            User userAdditFriend = userDao.getById(loggedInUser.getId());
-//        User userAdditFriend = userDao.getById(userId);
-
-        Friend newFriend = new Friend();
-        newFriend.setId(userAdditFriend.getId());
-        friendDao.save(newFriend);
-
-
-            List<Friend> friends = userAdditFriend.getFriends();
-            friends.add(friend);
-            userAdditFriend.setFriends(friends);
-            userDao.save(userAdditFriend);
-
-            User friendToEdit = userDao.getById(id);
-            friendToEdit.setId(friendToEdit.getId());
-            userDao.save(friendToEdit);
-
-//            userAdditFriend.setAddingFriend(user.getAddingFriend());
-//            userAdditFriend.setFriends(user.getFriends());
-//            userAdditFriend.setId(user.getId());
-
+//            User userAddTheFriend = userDao.getById(loggedInUser.getId());
+//////        User userAdditFriend = userDao.getById(id);
 //
+//
+//            List<Friend> friendAdded = userAddTheFriend.getProcessOfAddingFriend();
+//            friendAdded.add(friend);
+//            userAddTheFriend.setProcessOfAddingFriend(friendAdded);
+//            userDao.save(userAddTheFriend);
+
+
+
+//THIS ADDS FRIEND TO USER ID TABLE, BUT WE NEED IT ASSIGNED TO THE FRIEND_ID PART OF THE TABLE
+//            User userAdditFriend = userDao.getById(id);
+//            List<Friend> friendAddedAgain = userAdditFriend.getFriendAdded();
+//            friendAddedAgain.add(friend);
+//            userAdditFriend.setFriendAdded(friendAddedAgain);
 //            userDao.save(userAdditFriend);
-//            friendDao.save(userAdditFriend);
+
+//THIS IS THE ONE THAT WORKS THE WAY IT SHOULD!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*************************
+        User tryThisOneMoGen = userDao.getById(id);
+        Friend newFriendZone = new Friend();
+        newFriendZone.setFriendAdded(tryThisOneMoGen);
+        newFriendZone.setUserAdding(loggedInUser);
+        friendDao.save(newFriendZone);
+
 
            return "/friends/homepage";
+//           return "redirect:/showFriendOnHomepage";
 
         }
 
-//    @PostMapping("/selected_friend_by_id_from_user/{id}")
-//    public String saveFriends(@ModelAttribute Friend friend, @RequestParam(name = "friendAdded") long id) {
-//        User loggedInnUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//        User user = userDao.findById(loggedInnUser.getId());
-//
-//        List<Friend> friends = user.getFriends();
-//
-////        Friend newFriend = new Friend();
-////
-////        newFriend.setFriendAdded(user);
-//
-//        friends.add(friend);
-//
-////        friendDao.save(newFriend);
-//
-//
-//        user.setFriends(friends);
-//        userDao.save(user);
-//
-//        System.out.println("friends ============================ " + friends);
-//
-//        return "/friends/homepage";
-//
-//    }
 
+
+    @GetMapping("/showFriendOnHomepage")
+    public String editPost(@PathVariable long id, String username, Model model) {
+        Friend shouldSeeFriend = friendDao.getById(id);
+//        User postEdit = userDao.findByUsername(username);
+
+
+        model.addAttribute("seeMyFriend", shouldSeeFriend);
+
+//        return "/posts/edit";
+        return "/friends/homepage";
+
+    }
 
 }

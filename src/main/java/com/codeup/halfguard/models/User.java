@@ -67,19 +67,14 @@ public class User {
     )
     private List<Club> clubs;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(
-            name="users_friends",
-            joinColumns = {@JoinColumn(name = "user_id")},
-            inverseJoinColumns = {@JoinColumn(name = "friend_id")}
-    )
-    private List<Friend> friends;
 
-//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "friendAdded")
-//    private List<Friend> friends;
-//
-//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userAdding")
-//    private List<Friend> addingFriend;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userAdding")
+    private List<Friend> processOfAddingFriend;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "friendAdded")
+    private List<Friend> friendAdded;
+
 
     public User() {
     }
@@ -94,6 +89,22 @@ public class User {
         this.location = location;
         this.gymName = gymName;
 //        this.posts = posts;
+    }
+
+    public User(long id, String firstName, String lastName, String username, String password, long years, String beltRank, String location, String gymName, String profileImage, List<Post> posts, List<Club> clubs, List<Friend> friends) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.username = username;
+        this.password = password;
+        this.years = years;
+        this.beltRank = beltRank;
+        this.location = location;
+        this.gymName = gymName;
+        this.profileImage = profileImage;
+        this.posts = posts;
+        this.clubs = clubs;
+//        this.friends = friends;
     }
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -194,21 +205,29 @@ public class User {
         this.profileImage = profileImage;
     }
 
-    public List<Friend> getFriends() {
-        return friends;
+
+
+
+
+
+
+    public List<Friend> getProcessOfAddingFriend() {
+        return processOfAddingFriend;
     }
 
-    public void setFriends(List<Friend> friends) {
-        this.friends = friends;
+    public void setProcessOfAddingFriend(List<Friend> processOfAddingFriend) {
+        this.processOfAddingFriend = processOfAddingFriend;
+    }
+
+    public List<Friend> getFriendAdded() {
+        return friendAdded;
+    }
+
+    public void setFriendAdded(List<Friend> friendAdded) {
+        this.friendAdded = friendAdded;
     }
 
 
 
-//    public List<Friend> getAddingFriend() {
-//        return addingFriend;
-//    }
-//
-//    public void setAddingFriend(List<Friend> addingFriend) {
-//        this.addingFriend = addingFriend;
-//    }
+
 }

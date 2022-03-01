@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Friend Page</title>
+    <div th:insert="partials :: head"></div>
+</head>
+<body>
+<nav th:replace="partials :: navbar"></nav>
+
+MY FRIEND??
+<!--Friend: <p th:text="${seeMyFriend.id}"></p>-->
+Under hERE
+<tr th:each="friend : ${friendSee}">
+    Years Active: <p th:text="${friend.id}"></p>
+    Belt Rank: <p th:text="${friendSee.getId}"></p>
+    Location: <p th:text="${friendSee.id}"></p>
+</tr>
+Above Here
+</body>
+</html>
