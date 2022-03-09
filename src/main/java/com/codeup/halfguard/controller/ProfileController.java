@@ -26,6 +26,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import java.nio.file.Paths;
+import java.util.Locale;
 
 @Controller
 public class ProfileController {
@@ -34,8 +35,8 @@ public class ProfileController {
     private UserRepository userDao;
     private MediaRepository imageDao;
 
-//    @Value("${file-upload-path}")
-//    private String uploadPath;
+    @Value("AqGAcxAgFSMy3jPbAGB0Jz")
+    private String ApiKey;
 
     public ProfileController(ProfileRepository bioDao, PostRepository postDao, UserRepository userDao, MediaRepository imageDao) {
         this.bioDao = bioDao;
@@ -120,6 +121,12 @@ public class ProfileController {
 
         model.addAttribute("postBySpecificUserProfileEdited", postDao.findPostsByUser(posterToNew));
 
+        //THIS SHOULD ADD THE PROFILE PIC
+        User loginUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User userUploads = userDao.findById(loginUser.getId());
+
+
+        model.addAttribute("profilePic", userUploads.getProfileImage());
 
         return "/profile/userProfileEdited";
 //                return "/posts/profile";
@@ -143,53 +150,46 @@ public class ProfileController {
 
 
     @GetMapping("/start_process_to_add_pic")
-    public String takeToAddPicView(Model model) {
-        User userPicUploadStart = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        User userPicUploading = userDao.getById(userPicUploadStart.getId());
-        model.addAttribute("userProfileUploadButton", userPicUploading);
+    public String takeToAddPicView(Model model, User user) {
+//        User userPicUploadStart = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        User userPicUploading = userDao.getById(userPicUploadStart.getId());
+////        model.addAttribute("userProfileUploadButton", userPicUploading);
+//
+//
+//        model.addAttribute("client", ApiKey);
+////        model.addAttribute("image", new Image());
+//        model.addAttribute("user", user);
 
+//        model.addAttribute("client", client);
+//        model.addAttribute("user", userPicUploading);
 
         return "/profile/profilePicture";
     }
 
 
-
-
-
-    @PostMapping("/fileupload")
-    public String postPicToTable(@RequestParam(name = "file") MultipartFile file, @ModelAttribute User user) {
-//        String filename = file.getOriginalFilename();
-//        String filepath = Paths.get(uploadPath, filename).toString();
-//        File destinationFile = new File(filepath);
-
+    @PostMapping("/fileUpload")
+    public String postPicToTable(@ModelAttribute User user, Image image) {
         User userPicUploadStart = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User userPicUploading = userDao.getById(userPicUploadStart.getId());
 
-//        userPicUploading.setProfileImage(userPicUploading.getProfileImage());
-
-//        userPicUploading.setImages(userPicUploading.getImages());
-//        userPicUploading.setProfileImage(profileImage); THIS ONE WORKS
-
-//        userPicUploading.setProfileImage(user.getProfileImage());
+        String imgPath = user.getProfileImage();
+        userPicUploading.setProfileImage(imgPath);
+        userDao.save(userPicUploading);
 
 
-//        WORKED ON THIS YESTERDAY WITH JORDY, WAS LAST THING THAT NEEDS TO BE FIXED
-//        userPicUploading.setProfileImage(file);
-
-//        user.setProfileImage(userPicUploading.getProfileImage());
-
-
-//        userDao.save(userPicUploading);
+//        Image newImage = new Image();
+//        //This associates image with user ID number - setting user ID FK
+//        newImage.setUploadingImage(userPicUploadStart);
 
 
 
-        Image newImage = new Image();
-        newImage.setUploadingImage(userPicUploadStart);
-        imageDao.save(newImage);
 
 //        return "posts/profile";
 //        return "redirect:/posts/userProfile";
-        return "redirect:/imageToGetMapping";
+//        return "redirect:/imageToGetMapping";
+//        return "redirect:/posts/profile";
+        return "redirect:/posts/userProfile";
+
     }
 
 
@@ -197,7 +197,12 @@ public class ProfileController {
     public String profilePicSee(Model model) {
         User loginUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User userUploads = userDao.findById(loginUser.getId());
-        model.addAttribute("user", userUploads);
-        return "/profile/profilePicSee";
+
+
+        model.addAttribute("profilePic", userUploads.getProfileImage());
+//        return "/profile/profilePicSee";
+//        return "/posts/profile";
+//        return "redirect:/userProfile";
+        return "posts/profile";
     }
 }

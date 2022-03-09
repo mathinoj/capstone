@@ -12,9 +12,12 @@ public interface FriendRepository extends JpaRepository <Friend, Long> {
 
     <List>Friend findById(Friend friend);
 
-    List<Friend> findFriendsById(Long userId);
+    List<Friend> findFriendById(long userId);
 
-    List<Friend> findFriendByIdNotLike(Long userId);
+    List<Friend> findFriendByIdNotLike(long userId);
+
+//    List<Friend> findFriendByIdNotLikeOrId(Long userId);
+
 
     List<Friend> findAllById(long userId);
 

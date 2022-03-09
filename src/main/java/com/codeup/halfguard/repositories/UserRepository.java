@@ -11,8 +11,8 @@ import java.util.List;
 public interface UserRepository extends JpaRepository <User, Long> {
     @Query("SELECT u FROM User u WHERE u.firstName LIKE %?1%"
             + " OR u.lastName LIKE %?1%"
-            + " OR u.username Like %?1%"
-            + " OR u.id Like %?1%")
+            + " OR u.username Like %?1%")
+//            + " OR u. Like %?1%")
         //WHERE " + "CONCAT (u.firstName, u.lastName, u.username)" + " LIKE %?1%") <--THIS IS THE FASTER WRITTEN
     public List<User> findAll(String keywordUser);
 

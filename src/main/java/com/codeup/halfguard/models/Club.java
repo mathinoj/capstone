@@ -19,13 +19,13 @@ public class Club {
     @Column(length = 10000)
     private String clubDescription;
 
-    @ManyToOne
-    @JoinColumn(name="user_joining_club_id")
-    private User userJoining;
-
-    @ManyToOne
-    @JoinColumn(name = "club_being_joined_id")
-    private User clubJoined;
+//    @ManyToOne
+//    @JoinColumn(name="user_joining_club_id")
+//    private User userJoining;
+//
+//    @ManyToOne
+//    @JoinColumn(name = "club_being_joined_id")
+//    private User clubJoined;
 
 //    @ManyToMany(mappedBy = "clubs")
 //    private List<User> users;
@@ -71,21 +71,21 @@ public class Club {
         this.clubDescription = clubDescription;
     }
 
-    public User getUserJoining() {
-        return userJoining;
-    }
-
-    public void setUserJoining(User userJoining) {
-        this.userJoining = userJoining;
-    }
-
-    public User getClubJoined() {
-        return clubJoined;
-    }
-
-    public void setClubJoined(User clubJoined) {
-        this.clubJoined = clubJoined;
-    }
+//    public User getUserJoining() {
+//        return userJoining;
+//    }
+//
+//    public void setUserJoining(User userJoining) {
+//        this.userJoining = userJoining;
+//    }
+//
+//    public User getClubJoined() {
+//        return clubJoined;
+//    }
+//
+//    public void setClubJoined(User clubJoined) {
+//        this.clubJoined = clubJoined;
+//    }
 
 //    public List<User> getUsers() {
 //        return users;

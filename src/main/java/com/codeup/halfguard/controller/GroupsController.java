@@ -1,12 +1,7 @@
 package com.codeup.halfguard.controller;
 
-import com.codeup.halfguard.models.Club;
-import com.codeup.halfguard.models.Post;
-import com.codeup.halfguard.models.User;
-import com.codeup.halfguard.repositories.ClubRepository;
-import com.codeup.halfguard.repositories.FriendRepository;
-import com.codeup.halfguard.repositories.PostRepository;
-import com.codeup.halfguard.repositories.UserRepository;
+import com.codeup.halfguard.models.*;
+import com.codeup.halfguard.repositories.*;
 import org.springframework.data.repository.query.Param;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.parameters.P;
@@ -22,15 +17,17 @@ public class GroupsController {
     private UserRepository userDao;
     private ClubRepository clubDao;
     private FriendRepository friendDao;
+    private MemberRepository memberDao;
 //    private final PostRepository postDao;
 //    private final UserRepository userDao;
 //    private final EmailService emailService;
 
-    public GroupsController(PostRepository postDao, UserRepository userDao, ClubRepository clubDao, FriendRepository friendDao) {
+    public GroupsController(PostRepository postDao, UserRepository userDao, ClubRepository clubDao, FriendRepository friendDao, MemberRepository memberDao) {
         this.userDao = userDao;
         this.postDao = postDao;
         this.clubDao = clubDao;
         this.friendDao = friendDao;
+        this.memberDao = memberDao;
 //        this.emailService = emailService;
     }
 
@@ -44,8 +41,9 @@ public class GroupsController {
         User clubGod = userDao.getById(clubCreated.getId());
 //        Club blahDoh = clubDao.getById(clubCreated.getId());
 
-        System.out.println(clubDao.findClubsByUserJoining(clubGod));
-        model.addAttribute("displaySpecificClub", clubDao.findClubsByUserJoining(clubGod));
+//        THE ONE BELOW IS HOW IT ORIGINALLY WAS WRITTEN BUT THEN YOU CREATED MEMBER And shit fucked up
+//        model.addAttribute("displaySpecificClub", clubDao.findClubsByUserJoining(clubGod));
+        model.addAttribute("displaySpecificClub", clubDao.findClubsByIdNotLike(clubGod.getId()));
 
 
         //THIS WILL BE WHERE YOU PUT THE METHOD THAT BRINGS UP ALL THE GROUPS CREATED BY THE USER
@@ -100,8 +98,9 @@ public class GroupsController {
         User clubGodRick = userDao.getById(clubCreatedRader.getId());
 //                Club blahDoh = clubDao.getById(clubCreatedRader.getId());
 
-
-        model.addAttribute("displaySpecificClubMaybe", clubDao.findClubsByUserJoining(clubGodRick));
+ //        THE ONE BELOW IS HOW IT ORIGINALLY WAS WRITTEN BUT THEN YOU CREATED MEMBER And shit fucked up
+//        model.addAttribute("displaySpecificClubMaybe", clubDao.findClubsByUserJoining(clubGodRick));
+        model.addAttribute("displaySpecificClubMaybe", clubDao.findClubsByIdNotLike(clubGodRick.getId()));
 
 
 //        return "/groups/groups";
@@ -190,8 +189,58 @@ public class GroupsController {
         model.addAttribute("listAllClubs", listClubs);
         model.addAttribute("keyword", keyword);
 
+        System.out.println("listClubs =@@@@@@@@@@@@@@@@@@@@@@@@@@@@ " + listClubs);
+
         return "groups/searched_clubs";
     }
+
+    @GetMapping("/selected_group_by_id_from_user/{id}")
+    public String viewGroup(Model model, @PathVariable long id){
+        User userAddingGroup = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        User user = userDao.findById(userAddingGroup);
+
+        User user = userDao.getById(id);
+
+        model.addAttribute("friendOfGroup", user.getClubBeingJoined());
+//        model.addAttribute("friendOfGroup", user.getUserJoiningClub());
+
+
+        return "/groups/chosen_group";
+    }
+
+
+
+    @PostMapping("/join_group/")
+    public String processAddGroup (User user, @ModelAttribute Member member, @RequestParam(name = "id") long id){
+        User userAddingGroup = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        User tryingToJoinClub = userDao.getById(id);
+        User newClubJoined = new User();
+        newClubJoined.setClubBeingJoined(tryingToJoinClub.getClubBeingJoined());
+        newClubJoined.setUserJoiningClub(userAddingGroup.getUserJoiningClub());
+
+        System.out.println("newClubJoined ================= " + newClubJoined);
+
+        //        User tryThisOneMoGen = userDao.getById(id);
+        //        Friend newFriendZone = new Friend();
+        //        newFriendZone.setFriendAdded(tryThisOneMoGen);
+        //        newFriendZone.setUserAdding(loggedInUser);
+        //        friendDao.save(newFriendZone);
+
+//        return "redirect:/groups/groups";
+        return "redirect:/showGroupsOnHomepage";
+    }
+
+    @GetMapping("/showGroupsOnHomepage")
+    public String showNewAddedGroup(Model model){
+        User userAddingGroupToPage = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User userThatAddedGroup = userDao.getById(userAddingGroupToPage.getId());
+
+        model.addAttribute("showTheNewlyAddedGroup", memberDao.findById(userThatAddedGroup.getId()));
+
+        return "/groups/groups";
+    }
+
 
 
 }

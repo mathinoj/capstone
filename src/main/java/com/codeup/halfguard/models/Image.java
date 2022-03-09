@@ -11,12 +11,15 @@ public class Image {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
+
+    @Column(length = 150)
+    private String profile_picture;
 
 
-    @Column(nullable = true)
-    @Value("${file-upload-path}")
-    private String uploadPath;
+//    @Column(nullable = true)
+//    @Value("${file-upload-path}")
+//    private String uploadPath;
 
 //    @ManyToOne
 //    private User user;
@@ -29,27 +32,50 @@ public class Image {
     public Image() {
     }
 
-    public Image(Long id, String uploadPath, User uploadingImage) {
+//    public Image(Long id, String uploadPath, User uploadingImage) {
+//        this.id = id;
+////        this.uploadPath = uploadPath;
+//        this.uploadingImage = uploadingImage;
+//    }
+
+    public Image(long id, String profile_picture, User uploadingImage) {
         this.id = id;
-        this.uploadPath = uploadPath;
+        this.profile_picture = profile_picture;
         this.uploadingImage = uploadingImage;
     }
 
 
-    public Long getId() {
+//    public Long getId() {
+//        return id;
+//    }
+//
+//    public void setId(Long id) {
+//        this.id = id;
+//    }
+
+//    public String getUploadPath() {
+//        return uploadPath;
+//    }
+//
+//    public void setUploadPath(String uploadPath) {
+//        this.uploadPath = uploadPath;
+//    }
+
+
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
-    public String getUploadPath() {
-        return uploadPath;
+    public String getProfile_picture() {
+        return profile_picture;
     }
 
-    public void setUploadPath(String uploadPath) {
-        this.uploadPath = uploadPath;
+    public void setProfile_picture(String profile_picture) {
+        this.profile_picture = profile_picture;
     }
 
     public User getUploadingImage() {
@@ -59,4 +85,6 @@ public class Image {
     public void setUploadingImage(User uploadingImage) {
         this.uploadingImage = uploadingImage;
     }
+
+
 }

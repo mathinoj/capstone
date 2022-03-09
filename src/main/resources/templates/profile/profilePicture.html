@@ -13,52 +13,205 @@ THIS SHOULD SHOW PICTURE UPLOAD
 <br>
 
 
-<div class="box">
-    <form id="pick-form">
-<!--        <form id="pick-form" th:action="@{/fileupload}" method="post" th:object="${userProfileUploadButton}">-->
-    <form id="pick-form" th:action="@{/imageToPostToTable}" method="post" th:object="${userProfileUploadButton}">
-
-        <div class="field">
-            <div class="control">
-                <button class="button" type="button" id="picker">Pick file</button>
-                <input type="hidden" id="fileupload">
-            </div>
-            <div class="control" id="nameBox"></div>
-            <div class="control" id="urlBox"></div>
-        </div>
-        <div class="field">
-            <div class="control">
-                <input class="button" type="submit" value="Submit" th:href="@{/imageToGetMapping}">
-            </div>
-        </div>
-    </form>
-
-<!--    <form action="/fileupload" method="POST" enctype="multipart/form-data">-->
-<!--        <label for="file">Upload a file!</label>-->
-<!--        <input id="file" name="file" type="file" />-->
-<!--        <br />-->
-<!--        <input type="submit" value="upload" />-->
-<!--    </form>-->
-
-
-
-
 <!--<div>-->
-<!--    &lt;!&ndash;<form th:action="@{/create_group_info}" th:method="post" th:object="${user}" id="profilePic">&ndash;&gt;-->
-<!--    <form th:action="@{/create_group_info}" id="profilePic">-->
-<!--        <label for="fileupload">Choose a File to Upload:</label>-->
+<!--    <form id="image" th:action="@{/fileUpload}" th:method="post">-->
+<!--        <label for="fileupload"></label>-->
 <!--        <input type="hidden" id="fileupload">-->
-<!--        <button class="button" type="button" id="picker">Choose a File</button>-->
-<!--        <input class="button" type="submit" value="Submit">-->
+<!--        <button class=" btn btn-green" id="picker" type="button">Pick file</button>-->
+<!--        <div id="thumbnail-container"></div>-->
+
+<!--        <span class="control" id="nameBox">File Name</span>-->
+<!--        <span  id="urlBox"></span>-->
+<!--        <input type="submit" value="Submit" >-->
+
 <!--    </form>-->
 <!--</div>-->
 
-<br>
+<div class="container-fluid createAndEdit">
+    <label for="imgPath">Edit User Photo</label>
+    <form th:action="@{/fileUpload}" method="post" th:object="${user}">
+        <div class="file-field">
+            <div class="btn btn-primary btn-sm float-left" id="profilePic">
+                <span>Choose file</span>
+            </div>
+            <div class="file-path-wrapper">
+                <input class="file-path validate" id="imgPath" th:field="*{profileImage}" type="text" placeholder="Upload your photo">
+            </div>
+        </div>
+        <br>
+        <button type="submit">Submit edit</button>
+    </form>
+</div>
+<!--<div class="box">-->
+<!--    <form id="pick-form" th:action="@{/fileUpload}" th:method="post">-->
+<!--        <div class="control">-->
+<!--            <label for="fileupload"></label>-->
+<!--            <button class="button" type="button" id="picker">Pick file</button>-->
+<!--            <input type="hidden" id="fileupload">-->
+<!--        </div>-->
+<!--        <div class="control" id="nameBox"></div>-->
+<!--        <div class="control" id="urlBox"></div>-->
+<!--        <input class="btn btn-green" type="submit" value="Submit" th:method="post" th:action="@{/fileUpload}">-->
+<!--    </form>-->
+<!--</div>-->
+<!--<div class="field">-->
+<!--&lt;!&ndash;    <div class="control">&ndash;&gt;-->
+<!--&lt;!&ndash;        <input class="button" type="submit" value="Submit">&ndash;&gt;-->
+<!--&lt;!&ndash;    </div>&ndash;&gt;-->
+<!--</div>-->
+<!--</div>-->
+
+<!--<div class="box">-->
+<!--    <form id="pick-form">-->
+<!--&lt;!&ndash;        <form id="pick-form" th:action="@{/fileupload}" method="post" th:object="${userProfileUploadButton}">&ndash;&gt;-->
+<!--    <form id="pick-form" th:action="@{/imageToPostToTable}" method="post" th:object="${userProfileUploadButton}">-->
+
+<!--        <div class="field">-->
+<!--            <div class="control">-->
+<!--                <button class="button" type="button" id="picker">Pick file</button>-->
+<!--                <input type="hidden" id="fileupload">-->
+<!--            </div>-->
+<!--            <div class="control" id="nameBox"></div>-->
+<!--            <div class="control" id="urlBox"></div>-->
+<!--        </div>-->
+<!--        <div class="field">-->
+<!--            <div class="control">-->
+<!--                <input class="button" type="submit" value="Submit" th:href="@{/imageToGetMapping}">-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </form>-->
+
+<!--&lt;!&ndash;<div>&ndash;&gt;-->
+<!--&lt;!&ndash;    &lt;!&ndash;<form th:action="@{/create_group_info}" th:method="post" th:object="${user}" id="profilePic">&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;    <form th:action="@{/create_group_info}" id="profilePic">&ndash;&gt;-->
+<!--&lt;!&ndash;        <label for="fileupload">Choose a File to Upload:</label>&ndash;&gt;-->
+<!--&lt;!&ndash;        <input type="hidden" id="fileupload">&ndash;&gt;-->
+<!--&lt;!&ndash;        <button class="button" type="button" id="picker">Choose a File</button>&ndash;&gt;-->
+<!--&lt;!&ndash;        <input class="button" type="submit" value="Submit">&ndash;&gt;-->
+<!--&lt;!&ndash;    </form>&ndash;&gt;-->
+<!--&lt;!&ndash;</div>&ndash;&gt;-->
+
+<!--<br>-->
+
+<!--<script src="//static.filestackapi.com/filestack-js/3.x.x/filestack.min.js"></script>-->
+<!--<script>-->
+<!--    const client = filestack.init("AqGAcxAgFSMy3jPbAGB0Jz");-->
+<!--    const options = {-->
+<!--        onUploadDone: updateForm,-->
+<!--        maxSize: 10 * 1024 * 1024,-->
+<!--        accept: ['image/*'],-->
+<!--        uploadInBackground: false,-->
+<!--        onFileUploadFinished: (response) => {-->
+<!--            saveUserData({-->
+<!--                userId,-->
+<!--                fileHandle: response.handle,-->
+<!--                url: response.url-->
+<!--            }).then((response) => {-->
+<!--                console.log('User data has been saved', response);-->
+<!--                form.addEventListener('submit', function (event) {-->
+
+<!--                    $('#fileupload').val(response.url);-->
+<!--                    event.preventDefault();-->
+<!--                    alert('Submitting: ' + fileInput.value);-->
+<!--                });-->
+<!--            })-->
+<!--        }-->
+
+<!--    };-->
+<!--    const picker = client.picker(options);-->
+
+<!--    // Get references to the DOM elements-->
+
+<!--    const form = document.getElementById('pick-form');-->
+<!--    const fileInput = document.getElementById('fileupload');-->
+<!--    const btn = document.getElementById('picker');-->
+<!--    const nameBox = document.getElementById('nameBox');-->
+<!--    const urlBox = document.getElementById('urlBox');-->
+
+<!--    // Add our event listeners-->
+
+<!--    btn.addEventListener('click', function (e) {-->
+<!--        e.preventDefault();-->
+<!--        picker.open();-->
+<!--    });-->
+
+<!--    form.addEventListener('submit', function (e) {-->
+<!--        e.preventDefault();-->
+<!--        alert('Submitting: ' + fileInput.value);-->
+<!--    });-->
+
+<!--    function updateForm(result) {-->
+<!--        const fileData = result.filesUploaded[0];-->
+<!--        fileInput.value = fileData.url;-->
+<!--        console.log(fileData.url)-->
+<!--        // If file is resizable image, resize and embed it as a thumbnail preview-->
+<!--        if (['jpeg', 'png'].indexOf(fileData.mimetype.split('/')[1]) !== -1) {-->
+<!--            const container = document.getElementById('thumbnail-container');-->
+<!--            const thumbnail = document.getElementById('thumbnail') || new Image();-->
+<!--            thumbnail.id = 'thumbnail';-->
+<!--            thumbnail.src = client.transform(fileData.handle, {-->
+<!--                resize: {-->
+<!--                    width: 200-->
+<!--                }-->
+<!--            });-->
+
+<!--            if (!container.contains(thumbnail)) {-->
+<!--                container.appendChild(thumbnail);-->
+<!--            }-->
+<!--        }-->
+
+
+<!--        // Helper to overwrite the field input value-->
+
+<!--        // function updateForm(result) {-->
+<!--        //     const fileData = result.filesUploaded[0];-->
+<!--        //     fileInput.value = fileData.url;-->
+
+<!--        // Some ugly DOM code to show some data.-->
+<!--        const name = document.createTextNode('Selected: ' + fileData.filename);-->
+<!--        const url = document.createElement('a');-->
+<!--        url.href = fileData.url;-->
+<!--        url.appendChild(document.createTextNode(fileData.url));-->
+<!--        nameBox.appendChild(name);-->
+<!--        urlBox.appendChild(document.createTextNode('Uploaded to: '));-->
+<!--        urlBox.appendChild(url);-->
+
+
+<!--    }-->
+<!--</script>-->
+
 
 <script src="//static.filestackapi.com/filestack-js/3.x.x/filestack.min.js"></script>
-<script>
+<!--<script th:inline="javascript">-->
+<!--    /*<![CDATA[*/-->
+<!--    // const filekey = /*[[${filestack}]]*/ 'default';-->
+<!--    // console.log(filekey);-->
+<!--    const client = filestack.init("AqGAcxAgFSMy3jPbAGB0Jz");-->
+
+<!--    document.getElementById("profilePic").addEventListener('click', () => {-->
+<!--        client.picker({-->
+<!--            accept: 'image/*',-->
+<!--            onFileUploadFinished: function (file) {-->
+<!--                let imgPath = document.getElementById("imgPath");-->
+<!--                imgPath.value = file.url;-->
+<!--            }-->
+<!--        }).open();});-->
+
+<!--    /*]]>*/-->
+
+<!--</script>-->
+
+<script th:inline="javascript">
     const client = filestack.init("AqGAcxAgFSMy3jPbAGB0Jz");
-    const options = {
+
+    document.getElementById("profilePic").addEventListener('click', () => {
+        client.picker({
+            accept: 'image/*',
+            onFileUploadFinished: function (file) {
+                let imgPath = document.getElementById("imgPath");
+                imgPath.value = file.url;
+            }
+        }).open();});    const options = {
         onUploadDone: updateForm,
         maxSize: 10 * 1024 * 1024,
         accept: 'image/*',
@@ -86,34 +239,13 @@ THIS SHOULD SHOW PICTURE UPLOAD
         alert('Submitting: ' + fileInput.value);
     });
 
+    // Helper to overwrite the field input value
+
     function updateForm(result) {
         const fileData = result.filesUploaded[0];
         fileInput.value = fileData.url;
-        console.log(fileData.url)
-        // If file is resizable image, resize and embed it as a thumbnail preview
-        if (['jpeg', 'png'].indexOf(fileData.mimetype.split('/')[1]) !== -1) {
-            const container = document.getElementById('thumbnail-container');
-            const thumbnail = document.getElementById('thumbnail') || new Image();
-            thumbnail.id = 'thumbnail';
-            thumbnail.src = client.transform(fileData.handle, {
-                resize: {
-                    width: 200
-                }
-            });
 
-            if (!container.contains(thumbnail)) {
-                container.appendChild(thumbnail);
-            }
-        }
-
-
-        // Helper to overwrite the field input value
-
-        // function updateForm(result) {
-        //     const fileData = result.filesUploaded[0];
-        //     fileInput.value = fileData.url;
-
-        // Some ugly DOM code to show some data.
+// Some ugly DOM code to show some data.
         const name = document.createTextNode('Selected: ' + fileData.filename);
         const url = document.createElement('a');
         url.href = fileData.url;
@@ -123,8 +255,87 @@ THIS SHOULD SHOW PICTURE UPLOAD
         urlBox.appendChild(url);
 
 
+        console.log("fileInput.value *******************" + fileInput.value)
+        console.log("url===============" + url)
     }
 
+
 </script>
+
+<!--<script src="//static.filestackapi.com/filestack-js/3.x.x/filestack.min.js"></script>-->
+<!--<script>-->
+<!--    // const client = filestack.init("AqGAcxAgFSMy3jPbAGB0Jz");-->
+
+
+
+
+
+<!--    window.addEventListener('DOMContentLoaded', function () {-->
+<!--        // getUserId().then((response) => {-->
+<!--            const client = filestack.init("AqGAcxAgFSMy3jPbAGB0Jz");-->
+<!--            const options = {-->
+<!--                onUploadDone: updateForm,-->
+<!--                accept: ["image/*"],-->
+<!--                uploadInBackground: false,-->
+<!--// maxSize: 1024,-->
+<!--// maxFiles: 4,-->
+<!--// failOverMaxFiles: false,-->
+<!--                onFileUploadFinished: (response) => {-->
+<!--                    saveUserData({-->
+<!--                        // userId,-->
+<!--                        fileHandle: response.handle,-->
+<!--                        url: response.url-->
+<!--                    }).then((response) => {-->
+<!--                        console.log('User data has been saved', response);-->
+<!--                        form.addEventListener('submit', function (event) {-->
+
+<!--                            $('#fileupload').val(response.url);-->
+<!--                            event.preventDefault();-->
+<!--                            alert('Submitting: ' + fileInput.value);-->
+<!--                        });-->
+<!--                    })-->
+<!--                }-->
+<!--            };-->
+<!--            const picker = client.picker(options);-->
+
+<!--            const form = document.getElementById('pick-form');-->
+<!--            const fileInput = document.getElementById('fileupload');-->
+<!--            const btn = document.getElementById('picker');-->
+<!--            const nameBox = document.getElementById('nameBox');-->
+<!--            const urlBox = document.getElementById('urlBox');-->
+<!--            //  function for saving user data-->
+<!--            const saveUserData = (data) => {-->
+<!--                return new Promise((resolve) => {-->
+<!--                    console.log(data);-->
+<!--                    resolve({-->
+<!--                        success: true-->
+<!--                    })-->
+<!--                });-->
+<!--            };-->
+
+<!--// our event listeners-->
+<!--            btn.addEventListener('click', function (event) {-->
+<!--                event.preventDefault();-->
+<!--                picker.open();-->
+<!--            });-->
+
+<!--// overwrite the field input value-->
+<!--            function updateForm(result) {-->
+<!--                const fileData = result.filesUploaded[0];-->
+<!--                fileInput.value = fileData.url;-->
+
+<!--//     DOM code to show some data.-->
+<!--                const name = document.createTextNode('Selected: ' + fileData.filename);-->
+<!--                const url = document.createElement('a');-->
+<!--                url.href = fileData.url;-->
+<!--                url.appendChild(document.createTextNode(fileData.url));-->
+<!--                nameBox.appendChild(name);-->
+<!--                urlBox.appendChild(document.createTextNode('Uploaded to: '));-->
+<!--                urlBox.appendChild(url);-->
+<!--            }-->
+<!--        // });-->
+<!--    });-->
+<!--</script>-->
+
 </body>
 </html>

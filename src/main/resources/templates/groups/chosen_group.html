@@ -4,18 +4,20 @@
 <div th:insert="partials :: head"></div>
 <head>
     <meta charset="UTF-8">
-    <title>Login Page</title>
+    <title>Chosen Friend</title>
 </head>
 <body>
 <nav th:replace="partials :: navbar"></nav>
 
-<div>
-    <h1>Half Guard Homepage!</h1>
-    <div>
-        <h2><a th:href="@{/register}">Register Here</a></h2>
-        <h2><a th:href="@{/login}">Login</a></h2>
-    </div>
-</div>
+<h1>Chosen Group</h1>
+
+
+<!--<form  th:action="@{/join_group/}" th:method="post" >-->
+<!--    <input type="hidden" th:name="addedGroup" th:value="${id}" />-->
+<!--    <button  type="submit"  th:text="${id}"></button>-->
+<!--</form>-->
+
+<br>
 
 </body>
 </html>

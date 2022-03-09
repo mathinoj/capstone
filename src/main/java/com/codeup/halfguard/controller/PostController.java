@@ -50,6 +50,12 @@ public class PostController {
 
         model.addAttribute("bioShouldBeHere", userDao.findById(bioShouldBeHere.getId()));
 
+        //Should BE METHOD FOR PROFILE PIC
+        User loginUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User userUploads = userDao.findById(loginUser.getId());
+
+        model.addAttribute("profilePic", userUploads.getProfileImage());
+
         return "posts/profile";
     }
     ///////////THIS TAKES USER TO THEIR PROFILE AND THEIR SPECIFIC POSTS -- profile.html^^^^^^^^^^^^^^^^^^

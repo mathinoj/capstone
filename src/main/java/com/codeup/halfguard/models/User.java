@@ -60,10 +60,10 @@ public class User {
 //    private List<Club> clubs;
 
 @OneToMany(cascade = CascadeType.ALL, mappedBy = "userJoining")
-private List<Club> userJoiningClub;
+private List<Member> userJoiningClub;
 
 @OneToMany(cascade = CascadeType.ALL, mappedBy = "clubJoined")
-private List<Club> clubBeingJoined;
+private List<Member> clubBeingJoined;
 
 
 
@@ -93,7 +93,7 @@ private List<Club> clubBeingJoined;
 
 
 
-    public User(long id, String firstName, String lastName, String username, String password, long years, String beltRank, String location, String gymName, String profileImage, List<Post> posts, List<Club> userJoiningClub, List<Club> clubBeingJoined, List<Friend> processOfAddingFriend, List<Friend> friendAdded, List<Image> uploadImage) {
+    public User(long id, String firstName, String lastName, String username, String password, long years, String beltRank, String location, String gymName, String profileImage, List<Post> posts, List<Member> userJoiningClub, List<Member> clubBeingJoined, List<Friend> processOfAddingFriend, List<Friend> friendAdded, List<Image> uploadImage) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -111,6 +111,8 @@ private List<Club> clubBeingJoined;
         this.friendAdded = friendAdded;
         this.uploadImage = uploadImage;
     }
+
+
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -234,19 +236,19 @@ private List<Club> clubBeingJoined;
     }
 
 
-    public List<Club> getUserJoiningClub() {
+    public List<Member> getUserJoiningClub() {
         return userJoiningClub;
     }
 
-    public void setUserJoiningClub(List<Club> userJoiningClub) {
+    public void setUserJoiningClub(List<Member> userJoiningClub) {
         this.userJoiningClub = userJoiningClub;
     }
 
-    public List<Club> getClubBeingJoined() {
+    public List<Member> getClubBeingJoined() {
         return clubBeingJoined;
     }
 
-    public void setClubBeingJoined(List<Club> clubBeingJoined) {
+    public void setClubBeingJoined(List<Member> clubBeingJoined) {
         this.clubBeingJoined = clubBeingJoined;
     }
 }
