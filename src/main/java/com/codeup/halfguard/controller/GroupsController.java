@@ -33,29 +33,53 @@ public class GroupsController {
 
 
     @GetMapping("/groups_start")
-    public String groupHomepage(Model model) {
-//        model.addAttribute("allPosts", postDao.findAll());
-//        model.addAttribute("allPosts", postDao.findAll());
+    public String groupHomepage( Model model, Club club) {
 
-        User clubCreated = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        User clubGod = userDao.getById(clubCreated.getId());
+        //  Post post = postDao.getById(id);
+        //        model.addAttribute("post", post);
+
+//        Club clubDisplay = clubDao.getById(id);
+//        model.addAttribute("displaySpecificClub", clubDisplay);
+
+        User userLoggedInAndReady = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User seeingOwnGroups = userDao.getById(userLoggedInAndReady.getId());
+
+        model.addAttribute("displaySpecificClub", clubDao.findClubsByClubCreated(seeingOwnGroups));
+
+//        model.addAttribute("postBySpecificUser", postDao.findPostsByUser(poster));
+
+
+//        User clubCreated = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        User clubGod = userDao.getById(clubCreated.getId());
 //        Club blahDoh = clubDao.getById(clubCreated.getId());
 
 //        THE ONE BELOW IS HOW IT ORIGINALLY WAS WRITTEN BUT THEN YOU CREATED MEMBER And shit fucked up
-//        model.addAttribute("displaySpecificClub", clubDao.findClubsByUserJoining(clubGod));
-        model.addAttribute("displaySpecificClub", clubDao.findClubsByIdNotLike(clubGod.getId()));
+//        model.addAttribute("displaySpecificClub", clubDao.findClubsByIdNotLike(clubCreated.getId()));
 
 
         //THIS WILL BE WHERE YOU PUT THE METHOD THAT BRINGS UP ALL THE GROUPS CREATED BY THE USER
+
+
+        //THIS SHOULD SHOW ALL THE GROUPS ADDED BY USER
+        User userAddingGroupToPage = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User userThatAddedGroup = userDao.getById(userAddingGroupToPage.getId());
+
+        model.addAttribute("showTheNewlyAddedGroup", memberDao.findMemberById(userThatAddedGroup.getId()));
+//        model.addAttribute("showTheNewlyAddedGroup", clubDao.findClubsById(userThatAddedGroup.getId()));
+
 
         return "groups/groups";
     }
 
     @GetMapping("/groups_create")
     public String groupCreatePage(Model model) {
+
+//        User userLoggedInCreating = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        User userCreatingGroup = userDao.getById(userLoggedInCreating.getId());
 //        model.addAttribute("allPosts", postDao.findAll());
 //        model.addAttribute("allPosts", postDao.findAll());
         model.addAttribute("club", new Club());
+//        model.addAttribute("club", userCreatingGroup.getId());
 
 
         return "/groups/create_groups";
@@ -69,18 +93,12 @@ public class GroupsController {
     public String clubCreated(@ModelAttribute Club club) {
         User clubCreator = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User specificClubCreator = userDao.getById(clubCreator.getId());
-//        Club blah = clubDao.getById(clubCreator.getId());
 
-
-//        club.setUser(specificClubCreator);
-
-        //YOU CAN ALSO FALL BACK TO THESE 3 - these update the same line of the club, but does not add a new club
-//        club.setId(blah.getId()); <---DIDNT NEED THIS
-//        blah.setClubName(blah.getClubName());
-//        blah.setClubLocation(blah.getClubLocation());
-
-//        club.setId(specificClubCreator.getId()); FALL BACK TO THESE TWO
+//        club.setId(specificClubCreator.getId());
 //        specificClubCreator.setClubs(specificClubCreator.getClubs());
+
+        club.setClubCreated(specificClubCreator);
+
 
 
         clubDao.save(club);
@@ -189,7 +207,7 @@ public class GroupsController {
         model.addAttribute("listAllClubs", listClubs);
         model.addAttribute("keyword", keyword);
 
-        System.out.println("listClubs =@@@@@@@@@@@@@@@@@@@@@@@@@@@@ " + listClubs);
+
 
         return "groups/searched_clubs";
     }
@@ -237,7 +255,8 @@ public class GroupsController {
 
         model.addAttribute("showTheNewlyAddedGroup", memberDao.findById(userThatAddedGroup.getId()));
 
-        return "/groups/groups";
+//        return "/groups/groups";
+        return "redirect:/groups_start";
     }
 
 

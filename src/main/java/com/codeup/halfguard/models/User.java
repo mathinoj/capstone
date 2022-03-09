@@ -55,16 +55,17 @@ public class User {
     private List<Post> posts;
 
 
-
 //    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
 //    private List<Club> clubs;
 
-@OneToMany(cascade = CascadeType.ALL, mappedBy = "userJoining")
-private List<Member> userJoiningClub;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "clubCreated")
+    private List<Club> clubCreated;
 
-@OneToMany(cascade = CascadeType.ALL, mappedBy = "clubJoined")
-private List<Member> clubBeingJoined;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userJoining")
+    private List<Member> userJoiningClub;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "clubJoined")
+    private List<Member> clubBeingJoined;
 
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "userAdding")
@@ -92,8 +93,26 @@ private List<Member> clubBeingJoined;
     }
 
 
+//    public User(long id, String firstName, String lastName, String username, String password, long years, String beltRank, String location, String gymName, String profileImage, List<Post> posts, List<Member> userJoiningClub, List<Member> clubBeingJoined, List<Friend> processOfAddingFriend, List<Friend> friendAdded, List<Image> uploadImage) {
+//        this.id = id;
+//        this.firstName = firstName;
+//        this.lastName = lastName;
+//        this.username = username;
+//        this.password = password;
+//        this.years = years;
+//        this.beltRank = beltRank;
+//        this.location = location;
+//        this.gymName = gymName;
+//        this.profileImage = profileImage;
+//        this.posts = posts;
+//        this.userJoiningClub = userJoiningClub;
+//        this.clubBeingJoined = clubBeingJoined;
+//        this.processOfAddingFriend = processOfAddingFriend;
+//        this.friendAdded = friendAdded;
+//        this.uploadImage = uploadImage;
+//    }
 
-    public User(long id, String firstName, String lastName, String username, String password, long years, String beltRank, String location, String gymName, String profileImage, List<Post> posts, List<Member> userJoiningClub, List<Member> clubBeingJoined, List<Friend> processOfAddingFriend, List<Friend> friendAdded, List<Image> uploadImage) {
+    public User(long id, String firstName, String lastName, String username, String password, long years, String beltRank, String location, String gymName, String profileImage, List<Post> posts, List<Club> clubCreated, List<Member> userJoiningClub, List<Member> clubBeingJoined, List<Friend> processOfAddingFriend, List<Friend> friendAdded, List<Image> uploadImage) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -105,6 +124,7 @@ private List<Member> clubBeingJoined;
         this.gymName = gymName;
         this.profileImage = profileImage;
         this.posts = posts;
+        this.clubCreated = clubCreated;
         this.userJoiningClub = userJoiningClub;
         this.clubBeingJoined = clubBeingJoined;
         this.processOfAddingFriend = processOfAddingFriend;
@@ -112,8 +132,7 @@ private List<Member> clubBeingJoined;
         this.uploadImage = uploadImage;
     }
 
-
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
     public long getId() {
@@ -205,11 +224,6 @@ private List<Member> clubBeingJoined;
     }
 
 
-
-
-
-
-
     public List<Friend> getProcessOfAddingFriend() {
         return processOfAddingFriend;
     }
@@ -250,5 +264,13 @@ private List<Member> clubBeingJoined;
 
     public void setClubBeingJoined(List<Member> clubBeingJoined) {
         this.clubBeingJoined = clubBeingJoined;
+    }
+
+    public List<Club> getClubCreated() {
+        return clubCreated;
+    }
+
+    public void setClubCreated(List<Club> clubCreated) {
+        this.clubCreated = clubCreated;
     }
 }

@@ -19,6 +19,10 @@ public class Club {
     @Column(length = 10000)
     private String clubDescription;
 
+    @ManyToOne
+    @JoinColumn(name="created_club_id")
+    private User clubCreated;
+
 //    @ManyToOne
 //    @JoinColumn(name="user_joining_club_id")
 //    private User userJoining;
@@ -38,6 +42,8 @@ public class Club {
         this.clubLocation = clubLocation;
         this.clubDescription = clubDescription;
     }
+
+
 
     public long getId() {
         return id;
@@ -95,4 +101,12 @@ public class Club {
 //        this.users = users;
 //    }
 
+
+    public User getClubCreated() {
+        return clubCreated;
+    }
+
+    public void setClubCreated(User clubCreated) {
+        this.clubCreated = clubCreated;
+    }
 }
