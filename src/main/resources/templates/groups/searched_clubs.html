@@ -28,13 +28,13 @@
     </form>
 
 <!--        <tbody>-->
-<div th:each="user: ${listEveryClub}">
+<div th:each="club: ${listEveryClub}">
     <!--            <p th:text="${user.id}">User ID</p>-->
-    Group Name: <p th:text="${user.clubName}"></p>
-    Location: <p th:text="${user.clubLocation}"></p>
-    Description: <p th:text="${user.clubDescription}"></p>
+    Group Name: <p th:text="${club.clubName}"></p>
+    Location: <p th:text="${club.clubLocation}"></p>
+    Description: <p th:text="${club.clubDescription}"></p>
     <ul>
-        <form th:action="@{/join_group}" th:method="post">
+        <form th:href="@{'/selected_group_by_id_from_user/' + ${club.id}}" th:method="post">
             <button class="btn-link btn">Join Group</button>
         </form>
     </ul>
@@ -48,7 +48,7 @@
     Description: <p th:text="${club.clubDescription}"></p>
 
     <ul>
-        <a th:href="@{'/selected_group_by_id_from_user/{id}/' + ${club.id}}" th:method="post">
+        <a th:href="@{'/selected_group_by_id_from_user/' + ${club.id}}" th:method="post">
             <button class="btn-link btn">Join Group</button>
         </a>
 <!--        th:href="@{'selected_friend_by_id_from_user/' + ${user.getId}}"-->

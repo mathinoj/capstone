@@ -202,7 +202,8 @@ public class GroupsController {
         User user = userDao.getById(id);
 
         model.addAttribute("friendOfGroup", user.getClubBeingJoined());
-//        model.addAttribute("friendOfGroup", user.getUserJoiningClub());
+        model.addAttribute("friendOfGroup", user.getUserJoiningClub());
+
 
 
         return "/groups/chosen_group";
@@ -211,21 +212,19 @@ public class GroupsController {
 
 
     @PostMapping("/join_group/")
-    public String processAddGroup (User user, @ModelAttribute Member member, @RequestParam(name = "id") long id){
+//    @PostMapping("selected_group_by_id_from_user/{id}")
+    public String processAddGroup (User user, @ModelAttribute Member member, @RequestParam(name = "addedGroup") long id){
         User userAddingGroup = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        User tryingToJoinClub = userDao.getById(userAddingGroup.getId());
 
         User tryingToJoinClub = userDao.getById(id);
-        User newClubJoined = new User();
-        newClubJoined.setClubBeingJoined(tryingToJoinClub.getClubBeingJoined());
-        newClubJoined.setUserJoiningClub(userAddingGroup.getUserJoiningClub());
+        Member newClubJoined = new Member();
+        newClubJoined.setClubJoined(tryingToJoinClub);
+        newClubJoined.setUserJoining(userAddingGroup);
 
-        System.out.println("newClubJoined ================= " + newClubJoined);
 
-        //        User tryThisOneMoGen = userDao.getById(id);
-        //        Friend newFriendZone = new Friend();
-        //        newFriendZone.setFriendAdded(tryThisOneMoGen);
-        //        newFriendZone.setUserAdding(loggedInUser);
-        //        friendDao.save(newFriendZone);
+        memberDao.save(newClubJoined);
+
 
 //        return "redirect:/groups/groups";
         return "redirect:/showGroupsOnHomepage";
