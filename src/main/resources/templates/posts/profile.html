@@ -12,7 +12,6 @@
 <h1>THIS WILL BE THE USERS PROFILE WITH THEIR OWN POSTS, not all post</h1>
 
 
-PIC WILL GO BELOW HERE
 <br>
 
 <div>
@@ -21,12 +20,14 @@ PIC WILL GO BELOW HERE
              alt="This is the user profile picture"
         />
         <div>
-            <!--            <a href="/edit-picture" class="link text-center">Edit Profile Image</a>-->
+            <form th:action="@{/start_process_to_add_pic}">
+                <button class="btn-link btn">Picture Upload</button>
+            </form>
+<!--            </ul>           <a href="/edit-picture" class="link text-center">Edit Profile Image</a>&ndash;&gt;-->
         </div>
     </div>
 
 <br>
-PIC WILL GO ABOVE HERE
 
 
 <br>
@@ -39,17 +40,18 @@ PIC WILL GO ABOVE HERE
     Belt Rank: <p th:text="${post.getBeltRank}"></p>
     Location: <p th:text="${post.getLocation}"></p>
     Gym Name: <p th:text="${post.gymName}"></p>
+    <ul>
+        <form th:action="@{/editBio}">
+            <button class="btn-link btn">Edit Biography</button>
+        </form>
+    </ul>
 </tr>
 <br>
 
 <!--<h2><a th:href="@{/editBio}">Edit Biography</a></h2>-->
 
 
-<ul>
-    <form th:action="@{/editBio}">
-        <button class="btn-link btn">Edit Biography</button>
-    </form>
-</ul>
+
 <ul>
 <!--    <form th:action="@{/groups}" th:method="post">-->
     <form th:action="@{/groups_start}">
@@ -62,12 +64,7 @@ PIC WILL GO ABOVE HERE
         <button class="btn-link btn">Friends</button>
     </form>
 </ul>
-<ul>
-<!--    <form th:action="@{/fileupload}" th:method="post">-->
-    <form th:action="@{/start_process_to_add_pic}">
-    <button class="btn-link btn">Picture Upload</button>
-    </form>
-</ul>
+
 
 <br>
 <h3> POSTS WILL BE LISTED HERE </h3>

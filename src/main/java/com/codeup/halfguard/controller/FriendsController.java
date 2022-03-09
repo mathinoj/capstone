@@ -90,7 +90,7 @@ public class FriendsController {
 
 
         @PostMapping("tryThisOne/")
-       public String processFriend(long id) {
+       public String processFriend(@RequestParam(name = "addedFriend") Long id) {
         User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 //            User userAddTheFriend = userDao.getById(loggedInUser.getId());
 //////        User userAdditFriend = userDao.getById(id);

@@ -12,13 +12,20 @@
 <h1>THIS should HAVE the EDITED bio WITH updated INFO</h1>
 
 
-PIC WILL GO BELOW HERE
-<img alt="Profile picture"
-     class="profile-pic"
-     th:src="${profilePic}">
+<div>
+    <div id="profileImgBox">
+        <img id="profilePic" th:src="${profilePic}"
+             alt="This is the user profile picture"
+        />
+        <div>
+            <form th:action="@{/start_process_to_add_pic}">
+                <button class="btn-link btn">Picture Upload</button>
+            </form>
+            <!--            </ul>           <a href="/edit-picture" class="link text-center">Edit Profile Image</a>&ndash;&gt;-->
+        </div>
+    </div>
 
 <br>
-PIC WILL GO ABOVE HERE
 
 
 <br>
@@ -31,17 +38,18 @@ PIC WILL GO ABOVE HERE
     Belt Rank: <p th:text="${post.getBeltRank}"></p>
     Location: <p th:text="${post.getLocation}"></p>
     Gym Name: <p th:text="${post.gymName}"></p>
+    <ul>
+        <form th:action="@{/editBio}">
+            <button class="btn-link btn">Edit Biography</button>
+        </form>
+    </ul>
 </tr>
 <br>
 
 <!--<h2><a th:href="@{/editBio}">Edit Biography</a></h2>-->
 
 
-<ul>
-    <form th:action="@{/editBio}">
-        <button class="btn-link btn">Edit Biography</button>
-    </form>
-</ul>
+
 <ul>
     <form th:action="@{/groups_start}" >
         <button class="btn-link btn">Groups</button>
