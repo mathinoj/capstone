@@ -12,24 +12,26 @@
 <h1>This will be where all users friends are!</h1>
 
 <ul>
-        <form th:action="@{/view_all_users}" >
-<!--    <form th:action="@{/friends_homepage}" >-->
+    <form th:action="@{/view_all_users}">
+        <!--    <form th:action="@{/friends_homepage}" >-->
         <button class="btn-link btn">Search Friends</button>
     </form>
 </ul>
 
 
-<tr th:each="friend : ${showEveryUserFriend}">
-<!--    <p th:text="${friend.getFriendAdded().getFirstName()}"></p>-->
-<!--    <p th:text="${friend.getFriendAdded().getLastName()}"></p>-->
-<!--    <p th:text="${friend.getFriendAdded().getFirstName()}"></p>-->
+<div th:each="friend : ${showEveryUserFriend}">
+    <!--    <p th:text="${friend.getFriendAdded().getFirstName()}"></p>-->
+    <!--    <p th:text="${friend.getFriendAdded().getLastName()}"></p>-->
+    <!--    <p th:text="${friend.getFriendAdded().getFirstName()}"></p>-->
     <p th:text="${friend.getFriendAdded().getFirstName()}"></p>
+    <p th:text="${friend.getFriendAdded().getLastName()}"></p>
 
-<!--    Body: <p th:text="${friend.get}"></p>-->
-<!--    Person Posting:<p th:text="${post.getUser().getFirstName} + ' ' + ${post.getUser().getLastName}"></p>-->
-</tr>
-
-
+    <!--    Body: <p th:text="${friend.get}"></p>-->
+    <!--    Person Posting:<p th:text="${post.getUser().getFirstName} + ' ' + ${post.getUser().getLastName}"></p>-->
+    <form th:action="'/friends/delete/' + ${friend.getId()}" method="post">
+        <button>Delete</button>
+    </form>
+</div>
 
 
 <!--<div  th:each="user : ${allUsers}" >-->

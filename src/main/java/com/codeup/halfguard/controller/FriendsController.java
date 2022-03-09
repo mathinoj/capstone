@@ -154,4 +154,13 @@ public class FriendsController {
     }
 
 
+    @PostMapping("/friends/delete/{id}")
+    public String deleteFriend(@PathVariable long id) {
+//        long deletePostId = id;
+        friendDao.deleteById(id);
+
+//        return "/profile/userProfileEdited";
+        return "redirect:/friends_homepage";
+    }
+
 }
