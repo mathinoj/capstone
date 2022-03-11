@@ -23,7 +23,7 @@ public interface UserRepository extends JpaRepository <User, Long> {
 
     User findById(long id);
 
-
+    List<User> findAllByFriendAdded(long id);
 //    List<User> findByUserBio(User user);
 //    <List>User findByUserBio(User user);
 

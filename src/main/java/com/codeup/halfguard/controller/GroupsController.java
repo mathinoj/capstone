@@ -64,9 +64,14 @@ public class GroupsController {
         User userAddingGroupToPage = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User userThatAddedGroup = userDao.getById(userAddingGroupToPage.getId());
 
-        model.addAttribute("showTheNewlyAddedGroup", memberDao.findMemberById(userThatAddedGroup.getId()));
+//        model.addAttribute("showTheNewlyAddedGroup", memberDao.findMemberById(userThatAddedGroup.getId()));
 //        model.addAttribute("showTheNewlyAddedGroup", clubDao.findClubsById(userThatAddedGroup.getId()));
+        model.addAttribute("showTheNewlyAddedGroup", memberDao.findMemberByClubJoinedId(userAddingGroupToPage.getId()));
 
+
+        //    User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        //        User userLookingForFriend = userDao.getById(loggedInUser.getId());
+//        model.addAttribute("showEveryUserFriend", friendDao.findFriendByUserAddingId(loggedInUser.getId()));
 
         return "groups/groups";
     }

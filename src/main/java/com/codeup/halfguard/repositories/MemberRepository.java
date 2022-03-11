@@ -11,4 +11,8 @@ public interface MemberRepository extends JpaRepository <Member, Long> {
 //    List<Member> findMemberByClubJoinedAndId(long userId);
 //    List<Member> findMemberByClubJoinedAndUserJoining(long userId);
 List<Member> findMemberById(long id);
+    List<Member> findMemberByUserJoiningId(long id);
+    List<Member> findMemberByClubJoinedId(long id);
+
+    //    List<Friend> findFriendByUserAddingId(long id);
 }

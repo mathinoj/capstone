@@ -45,15 +45,6 @@ public class FriendsController {
         model.addAttribute("showEveryUserFriend", friendDao.findFriendByUserAddingId(loggedInUser.getId()));
 //        model.addAttribute("showEveryUserFriend", friendDao.findFriendByIdNotLike(loggedInUser);
 //        model.addAttribute("showEveryUserFriend", friendDao.findFriendsById(userLookingForFriend.getId(id)));
-//        model.addAttribute("showEveryUserFriend", friendDao.findFriendById(userLookingForFriend.getId()));
-//        model.addAttribute("showEveryUserFriend", friendDao.findAllByUser(loggedInUser));
-//        model.addAttribute("showEveryUserFriend", friendDao.findAllByUserAdding(loggedInUser));
-
-//        User specificUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//        User poster = userDao.getById(specificUser.getId());
-//
-//
-//        model.addAttribute("postBySpecificUser", postDao.findPostsByUser(poster));
 
         return "/friends/homepage";
     }

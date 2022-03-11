@@ -1,9 +1,6 @@
 package com.codeup.halfguard.repositories;
 
-import com.codeup.halfguard.models.Club;
-import com.codeup.halfguard.models.Member;
-import com.codeup.halfguard.models.Post;
-import com.codeup.halfguard.models.User;
+import com.codeup.halfguard.models.*;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -23,6 +20,7 @@ public interface ClubRepository extends JpaRepository <Club, Long> {
     //THIS FINDS ALL CLUBS CREATED BY USER - IT IS USED FOR DISPLAYING USER MADE CLUBS ON groups_start HTML
     List<Club> findClubsByClubCreated(User user);
 
+    List<Club> findClubById(long id);
 
     Club findByClubName(String clubName);
 

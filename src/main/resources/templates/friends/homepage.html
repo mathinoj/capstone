@@ -4,31 +4,58 @@
 <div th:insert="partials :: head"></div>
 <head>
     <meta charset="UTF-8">
+    <meta th:fragment="boostratpViewport" name="viewport"
+          content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link th:fragment="bootstrapStylesheet" rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
+          integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/style.css">
+
     <title>Friends Home</title>
 </head>
 <body>
 <nav th:replace="partials :: navbar"></nav>
 
-<h1>This will be where all users friends are!</h1>
+<div class="container-fluid">
+    <div class="container">
+        <div class="row">
+            <div class="searchFriends">
+                <form th:action="@{/view_all_users}">
+                    <!--    <form th:action="@{/friends_homepage}" >-->
+                    <!--                <button class="btn">Search Friends</button>-->
+                    <input type="submit" value="Search Friends"/>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <form th:action="@{/posts/userProfile}">
+                <button class="btn-link btn">Go Back</button>
+            </form>
+        </div>
+    </div>
 
-<ul>
-    <form th:action="@{/view_all_users}">
-        <!--    <form th:action="@{/friends_homepage}" >-->
-        <button class="btn-link btn">Search Friends</button>
-    </form>
-</ul>
+    <br>
+    <h2>My Friends</h2>
 
+    <div class="container" th:each="user : ${showEveryUserFriend}">
+        <div class="row">
+            <p th:text="${user.getFriendAdded().getFirstName} + ' ' + ${user.getFriendAdded().getLastName}"></p>
+        </div>
+        <div class="row">
+            <p th:text="${user.getFriendAdded().getUsername()}"></p>
+        </div>
+        <div class="row">
+            <form th:action="'/friends/delete/' + ${user.getId()}" method="post">
+                <!--                <button>Delete Friend</button>-->
+                <input type="submit" value="Delete Friend"/>
 
-<div th:each="user : ${showEveryUserFriend}">
-    <p th:text="${user.getFriendAdded().getFirstName()}"></p>
-    <p th:text="${user.getFriendAdded().getLastName()}"></p>
-<!--    <p th:text="${user.getUserAdding().getFriendAdded()}"></p>-->
-
-    <!--    Body: <p th:text="${friend.get}"></p>-->
-    <!--    Person Posting:<p th:text="${post.getUser().getFirstName} + ' ' + ${post.getUser().getLastName}"></p>-->
-    <form th:action="'/friends/delete/' + ${user.getId()}" method="post">
-        <button>Delete</button>
-    </form>
+                <!--                <button class="btn"><i class="fa fa-trash"></i></button>-->
+            </form>
+        </div>
+    </div>
 </div>
 
 
