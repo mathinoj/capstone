@@ -8,71 +8,74 @@
 </head>
 <body>
 <nav th:replace="partials :: navbar"></nav>
+<!--<div>-->
+<!--    <h1>List of All Groups</h1>-->
+<!--</div>-->
 
-
-<div>
-    <h1>List of All Groups</h1>
-</div>
-
-
-<!--<h1>Search Clubs</h1>-->
-
-
-    <form th:action="@{/search_clubs}">
-        Filter:
-        <input type="text" name="keyword" th:value="${keyword}" required/>
-        <br>
-        <input type="submit" value="Search"/>
-        <br>
-        <input type="button" value="Clear" onclick="clearFilter()"/>
-    </form>
-
-<!--        <tbody>-->
-<div th:each="club: ${listEveryClub}">
-    <!--            <p th:text="${user.id}">User ID</p>-->
-    Group Name: <p th:text="${club.clubName}"></p>
-    Location: <p th:text="${club.clubLocation}"></p>
-    Description: <p th:text="${club.clubDescription}"></p>
-    <ul>
-        <form th:href="@{'/selected_group_by_id_from_user/' + ${club.id}}" th:method="post">
-            <button class="btn-link btn">Join Group</button>
+<div class="container">
+    <div class="container-fluid">
+        <form th:action="@{/search_clubs}">
+            <div class="row">
+                <input placeholder="Search Here" type="text" name="keyword" th:value="${keyword}" required/>
+                <br>
+                <input type="submit" value="Search"/>
+                <br>
+                <input type="button" value="Clear" onclick="clearFilter()"/>
+            </div>
         </form>
-    </ul>
-    <br>
+    </div>
+    <!--        <tbody>-->
+    <div th:each="club: ${listEveryClub}" class="container-fluid">
+        <!--            <p th:text="${user.id}">User ID</p>-->
+        <div class="row">
+            Group Name: <p th:text="${club.clubName}"></p>
+        </div>
+        <div class="row">
+            Location: <p th:text="${club.clubLocation}"></p>
+        </div>
+        <div class="row">
+            Description: <p th:text="${club.clubDescription}"></p>
+        </div>
+        <div class="row">
+            <a th:href="@{'/selected_group_by_id_from_user/' + ${club.id}}" th:method="post">
+                <button class="btn-link btn">Join Group</button>
+            </a>
+        </div>
+    </div>
+
+    <div th:each="club: ${listAllClubs}" class="container-fluid">
+        <!--            <p th:text="${user.id}">User ID</p>-->
+        <div class="row">
+            Group Name: <p th:text="${club.clubName}"></p>
+        </div>
+        <div class="row">
+            Location: <p th:text="${club.clubLocation}"></p>
+        </div>
+        <div class="row">
+            Description: <p th:text="${club.clubDescription}"></p>
+        </div>
+        <div class="row">
+            <a th:href="@{'/selected_group_by_id_from_user/' + ${club.id}}" th:method="post">
+                <button class="btn-link btn">Join Group</button>
+            </a>
+            <!--        th:href="@{'selected_friend_by_id_from_user/' + ${user.getId}}"-->
+        </div>
+        <br>
+    </div>
 </div>
 
-<div th:each="club: ${listAllClubs}">
-    <!--            <p th:text="${user.id}">User ID</p>-->
-    Group Name: <p th:text="${club.clubName}"></p>
-    Location: <p th:text="${club.clubLocation}"></p>
-    Description: <p th:text="${club.clubDescription}"></p>
-
-    <ul>
-        <a th:href="@{'/selected_group_by_id_from_user/' + ${club.id}}" th:method="post">
-            <button class="btn-link btn">Join Group</button>
-        </a>
-<!--        th:href="@{'selected_friend_by_id_from_user/' + ${user.getId}}"-->
-    </ul>
-    <br>
-</div>
-
-
-<!--<form  th:each="club: ${listAllClubs}" th:object="${listAllClubs}" >-->
-<!--    Group Name: <span th:text="${club.clubName}"></span>-->
-<!--    Location: <span th:text="${club.clubLocation}"></span>-->
-<!--    Description: <span th:text="${club.clubDescription}"></span>-->
-<!--    Id: <span th:text="${club.id}"></span>-->
-<!--    <span>-->
-<!--        <button th:href="@{selected_friend_by_id_from_user/}"  type="submit" th:method="post">Add Group</button>-->
-<!--    <a   th:href="@{'selected_friend_by_id_from_user/' + ${club.getId()}}" th:method="post"></a>-->
-<!--        </span>-->
-<!--</form>-->
-<!--        </tbody>-->
 
 <script type="text/javascript">
-    function clearFilter(){
+    function clearFilter() {
         window.location = '/view_all_clubs'
     }
 </script>
+
+<script th:fragment="bootstrapSrc" src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+<script th:fragment="bootstrapSrcTwo" src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF"
+        crossorigin="anonymous"></script>
 </body>
 </html>

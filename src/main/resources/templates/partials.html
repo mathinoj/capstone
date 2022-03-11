@@ -9,44 +9,47 @@
           href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
           integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
 
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
     <title>Title</title>
 </head>
 <body>
 
 
-<nav th:fragment="navbar">
-    <a href="#" class="brand-logo center">Welcome to Halfguard</a>
-    <div class="nav-wrapper">
-        <ul>
-            <li><a class="nav-link" th:href="@{/}">Logout</a></li>
-            <li><a class="nav-link" th:href="@{/posts/userProfile}">PROFILE PAGE(/posts/userProfile)</a></li>
-            <li><a class="nav-link" th:href="@{/posts/create}">CREATE POSTS (/posts/create)</a></li>
-            <li><a class="nav-link" th:href="@{/posts}">ALL POSTS (/posts)</a></li>
-            <!--            <li><a class="nav-link" th:href="@{/posts/display}">Home (/posts/display)</a></li>-->
-        </ul>
-    </div>
-</nav>
+<!--<nav th:fragment="navbar">-->
+<!--    <a href="#" class="brand-logo center">Welcome to Halfguard</a>-->
+<!--    <div class="nav-wrapper">-->
+<!--        <ul>-->
+<!--            <li><a class="nav-link" th:href="@{/}">Logout</a></li>-->
+<!--            <li><a class="nav-link" th:href="@{/posts/userProfile}">PROFILE PAGE(/posts/userProfile)</a></li>-->
+<!--            <li><a class="nav-link" th:href="@{/posts/create}">CREATE POSTS (/posts/create)</a></li>-->
+<!--            <li><a class="nav-link" th:href="@{/posts}">ALL POSTS (/posts)</a></li>-->
+<!--            &lt;!&ndash;            <li><a class="nav-link" th:href="@{/posts/display}">Home (/posts/display)</a></li>&ndash;&gt;-->
+<!--        </ul>-->
+<!--    </div>-->
+<!--</nav>-->
 
-<!--<nav class="navbar navbar-expand-lg navbar-light bg-light" th:fragment="navbar">-->
-<!--    <a class="navbar-brand" th:href="@{/posts}">Half Guard</a>-->
-<!--    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"-->
-<!--            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">-->
-<!--        <span class="navbar-toggler-icon"></span>-->
-<!--    </button>-->
-<!--    <div class="collapse navbar-collapse" id="navbarNavDropdown">-->
-<!--        <ul class="navbar-nav">-->
-<!--            <li class="nav-item active">-->
-<!--                <a class="nav-link" th:href="@{/}">Logout <span class="sr-only">(current)</span></a>-->
-<!--            </li>-->
-<!--            <li class="nav-item">-->
-<!--                <a class="nav-link" th:href="@{/posts/userProfile}">Profile Page</a>-->
-<!--            </li>-->
-<!--            <li class="nav-item">-->
-<!--                <a class="nav-link" th:href="@{/posts/create}">Create Posts</a>-->
-<!--            </li>-->
-<!--            <li class="nav-item">-->
-<!--                <a class="nav-link" th:href="@{/posts}">All Posts</a>-->
-<!--            </li>-->
+<nav class="navbar navbar-expand-lg navbar-light bg-light" th:fragment="navbar">
+    <a class="navbar-brand" th:href="@{/posts}">Half Guard</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link" th:href="@{/}">Logout <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/posts/userProfile}">Profile Page</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/posts/create}">Create Posts</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/posts}">All Posts</a>
+            </li>
 <!--            <li class="nav-item dropdown">-->
 <!--                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"-->
 <!--                   aria-haspopup="true" aria-expanded="false">-->
@@ -59,9 +62,18 @@
 <!--                    <a class="dropdown-item" th:href="@{/posts}">All Posts</a>-->
 <!--                </div>-->
 <!--            </li>-->
-<!--        </ul>-->
-<!--    </div>-->
-<!--</nav>-->
+        </ul>
+    </div>
+</nav>
+
+<div class="jumbotron jumbotron-fluid"  th:fragment="jumbotron">
+    <div class="container">
+        <h1 class="display-4">Fluid jumbotron</h1>
+        <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
+    </div>
+</div>
+
+
 
 <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
 <script th:fragment="bootstrapSrc" src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"

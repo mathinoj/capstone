@@ -127,9 +127,9 @@ public class ProfileController {
 
 
         model.addAttribute("profilePic", userUploads.getProfileImage());
-
-        return "/profile/userProfileEdited";
-//                return "/posts/profile";
+//
+//        return "/profile/userProfileEdited";
+                return "redirect:/posts/userProfile/";
     }
 ////////////////////////////////////////THIS CONTROLLER SHOWS NEW EDITED BIO, AND SAME POSTS^^^^^^^^^^^^^^^^^^^^^^^^^^^
 

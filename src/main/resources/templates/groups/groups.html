@@ -9,69 +9,65 @@
 <body>
 <nav th:replace="partials :: navbar"></nav>
 
-THIS WILL BE THE GROUPS PAGE WHERE ALL GROUPS CREATED BY USER ARE LISTED
-<br>
-<ul>
-    <!--    <form th:action="@{/groups}" th:method="post">-->
-    <form th:action="@{/groups_create}">
-        <button class="btn-link btn">Create Group</button>
-    </form>
-</ul>
-<ul>
-    <form th:action="@{/view_all_clubs}">
-        <button class="btn-link btn">Search Groups</button>
-    </form>
-</ul>
+<div class="container">
+    <div class="container">
+        <div>
+            <!--    <form th:action="@{/groups}" th:method="post">-->
+            <form th:action="@{/groups_create}">
+                <button class="btn-link btn">Create Group</button>
+            </form>
+        </div>
+        <div>
+            <form th:action="@{/view_all_clubs}">
+                <button class="btn-link btn">Search Groups</button>
+            </form>
+        </div>
 
-<h3>Your Groups</h3>
+        <h2>Your Groups</h2>
 
-<tr th:each="club : ${displaySpecificClub}">
-Group Name: <p th:text="${club.getClubName()}"></p>
-Group Location: <p th:text="${club.getClubLocation()}"></p>
-Group Description: <p th:text="${club.getClubDescription()}"></p>
-<!--Group Creator:<p th:text="${club.getUser().getFirstName} + ' ' + ${club.getUser().getLastName}"></p>-->
+        <div th:each="club : ${displaySpecificClub}">
+            Group Name: <p th:text="${club.getClubName()}"></p>
+            Group Location: <p th:text="${club.getClubLocation()}"></p>
+            Group Description: <p th:text="${club.getClubDescription()}"></p>
+            <!--Group Creator:<p th:text="${club.getUser().getFirstName} + ' ' + ${club.getUser().getLastName}"></p>-->
 
-    <form th:action="'/club/edit/' + ${club.getId()}" method="get">
-        <button>Edit</button>
-    </form>
+            <div class="row">
+                <form th:action="'/club/edit/' + ${club.getId()}" method="get">
+                    <!--                <button>Edit</button>-->
+                    <button class="btn"><i class="fa fa-pencil"></i></button>
+                </form>
 
-    <form th:action="'/club/delete/' + ${club.getId()}" method="post">
-        <button>Delete</button>
-    </form>
-</tr>
-<br>
-<h1>ADDED GROUPS BELOW</h1>
-<br>
-<tr th:each="club : ${showTheNewlyAddedGroup}">
-    <!--    <p th:text="${friend.getFriendAdded().getFirstName()}"></p>-->
-    <!--    <p th:text="${friend.getFriendAdded().getLastName()}"></p>-->
-    <!--    <p th:text="${friend.getFriendAdded().getFirstName()}"></p>-->
-        <p th:text="${club.getClubJoined().clubBeingJoined}"></p>
-<!--    <p th:text="${memb}"></p>-->
+                <form th:action="'/club/delete/' + ${club.getId()}" method="post">
+                    <!--                <button>Delete</button>-->
+                    <button class="btn"><i class="fa fa-trash"></i></button>
+                </form>
+            </div>
+        </div>
+
+        <h2>Your Added Groups</h2>
+
+        <div th:each="club : ${showTheNewlyAddedGroup}">
+            <!--    <p th:text="${friend.getFriendAdded().getFirstName()}"></p>-->
+            <!--    <p th:text="${friend.getFriendAdded().getLastName()}"></p>-->
+            <!--    <p th:text="${friend.getFriendAdded().getFirstName()}"></p>-->
+            <p th:text="${club.clubJoined}"></p>
+            <!--    <p th:text="${memb}"></p>-->
 
 
+            <!--    <p th:text="${}"></p>-->
 
-    <!--    <p th:text="${}"></p>-->
+            <!--    Body: <p th:text="${friend.get}"></p>-->
+            <!--    Person Posting:<p th:text="${post.getUser().getFirstName} + ' ' + ${post.getUser().getLastName}"></p>-->
+        </div>
+    </div>
+</div>
 
-    <!--    Body: <p th:text="${friend.get}"></p>-->
-    <!--    Person Posting:<p th:text="${post.getUser().getFirstName} + ' ' + ${post.getUser().getLastName}"></p>-->
-</tr>
+<script th:fragment="bootstrapSrc" src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+<script th:fragment="bootstrapSrcTwo"
+        src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF"
+        crossorigin="anonymous"></script>
 </body>
 </html>
-
-<!--<ul>-->
-<!--    <form th:action="@{/editBio}">-->
-<!--        <button class="btn-link btn">Create Group</button>-->
-<!--    </form>-->
-<!--</ul>-->
-<!--<ul>-->
-<!--    &lt;!&ndash;    <form th:action="@{/groups}" th:method="post">&ndash;&gt;-->
-<!--    <form th:action="@{/groups_create}">-->
-<!--        <button class="btn-link btn">Create Group</button>-->
-<!--    </form>-->
-<!--</ul>-->
-<!--<ul>-->
-<!--    <form th:action="@{/friends}" th:method="post">-->
-<!--        <button class="btn-link btn">Friends</button>-->
-<!--    </form>-->
-<!--</ul>-->

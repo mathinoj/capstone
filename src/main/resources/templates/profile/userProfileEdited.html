@@ -1,94 +1,108 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<div th:insert="partials :: head"></div>
-<head>
-<meta charset="UTF-8">
-<title>Profile</title>
-</head>
-<body>
-<nav th:replace="partials :: navbar"></nav>
-
-<h1>THIS should HAVE the EDITED bio WITH updated INFO</h1>
+<!--<!DOCTYPE html>-->
+<!--<html lang="en" xmlns:th="http://www.thymeleaf.org"-->
+<!--      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">-->
+<!--<div th:insert="partials :: head"></div>-->
+<!--<head>-->
+<!--<meta charset="UTF-8">-->
+<!--    <link rel="stylesheet" href="/css/style.css">-->
+<!--<title>Profile</title>-->
 
 
-<div>
-    <div id="profileImgBox">
-        <img id="profilePic" th:src="${profilePic}"
-             alt="This is the user profile picture"
-        />
-        <div>
-            <form th:action="@{/start_process_to_add_pic}">
-                <button class="btn-link btn">Picture Upload</button>
-            </form>
-            <!--            </ul>           <a href="/edit-picture" class="link text-center">Edit Profile Image</a>&ndash;&gt;-->
-        </div>
-    </div>
+<!--</head>-->
+<!--<body>-->
+<!--<nav th:replace="partials :: navbar"></nav>-->
 
-<br>
+<!--<div class="jumbotron jumbotron-fluid jumbo-height"  th:fragment="jumbotron">-->
+<!--    <div class="container">-->
 
+<!--        <img id="profilePic" th:src="${profilePic}"  class="rounded-circle img-size img-fluid">-->
 
-<br>
-<h2><span th:text="${#authentication.principal.firstName + ' ' + #authentication.principal.lastName}"></span>, profile</h2>
-<br>
-<h4> NEED TO HAVE BIO LISTED BELOW</h4>
-<br>
-<tr th:each="post : ${postSpecificUser}">
-    Years Active: <p th:text="${post.getYears}"></p>
-    Belt Rank: <p th:text="${post.getBeltRank}"></p>
-    Location: <p th:text="${post.getLocation}"></p>
-    Gym Name: <p th:text="${post.gymName}"></p>
-    <ul>
-        <form th:action="@{/editBio}">
-            <button class="btn-link btn">Edit Biography</button>
-        </form>
-    </ul>
-</tr>
-<br>
+<!--    </div>-->
+<!--</div>-->
 
-<!--<h2><a th:href="@{/editBio}">Edit Biography</a></h2>-->
+<!--<div>-->
+<!--    <div id="profileImgBox">-->
+<!--&lt;!&ndash;        <img id="profilePic" th:src="${profilePic}"&ndash;&gt;-->
+<!--&lt;!&ndash;             alt="This is the user profile picture"&ndash;&gt;-->
+<!--&lt;!&ndash;        />&ndash;&gt;-->
+<!--        <div>-->
+<!--            <form th:action="@{/start_process_to_add_pic}">-->
+<!--                <button class="btn-link btn">Picture Upload</button>-->
+<!--            </form>-->
+<!--            &lt;!&ndash;            </ul>           <a href="/edit-picture" class="link text-center">Edit Profile Image</a>&ndash;&gt;&ndash;&gt;-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+<!--<br>-->
 
 
+<!--<br>-->
+<!--<h2><span th:text="${#authentication.principal.firstName + ' ' + #authentication.principal.lastName}"></span>, profile</h2>-->
+<!--<br>-->
+<!--<h4> NEED TO HAVE BIO LISTED BELOW</h4>-->
+<!--<br>-->
+<!--<tr th:each="post : ${postSpecificUser}">-->
+<!--    Years Active: <p th:text="${post.getYears}"></p>-->
+<!--    Belt Rank: <p th:text="${post.getBeltRank}"></p>-->
+<!--    Location: <p th:text="${post.getLocation}"></p>-->
+<!--    Gym Name: <p th:text="${post.gymName}"></p>-->
+<!--    <ul>-->
+<!--        <form th:action="@{/editBio}">-->
+<!--            <button class="btn-link btn">Edit Biography</button>-->
+<!--        </form>-->
+<!--    </ul>-->
+<!--</tr>-->
+<!--<br>-->
 
-<ul>
-    <form th:action="@{/groups_start}" >
-        <button class="btn-link btn">Groups</button>
-    </form>
-</ul>
-<ul>
-    <!--    <form th:action="@{/view_all_users}" >-->
-    <form th:action="@{/friends_homepage}" >
-        <button class="btn-link btn">Friends</button>
-    </form>
-</ul>
-<ul>
-    <form th:action="@{/start_process_to_add_pic}" >
-        <button class="btn-link btn">Picture Upload</button>
-    </form>
-</ul>
+<!--&lt;!&ndash;<h2><a th:href="@{/editBio}">Edit Biography</a></h2>&ndash;&gt;-->
 
-<br>
-<h3> POSTS WILL BE LISTED HERE </h3>
-<br>
 
-<tr th:each="post : ${postBySpecificUserProfileEdited}">
-    Title: <p th:text="${post.getTitle}"></p>
-    Body: <p th:text="${post.getBody}"></p>
-    Person Posting:<p th:text="${post.getUser().getFirstName} + ' ' + ${post.getUser().getLastName}"></p>
 
-    <form th:action="'/posts/edit/' + ${post.getId()}" method="get">
-        <button>Edit</button>
-    </form>
+<!--<ul>-->
+<!--    <form th:action="@{/groups_start}" >-->
+<!--        <button class="btn-link btn">Groups</button>-->
+<!--    </form>-->
+<!--</ul>-->
+<!--<ul>-->
+<!--    &lt;!&ndash;    <form th:action="@{/view_all_users}" >&ndash;&gt;-->
+<!--    <form th:action="@{/friends_homepage}" >-->
+<!--        <button class="btn-link btn">Friends</button>-->
+<!--    </form>-->
+<!--</ul>-->
+<!--<ul>-->
+<!--    <form th:action="@{/start_process_to_add_pic}" >-->
+<!--        <button class="btn-link btn">Picture Upload</button>-->
+<!--    </form>-->
+<!--</ul>-->
 
-    <form th:action="'/posts/delete/' + ${post.getId()}" method="post">
-        <button>Delete</button>
-    </form>
-<!--    <a th:href="@{'/posts/' + ${post.getId()}} ">View Single Post</a>-->
+<!--<br>-->
+<!--<h3> POSTS WILL BE LISTED HERE </h3>-->
+<!--<br>-->
 
-    <br>
+<!--<tr th:each="post : ${postBySpecificUserProfileEdited}">-->
+<!--    Title: <p th:text="${post.getTitle}"></p>-->
+<!--    Body: <p th:text="${post.getBody}"></p>-->
+<!--    Person Posting:<p th:text="${post.getUser().getFirstName} + ' ' + ${post.getUser().getLastName}"></p>-->
 
-</tr>
+<!--    <form th:action="'/posts/edit/' + ${post.getId()}" method="get">-->
+<!--        <button>Edit</button>-->
+<!--    </form>-->
 
-<script src="//static.filestackapi.com/filestack-js/3.x.x/filestack.min.js"></script>
-</body>
-</html>
+<!--    <form th:action="'/posts/delete/' + ${post.getId()}" method="post">-->
+<!--        <button>Delete</button>-->
+<!--    </form>-->
+<!--&lt;!&ndash;    <a th:href="@{'/posts/' + ${post.getId()}} ">View Single Post</a>&ndash;&gt;-->
+
+<!--    <br>-->
+
+<!--</tr>-->
+
+<!--<script src="//static.filestackapi.com/filestack-js/3.x.x/filestack.min.js"></script>-->
+<!--    <script th:fragment="bootstrapSrc" src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"-->
+<!--            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"-->
+<!--            crossorigin="anonymous"></script>-->
+<!--    <script th:fragment="bootstrapSrcTwo" src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"-->
+<!--            integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF"-->
+<!--            crossorigin="anonymous"></script>-->
+<!--</body>-->
+<!--</html>-->

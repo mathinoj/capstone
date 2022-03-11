@@ -3,91 +3,121 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <div th:insert="partials :: head"></div>
 <head>
-<meta charset="UTF-8">
-<title>Profile</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <title>Profile</title>
 </head>
 <body>
 <nav th:replace="partials :: navbar"></nav>
 
-<h1>THIS WILL BE THE USERS PROFILE WITH THEIR OWN POSTS, not all post</h1>
+<div class="jumbotron jumbotron-fluid jumbo-height" th:fragment="jumbotron">
+    <div class="container-fluid">
+        <!--        <div class="row">-->
+        <img id="profilePic" th:src="${profilePic}" class="rounded-circle img-size img-fluid">
+        <!--        </div>-->
+    </div>
+</div>
+<div class="container">
+
+    <div class="container-fluid">
+        <div class="row">
+            <div id="profileImgBox">
+                <!--        <img id="profilePic" th:src="${profilePic}"-->
+                <!--             alt="This is the user profile picture"-->
+                <!--        />-->
+                <div>
+                </div>
+                <!--            </ul>           <a href="/edit-picture" class="link text-center">Edit Profile Image</a>&ndash;&gt;-->
+            </div>
+        </div>
+    </div>
+    <!--<br>-->
 
 
-<br>
+    <div class="container-fluid">
+        <div class="row">
+            <h2>Hello, <span
+                    th:text="${#authentication.principal.firstName + ' ' + #authentication.principal.lastName}"></span>!
+            </h2>
+        </div>
+        <div class="row">
+            <div th:each="post : ${bioShouldBeHere}" class="container-fluid">
+                <div class="row">
+                    <div class="container-fluid">
+                        <div class="row">
+                            Years Active:&nbsp;<p th:text="${post.getYears}"></p>
+                        </div>
+                        <div class="row">
+                            Belt/Rank:&nbsp;<p th:text="${post.getBeltRank}"></p>
+                        </div>
+                        <div class="row">
+                            Location:&nbsp;<p th:text="${post.getLocation}"></p>
+                        </div>
+                        <div class="row">
+                            Gym Name:&nbsp;<p th:text="${post.gymName}"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--<br>-->
 
-<div>
-    <div id="profileImgBox">
-        <img id="profilePic" th:src="${profilePic}"
-             alt="This is the user profile picture"
-        />
-        <div>
-            <form th:action="@{/start_process_to_add_pic}">
-                <button class="btn-link btn">Picture Upload</button>
+
+    <div class="container-fluid">
+        <div class="row">
+            <form th:action="@{/editBio}">
+                <button class="btn-secondary">Edit Biography</button>
             </form>
-<!--            </ul>           <a href="/edit-picture" class="link text-center">Edit Profile Image</a>&ndash;&gt;-->
+            <form th:action="@{/groups_start}">
+                <button class="btn-secondary">Groups</button>
+            </form>
+            <form th:action="@{/friends_homepage}">
+                <button class="btn-secondary">Friends</button>
+            </form>
+            <form th:action="@{/start_process_to_add_pic}">
+                <button class="btn-secondary">Picture Upload</button>
+            </form>
         </div>
     </div>
 
-<br>
 
+    <div th:each="post : ${postBySpecificUser}" class="container-fluid border-1">
+        <div class="row">
+            Title: <p th:text="${post.getTitle}"></p>
+        </div>
+        <div class="row">
+            Body: <p th:text="${post.getBody}"></p>
+        </div>
+        <div class="row">
+            Person Posting:<p th:text="${post.getUser().getFirstName} + ' ' + ${post.getUser().getLastName}"></p>
+        </div>
 
-<br>
-<h2><span th:text="${#authentication.principal.firstName + ' ' + #authentication.principal.lastName}"></span>, profile</h2>
-<br>
-<h4> NEED TO HAVE BIO LISTED BELOW</h4>
-<br>
-<tr th:each="post : ${bioShouldBeHere}">
-    Years Active: <p th:text="${post.getYears}"></p>
-    Belt Rank: <p th:text="${post.getBeltRank}"></p>
-    Location: <p th:text="${post.getLocation}"></p>
-    Gym Name: <p th:text="${post.gymName}"></p>
-    <ul>
-        <form th:action="@{/editBio}">
-            <button class="btn-link btn">Edit Biography</button>
-        </form>
-    </ul>
-</tr>
-<br>
+        <div class="row">
+            <!--        <div class="col">-->
+            <form th:action="'/posts/edit/' + ${post.getId()}" method="get">
+                <!--                <button>Edit</button>-->
+                <button class="btn"><i class="fa fa-pencil"></i></button>
+            </form>
+            <!--        </div>-->
+            <!--        <div class="col">-->
+            <form th:action="'/posts/delete/' + ${post.getId()}" method="post">
+                <!--                <button>Delete</button>-->
+                <button class="btn"><i class="fa fa-trash"></i></button>
 
-<!--<h2><a th:href="@{/editBio}">Edit Biography</a></h2>-->
-
-
-
-<ul>
-<!--    <form th:action="@{/groups}" th:method="post">-->
-    <form th:action="@{/groups_start}">
-        <button class="btn-link btn">Groups</button>
-    </form>
-</ul>
-<ul>
-<!--    <form th:action="@{/view_all_users}" >-->
-        <form th:action="@{/friends_homepage}" >
-        <button class="btn-link btn">Friends</button>
-    </form>
-</ul>
-
-
-<br>
-<h3> POSTS WILL BE LISTED HERE </h3>
-<br>
-
-<tr th:each="post : ${postBySpecificUser}">
-    Title: <p th:text="${post.getTitle}"></p>
-    Body: <p th:text="${post.getBody}"></p>
-    Person Posting:<p th:text="${post.getUser().getFirstName} + ' ' + ${post.getUser().getLastName}"></p>
-
-    <form th:action="'/posts/edit/' + ${post.getId()}" method="get">
-        <button>Edit</button>
-    </form>
-
-    <form th:action="'/posts/delete/' + ${post.getId()}" method="post">
-        <button>Delete</button>
-    </form>
-<!--    <a th:href="@{'/posts/' + ${post.getId()}} ">View Single Post</a>-->
-
-    <br>
-
-</tr>
-
+            </form>
+            <!--        </div>-->
+        </div>
+    </div>
+</div>
 <script src="//static.filestackapi.com/filestack-js/3.x.x/filestack.min.js"></script>
+<script th:fragment="bootstrapSrc" src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+<script th:fragment="bootstrapSrcTwo" src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF"
+        crossorigin="anonymous"></script>
 </body>
 </html>

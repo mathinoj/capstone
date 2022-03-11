@@ -40,12 +40,20 @@ public class FriendsController {
     public String friendsHomepage(Model model) {
         User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User userLookingForFriend = userDao.getById(loggedInUser.getId());
+//        Friend userLookingForFriend = friendDao.getById(loggedInUser.getId());
 
-//        model.addAttribute("showEveryUserFriend", friendDao.findFriendsById(userLookingForFriend.getId()));
-//        model.addAttribute("showEveryUserFriend", friendDao.findFriendByIdNotLike(userLookingForFriend.getId()));
-        model.addAttribute("showEveryUserFriend", friendDao.findFriendById(userLookingForFriend.getId()));
+        model.addAttribute("showEveryUserFriend", friendDao.findFriendByUserAddingId(loggedInUser.getId()));
+//        model.addAttribute("showEveryUserFriend", friendDao.findFriendByIdNotLike(loggedInUser);
+//        model.addAttribute("showEveryUserFriend", friendDao.findFriendsById(userLookingForFriend.getId(id)));
 //        model.addAttribute("showEveryUserFriend", friendDao.findFriendById(userLookingForFriend.getId()));
+//        model.addAttribute("showEveryUserFriend", friendDao.findAllByUser(loggedInUser));
+//        model.addAttribute("showEveryUserFriend", friendDao.findAllByUserAdding(loggedInUser));
 
+//        User specificUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        User poster = userDao.getById(specificUser.getId());
+//
+//
+//        model.addAttribute("postBySpecificUser", postDao.findPostsByUser(poster));
 
         return "/friends/homepage";
     }
@@ -130,9 +138,8 @@ public class FriendsController {
         User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User userLookingForFriend = userDao.getById(loggedInUser.getId());
 
-//        model.addAttribute("showEveryUserFriend", friendDao.findFriendsById(userLookingForFriend.getId()));
-        model.addAttribute("showEveryUserFriend", friendDao.findFriendByIdNotLike(userLookingForFriend.getId()));
-//        model.addAttribute("showEveryUserFriend", friendDao.findFriendById(userLookingForFriend.getId()));
+        model.addAttribute("showEveryUserFriend", friendDao.findFriendsById(userLookingForFriend.getId()));
+//        model.addAttribute("showEveryUserFriend", friendDao.findFriendByIdNotLike(userLookingForFriend.getId()));
 //        model.addAttribute("showEveryUserFriend", friendDao.findFriendById(userLookingForFriend.getId()));
 
 
@@ -149,7 +156,8 @@ public class FriendsController {
 //        model.addAttribute("friends", new Friend());
 
 //        return "/posts/edit";
-        return "/friends/homepage";
+//        return "/friends/homepage";
+        return "redirect:friends_homepage";
 
     }
 
