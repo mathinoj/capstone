@@ -36,3 +36,15 @@
 .searchFriends{
     margin-top: 989px;
 }
+
+@font-face {
+    font-family: 'Permanent Marker', cursive;
+}
+
+#h1.welcomePage{
+    text-align: center;
+}
+
+#welcomePage{
+    text-align: center;
+}

@@ -3,36 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <title>Edit blah</title>
-<div th:insert="partials :: head"></div>
+    <div th:insert="partials :: head"></div>
 </head>
 <body>
 <nav th:replace="partials :: navbar"></nav>
 
-<form th:action="${'/will_this_work'}" method="post">
-    <label name="postTitle">Title of Post:</label>
-    <input name="postTitle" th:value="${postEdit.getTitle()}" required>
+<div class="container-fluid">
+    <div class="container">
+        <form th:action="${'/will_this_work'}" method="post">
+            <div class="row">
+                <label th:name="postTitle">Title of Post:</label>
+                <input name="postTitle" th:value="${postEdit.getTitle()}" required>
+            </div>
+            <div class="row">
+                <label th:name="postBody">Body of Post:</label>
+                <input name="postBody" th:rows="4" th:value="${postEdit.getBody()}" required>
+            </div>
+            <!--    <div class="form-group">-->
+            <!--        <label th:name="postBody" for="exampleFormControlTextarea1"></label>-->
+            <!--        <textarea name="postBody" class="form-control" id="exampleFormControlTextarea1" th:value="${postEdit.getBody()}" required rows="3"></textarea>-->
+            <!--    </div>-->
 
-    <label name="postBody">Body of Post:</label>
-    <input name="postBody" th:value="${postEdit.getBody()}" required>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span th:name="postBody" class="input-group-text" ></span>
+                </div>
+                <textarea class="form-control" aria-label="With textarea" name="postBody" th:rows="4"
+                          th:value="${postEdit.getBody()}" required></textarea>
+            </div>
 
-    <input name="postId" type="hidden" th:value="${postEdit.getId()}">
-
-    <button type="submit">Submit Edit</button>
-</form>
 
 
-<!--////////////////THIS DOES A SINGLE POST BY A SPECIFIC USER, AND IT POSTS TO THE DATABASE, BUT DOESN'T SHOW UP ON ALLPOSTS!!!! THEREFORE THIS MIGHT BE USEFUL FOR SINGLE POSTS ON USERS HOMEPAGE-->
-<!--<form th:action="@{/posts/edit}" th:method="post" th:object="${post}">-->
-<!--    Title:-->
-<!--    <input type="text" th:field="*{title}" />-->
-<!--    <br />-->
-<!--    Description:-->
-<!--    <input type="text" th:field="*{body}" />-->
-<!--    <br />-->
-<!--    <input type="submit" />-->
-<!--</form>-->
 
-<!--<button type="submit">Submit edit</button>-->
+
+            <input name="postId" type="hidden" th:value="${postEdit.getId()}">
+            <div class="row">
+                <button type="submit">Submit Edit</button>
+            </div>
+        </form>
+    </div>
+</div>
 
 <script th:fragment="bootstrapSrc" src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"

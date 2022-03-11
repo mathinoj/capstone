@@ -5,6 +5,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Posts Index</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <!--<style>-->
+    <!--    h1 {text-align: center;}-->
+    <!--</style>-->
 </head>
 <body>
 <nav th:replace="partials :: navbar"></nav>
@@ -12,19 +16,26 @@
 
 <div class="container" sec:authorize="isAuthenticated()">
     <div class="row bg-primary">
-        <h1>Welcome to Half Guard, <span
-                th:text="${#authentication.principal.firstName + ' ' + #authentication.principal.lastName}"></span>!
+        <h1 id="welcomePage">Welcome to Half Guard,
+            <br>
+            <span th:text="${#authentication.principal.firstName + ' ' + #authentication.principal.lastName}"></span>!
         </h1>
     </div>
+
     <div class="container" th:each="post : ${allPosts}">
-        <div class="row">
-            Title: <p th:text="${post.getTitle}"></p>
-        </div>
-        <div class="row">
-            Body: <p th:text="${post.getBody}"></p>
-        </div>
-        <div class="row">
-            POSTER 1000:<p th:text="${post.getUser().getFirstName} + ' ' + ${post.getUser().getLastName}"></p>
+        <div class="justify-content-center">
+            <div class="form-row">
+                <div class="col">
+                    Title: <p th:text="${post.getTitle}"></p>
+                </div>
+                <div class="col">
+                    Poster:<p th:text="${post.getUser().getFirstName} + ' ' + ${post.getUser().getLastName}"></p>
+                </div>
+            </div>
+            <div class="row form-group justify-content-center">
+                <label for="bodyOfPost"></label>
+                <textarea class="form-control" id="bodyOfPost" rows="4" th:text="${post.getBody}" disabled></textarea>
+            </div>
         </div>
     </div>
 </div>

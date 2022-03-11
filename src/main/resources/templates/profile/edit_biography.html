@@ -18,19 +18,24 @@
             <!--<form th:action="@{/posts_afterEdits}" method="POST" th:object="${userSpecificBio}">-->
             <div class="row">
                 <!--            <label for="years">Years:&nbsp;</label>-->
-                <input placeholder="Years Training" id="years" th:field="*{years}"/>
+<!--                <input placeholder="Years Training" id="years" th:field="*{years}"/>-->
+                <input class="form-group" type="text" placeholder="Years Training" id="years" th:field="*{years}" required>
+
             </div>
             <div class="row">
                 <!--            <label for="beltRank">Belt:&nbsp;</label>-->
-                <input placeholder="Belt/Rank" id="beltRank" th:field="*{beltRank}"/>
+<!--                <input placeholder="Belt/Rank" id="beltRank" th:field="*{beltRank}"/>-->
+                <input class="form-group" type="text" placeholder="Belt/Rank" id="beltRank" th:field="*{beltRank}" required>
             </div>
             <div class="row">
                 <!--            <label for="location">Location:&nbsp;</label>-->
-                <input placeholder="Gym Location" id="location" th:field="*{location}"/>
+<!--                <input placeholder="Gym Location" id="location" th:field="*{location}"/>-->
+                <input class="form-group" type="text" placeholder="Gym Location" id="location" th:field="*{location}" required>
             </div>
             <div class="row">
                 <!--            <label for="gymName">Gym Name:&nbsp;</label>-->
-                <input placeholder="Gym Name" id="gymName" th:field="*{gymName}"/>
+<!--                <input placeholder="Gym Name" id="gymName" th:field="*{gymName}"/>-->
+                <input class="form-group" type="text" placeholder="Gym Name" id="gymName" th:field="*{gymName}" required>
             </div>
             <div class="row">
                 <input value="Edit Bio!" type="submit"/>
@@ -38,6 +43,9 @@
         </form>
     </div>
 </div>
+
+
+
 
 <script th:fragment="bootstrapSrc" src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"

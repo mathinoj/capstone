@@ -172,8 +172,8 @@ public class ProfileController {
         User userPicUploadStart = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User userPicUploading = userDao.getById(userPicUploadStart.getId());
 
-        String imgPath = user.getProfileImage();
-        userPicUploading.setProfileImage(imgPath);
+        String imageFile = user.getProfileImage();
+        userPicUploading.setProfileImage(imageFile);
         userDao.save(userPicUploading);
 
 
